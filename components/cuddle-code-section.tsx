@@ -187,7 +187,7 @@ export default function CuddleCodeSection() {
                             <Badge
                               variant={
                                 item.status === "Completed"
-                                  ? "success"
+                                  ? "secondary"
                                   : item.status === "In Progress"
                                     ? "default"
                                     : "outline"
