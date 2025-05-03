@@ -116,7 +116,7 @@ export default function ContactSection() {
                     <div>
                       <h4 className="font-medium">LinkedIn</h4>
                       <a
-                        href="https://linkedin.com/radprk"
+                        href="https://linkedin.com/in/radprk"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-blue-600 dark:text-blue-400 hover:underline"
@@ -138,7 +138,7 @@ export default function ContactSection() {
                         rel="noopener noreferrer"
                         className="text-blue-600 dark:text-blue-400 hover:underline"
                       >
-                        github.com/radhaparikh
+                        github.com/radprk
                       </a>
                     </div>
                   </div>
@@ -146,7 +146,7 @@ export default function ContactSection() {
 
                 <div className="mt-8 space-y-4">
                   <Button asChild variant="outline" className="w-full gap-2">
-                    <a href="#" target="_blank" rel="noopener noreferrer">
+                    <a href="https://calendly.com/radprk" target="_blank" rel="noopener noreferrer">
                       <Calendar className="h-4 w-4" />
                       Schedule a Meeting
                     </a>
