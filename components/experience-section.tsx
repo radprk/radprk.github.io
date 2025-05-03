@@ -25,9 +25,9 @@ export default function ExperienceSection() {
       location: "Pittsburgh, PA",
       period: "Jan 2025 - Present",
       description: [
-        "Conceptualized and developing an AI-powered coding tutor that dynamically assesses and adapts to user's programming abilities",
+        "Developing an AI-powered recruiting platform for matching talent to right opportunities",
         "Leading end-to-end product development from market research and user interviews to prototype development",
-        "Exploring partnership opportunities with nearby community colleges/highschools for initial pilot programs",
+        "Exploring partnership opportunities with nearby recruiters for initial pilot programs",
         "Developing unique assessment methodology that identifies specific coding knowledge gaps in real-time",
         "Designing data collection framework to continuously improve personalization algorithms",
       ],

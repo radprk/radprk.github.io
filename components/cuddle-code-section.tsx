@@ -57,7 +57,7 @@ export default function CuddleCodeSection() {
           </Badge>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">CuddleCode</h2>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            An AI-powered coding tutor that dynamically assesses and adapts to user's programming abilities
+            Redefining New Age Tech Hiring 
           </p>
         </motion.div>
 
@@ -90,9 +90,7 @@ export default function CuddleCodeSection() {
           >
             <h3 className="text-2xl font-bold mb-4">The Mission</h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
-              CuddleCode is revolutionizing programming education by creating an AI tutor that understands each
-              learner's unique strengths and weaknesses. Our platform provides personalized guidance, adapting in
-              real-time to help users build confidence and competence in coding.
+              CuddleCode is revolutionizing tech hiring by providing a comprehensive platform that assesses coding skills and knowledge gaps in real-time. Our mission is to empower both candidates and employers with data-driven insights, ensuring a perfect match for tech roles.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
