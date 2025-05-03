@@ -10,20 +10,12 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // GitHub Pages serves content from a subdirectory when using project pages
-  // If you're using a custom domain or user/organization page, you can remove this
-  basePath: '/portfolio',
-  // Disable server-based features since GitHub Pages is static
-  trailingSlash: true,
-};
-
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  output: 'export',
+  // If you're hosting at username.github.io/repository-name
+  // Include your repository name in basePath
+  // If you're hosting at username.github.io, leave this empty
   basePath: '',
-  images: {
-    unoptimized: true,
-  },
+  // This helps with GitHub Pages static hosting
+  trailingSlash: true,
 };
 
 export default nextConfig;
