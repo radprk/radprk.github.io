@@ -17,13 +17,12 @@ export default function HeroSection() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               <span className="block">Hi, I'm Radha Parikh</span>
               <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-teal-500 bg-clip-text text-transparent">
-                AI Innovator & ML Specialist
+                I go where my curiosity takes me.  
               </span>
             </h1>
 
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-xl">
-              Master's student at Carnegie Mellon University and founder of CuddleCode, specializing in deep learning,
-              neural architecture search, and AI-powered education.
+              Master’s student at Carnegie Mellon University, exploring technology and learning how to create meaningful impact through it.
             </p>
 
             <div className="flex flex-wrap gap-4">
