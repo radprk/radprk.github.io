@@ -4,343 +4,1130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Radha Parikh - Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #121212;
+            --primary-color: #f8f8f8;
+            --secondary-color: #888888;
+            --accent-color: #7b68ee;
+            --card-bg: #1e1e1e;
+            --border-color: #333333;
+            --header-height: 70px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: var(--header-height);
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style-type: none;
+        }
+
+        .nav-links a {
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--accent-color);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: var(--header-height);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(123, 104, 238, 0.1) 0%, rgba(18, 18, 18, 0.95) 70%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h3 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero h4 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-15px);
+            }
+            60% {
+                transform: translateY(-7px);
+            }
+        }
+
+        /* Section Styling */
+        section {
+            padding: 100px 0;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+        }
+
+        .interests {
+            margin-top: 3rem;
+        }
+
+        .interests h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .interests-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .interest-tag {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            padding: 0.5rem 1.2rem;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .interest-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            background-color: rgba(123, 104, 238, 0.1);
+        }
+
+        /* Education Section */
+        .education-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .education-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .education-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .education-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .education-header h3 {
+            font-size: 1.3rem;
+        }
+
+        .location {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .degree {
+            color: var(--accent-color);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .duration {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .courses {
+            color: var(--secondary-color);
+            font-size: 0.95rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Facts Section */
+        .facts-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .fact-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .fact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .fact-item p {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+        }
+
+        .image-link {
+            color: var(--accent-color);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .image-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--accent-color);
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .skill-category {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .skill-category h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .skill-category p {
+            color: var(--secondary-color);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.8rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-color);
+        }
+
+        .project-card p {
+            color: var(--accent-color);
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .project-details {
+            list-style-type: none;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .project-details li {
+            color: var(--secondary-color);
+            margin-bottom: 0.7rem;
+            position: relative;
+            padding-left: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        .project-details li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            background-color: rgba(123, 104, 238, 0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background-color: rgba(123, 104, 238, 0.3);
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 20px;
+            height: 100%;
+            width: 2px;
+            background-color: var(--border-color);
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 11px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content .role {
+            color: var(--accent-color);
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-content .duration {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-content .location {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-content ul {
+            padding-left: 1.2rem;
+            list-style-type: none;
+        }
+
+        .timeline-content li {
+            color: var(--secondary-color);
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .timeline-content li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .contact-item a {
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                width: 100%;
+                background-color: var(--bg-color);
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                gap: 1rem;
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero h3 {
+                font-size: 1.5rem;
+            }
+
+            .hero h4 {
+                font-size: 1.2rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item {
+                padding-left: 40px;
+            }
+
+            .timeline-content li {
+                font-size: 0.9rem;
+            }
+
+            .timeline-item {
+                padding-left: 40px;
+            }
+
+            .timeline-content li {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="site-banner">
-        <span>🚧 Website under construction, still updating it, making websites is hard if you're not a web developer! 🚧</span>
-    </div>
-    <nav>
-        <div class="nav-content">
-            <a href="#home">Home</a>
-            <a href="#cuddle-code">Cuddle Code</a>
-            <a href="#projects">Projects</a>
-            <a href="#upcoming">Upcoming</a>
-            <a href="#experience">Experience</a>
-            <a href="#interests">Interests</a>
-            <a href="#contact">Contact</a>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>Radha Parikh</h1>
+                </div>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#education">Education</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#endeavours">Endeavours</a></li>
+                        <li><a href="#fun-facts">Fun Facts</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
-    </nav>
+    </header>
 
     <section id="home" class="hero">
-        <div class="hero-content hero-flex">
-            <img src="images/radha_dp2.jpg" alt="Radha Parikh" class="hero-photo">
-            <div>
-                <h1>Radha Parikh</h1>
-                <p class="subtitle">Building the Future of AI & Technology</p>
-                <p class="location">Pittsburgh, USA</p>
-                <div class="social-links">
-                    <a href="https://linkedin.com/in/radprk" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="mailto:rnparikh@andrew.cmu.edu"><i class="fas fa-envelope"></i></a>
-                    <a href="https://github.com/radprk" target="_blank"><i class="fab fa-github"></i></a>
+        <div class="hero-content">
+            <h2>Radha Parikh</h2>
+            <h3>Masters Student</h3>
+            <h4>Carnegie Mellon University</h4>
+        </div>
+        <a href="#about" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <section id="about" class="container">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="./images/radha_dp2.jpg" alt="Radha Parikh" class="profile-image" style="width:250px;height:250px;border-radius:50%;object-fit:cover;">
                 </div>
+                <div class="about-text">
+                    <p>I am a machine learning and AI practitioner at Carnegie Mellon University, where I build applied AI systems that create real-world impact. I currently work with Prof. Anand Rao on research exploring the future of work, developing frameworks to evaluate human-AI teaming and simulate workforce policy scenarios.</p>
+                    <p>In parallel, I'm building Cuddle Code, an AI-powered assessment platform designed to help organizations identify problem-solvers who can thrive in AI-augmented workplaces—a serendipitous alignment with my research interests.</p>
+                    <p>Previously, I was a Data Engineer at Fractal Analytics, where I built MLOps pipelines and data products for Fortune 500 clients in transportation and retail.</p>
+                    <p>I love bridging the gap between research and industry, turning ideas into solutions that deliver meaningful impact.</p>
+                    <p>Reach out on: <a href="mailto:rnparikh@andrew.cmu.edu">rnparikh@andrew.cmu.edu</a> for opportunities.</p>
+                </div>
+            </div>
+            <div class="interests">
+                <h3>Skills & Expertise</h3>
+                <div class="interests-list">
+                    <span class="interest-tag">Machine Learning</span>
+                    <span class="interest-tag">Data Engineering</span>
+                    <span class="interest-tag">MLOps</span>
+                    <span class="interest-tag">Neural Networks</span>
+                    <span class="interest-tag">Transformers</span>
+                    <span class="interest-tag">PyTorch</span>
+                    <span class="interest-tag">TensorFlow</span>
+                    <span class="interest-tag">LangChain</span>
+                </div>
+            </div>
+            <div style="text-align:center; margin-top:2rem;">
+                <a href="radprk-resume-may2025-mle.pdf" target="_blank" class="button gradient" style="font-size:1.1rem; padding: 0.8rem 2rem;">Download Resume <i class="fas fa-download"></i></a>
             </div>
         </div>
     </section>
 
-    <section id="cuddle-code" class="section">
-        <h2>Cuddle Code</h2>
-        <div class="cuddle-code-content">
-            <div class="cuddle-code-info">
-                <h3>AI-augmented assessment platform for modern workplaces</h3>
-                <p>Currently working on this startup that revolutionizes workplace assessments using AI technology.</p>
-                <a href="https://cuddle-code.com" target="_blank" class="button gradient">Visit Website</a>
+    <section id="education" class="container">
+        <h2>Education</h2>
+        <div class="education-container">
+            <div class="education-card">
+                <div class="education-header">
+                    <h3>Carnegie Mellon University, Heinz College</h3>
+                    <p class="location">Pittsburgh, PA</p>
+                </div>
+                <p class="degree">Master of Information Systems Management | GPA: 3.73</p>
+                <p class="duration">August 2024 - August 2025</p>
+                <p class="courses">Intro to Deep Learning, AI Venture Studio, Intro to Machine Learning, Distributed Systems, Operationalizing AI, Agent Based Modelling</p>
             </div>
-            <div class="cuddle-code-highlights">
-                <div class="highlight-card">
-                    <i class="fas fa-lightbulb"></i>
-                    <h4>Product Ideation</h4>
-                    <p>Led product ideation and market research</p>
+            
+            <div class="education-card">
+                <div class="education-header">
+                    <h3>Manipal Institute of Technology</h3>
+                    <p class="location">Manipal, India</p>
                 </div>
-                <div class="highlight-card">
-                    <i class="fas fa-users"></i>
-                    <h4>User Research</h4>
-                    <p>Conducted user interviews and market analysis</p>
-                </div>
-                <div class="highlight-card">
-                    <i class="fas fa-code"></i>
-                    <h4>Development</h4>
-                    <p>Built the website and created demos</p>
-                </div>
+                <p class="degree">Bachelor of Technology - Aeronautical Engineering, Minor in Data Science | GPA: 3.62</p>
+                <p class="duration">August 2017 - August 2021</p>
             </div>
         </div>
     </section>
 
-    <section id="upcoming" class="section">
-        <h2>Upcoming</h2>
-        <ul class="upcoming-list">
-            <li>Research Assistantship in future of work with Anand Rao</li>
-            <li>Cuddle Code pilots!</li>
-        </ul>
+    <section id="skills" class="container">
+        <h2>Skills</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>Machine Learning Tools</h3>
+                <p>NumPy, Pandas, PyTorch, TensorFlow, Scikit-learn</p>
+            </div>
+            <div class="skill-category">
+                <h3>Machine Learning Techniques</h3>
+                <p>Neural Networks, Transformers, RNNs/LSTMs, CNNs, PPO, LangChain</p>
+            </div>
+            <div class="skill-category">
+                <h3>Programming Languages & Databases</h3>
+                <p>SQL, Python, Java, R, MongoDB, MySQL, cosmosDB</p>
+            </div>
+            <div class="skill-category">
+                <h3>Data Processing and Monitoring</h3>
+                <p>Azure, Spark, Databricks, Kafka, Docker, Kubernetes, CI/CD, MLflow, WandB, Git, PowerBI</p>
+            </div>
+        </div>
     </section>
 
-    <section id="projects" class="section">
+    <section id="projects" class="container">
         <h2>Featured Projects</h2>
         <div class="projects-grid">
             <div class="project-card">
+                <h3>Cuddle Code</h3>
+                <p>AI-augmented assessment platform for modern workplaces</p>
+                <ul class="project-details">
+                    <li>Led ideation, market research, user interviews, and prototype development to validate product-market fit</li>
+                    <li>Designed and developed the official website to communicate the mission and onboard early partners</li>
+                    <li>Explored partnership opportunities with hiring platforms, bootcamps, and recruiters to pilot AI-augmented assessment experiences</li>
+                </ul>
+                <div class="project-links">
+                    <a href="https://cuddle-code.com/" target="_blank" class="project-link">Visit Website <i class="fas fa-external-link-alt"></i></a>
+                    <a href="https://youtu.be/0-IefClE5p0?si=tICBMR6GmM3v0k7O" target="_blank" class="project-link">Watch Demo <i class="fas fa-play-circle"></i></a>
+                </div>
+            </div>
+            <div class="project-card">
                 <h3>NAS PPO for Deepfake Audio Detection</h3>
                 <p>Reinforcement Learning-based Neural Architecture Search for detecting deepfake audio</p>
-                <a href="#" target="_blank" class="project-link">View on GitHub</a>
+                <ul class="project-details">
+                    <li>Designed a hybrid NAS framework combining DARTS and PPO to efficiently search for deepfake voice detection architectures</li>
+                    <li>Applied Proximal Policy Optimization for exploration and DARTS for exploitation to balance search efficiency and performance</li>
+                    <li>Achieved improved detection accuracy on the ASVspoof 2019 dataset, advancing state-of-the-art in synthetic voice detection</li>
+                </ul>
+                <div class="project-links">
+                    <a href="https://github.com/TangriDhruv/Deepfake-detection-Using-NAS" target="_blank" class="project-link">View on GitHub <i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="project-card">
+                <h3>Gita GPT</h3>
+                <p>Modern problem solver Android app using GPT and Gita API</p>
+                <ul class="project-details">
+                    <li>Developed an Android app where users enter their modern life problems</li>
+                    <li>The app interacts with GPT to understand the problem and fetches relevant verses from the Gita API</li>
+                    <li>Explains how the verses apply to the user's current problem, providing actionable insights</li>
+                </ul>
+                <div class="project-links">
+                    <a href="https://github.com/CMU-Heinz-95702/distributed-systems-project-04-radprk/blob/iter-1/project4-rnparikh.pdf" target="_blank" class="project-link">View Project PDF <i class="fas fa-file-pdf"></i></a>
+                </div>
             </div>
             <div class="project-card">
                 <h3>Real-time AQI Prediction</h3>
                 <p>Built using Apache Kafka and Docker for real-time air quality monitoring</p>
-                <a href="#" target="_blank" class="project-link">View on GitHub</a>
-            </div>
-            <div class="project-card">
-                <h3>Automatic Speech Recognition</h3>
-                <p>Transformer-based ASR with CTC loss and beam search</p>
-                <a href="#" target="_blank" class="project-link">View on GitHub</a>
-            </div>
-            <div class="project-card">
-                <h3>Gita Wisdom Finder</h3>
-                <p>Android app using REST APIs, Java, GPT API, and Gita API</p>
-                <a href="#" target="_blank" class="project-link">View on GitHub</a>
+                <ul class="project-details">
+                    <li>Built a real-time air quality prediction system leveraging Kafka for high-throughput data streaming</li>
+                    <li>Designed a producer-consumer architecture simulating live AQI data ingestion using the UCI Air Quality dataset</li>
+                    <li>Implemented MLflow for experiment tracking and Docker Compose for scalable local deployment</li>
+                </ul>
+                <div class="project-links">
+                    <a href="https://github.com/radprk/realtime-aqi-kafka/tree/update-aqi" target="_blank" class="project-link">View on GitHub <i class="fab fa-github"></i></a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="experience" class="section">
-        <h2>Professional Experience</h2>
+    <section id="endeavours" class="container">
+        <h2>Endeavours</h2>
         <div class="experience-timeline">
             <div class="timeline-item">
                 <div class="timeline-content">
                     <h3>Fractal Analytics</h3>
                     <p class="role">Data Engineer</p>
                     <p class="duration">August 2021 - June 2024</p>
+                    <p class="location">Bengaluru, India</p>
                     <ul>
-                        <li>Spearheaded MLOps implementation for transportation analytics, maintaining 74% model accuracy</li>
-                        <li>Designed high-throughput ADF pipelines processing 100GB data in 15 minutes</li>
-                        <li>Optimized ETL processes saving $1000/month</li>
-                        <li>Improved cashflow prediction accuracy by 70% using ARIMA and SARIMAX</li>
-                        <li>Led team to 2nd position in sports league (Cloudzilla)</li>
+                        <li>Spearheaded the implementation of MLOps practices for a transportation analytics project using Azure, maintaining the model accuracy at ~74% for the track and trace application for a multinational CPG corporation</li>
+                        <li>Designed low latency and high throughput ADF pipelines for automating data ingestion into the PowerBI dashboards for multinational retail corporation processing upto ~100 GB data in less than 15 minutes</li>
+                        <li>Built ETL pipelines to ingest data from disparate sources for a webapp with 500 daily active users and optimized throughput for existing cosmosDB containers, reducing cost by ~$1000/month</li>
+                        <li>Improved the accuracy of an existing model predicting cashflows by 70% for top 52 vendors and customers by augmenting existing data with more fields from the SAP-ERP system using ARIMA and SARIMAX</li>
+                        <li>Optimized the CI/CD pipeline of an MMM product by writing unit tests using Tensorflow for statistics in the simulation model</li>
                     </ul>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
                     <h3>Homework App</h3>
-                    <p class="role">Product Management Intern</p>
+                    <p class="role">PM Intern</p>
                     <p class="duration">March 2021 - June 2021</p>
+                    <p class="location">Bengaluru, India</p>
                     <ul>
-                        <li>Conducted 50+ user interviews</li>
-                        <li>Increased downloads by 50%</li>
-                        <li>Led E2E product testing</li>
+                        <li>Leveraged Mixpanel for executing 50+ user interviews for user research and product usability analysis</li>
+                        <li>Designed 3 features to enhance UX for recurring users by reducing friction in user flow; resulted in 50% increase in downloads</li>
+                        <li>Conducted E2E product testing for the weekly releases and collaborated with dev team on bug fixes</li>
                     </ul>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <h3>Reliance Industries</h3>
-                    <p class="role">Summer Intern</p>
-                    <p class="duration">Summer 2019</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="interests" class="section">
-        <h2>Beyond Work</h2>
-        <div class="interests-grid">
-            <div class="interest-card">
-                <div class="interest-image">
-                    <img src="images/radha-performance.png" alt="Playing Music">
-                </div>
-                <div class="interest-content">
-                    <h3>Music</h3>
-                    <p>I used to have more music but as I got older I started finding it cringe so I hid them all.</p>
-                    <a href="https://www.youtube.com/@radprk42" target="_blank" class="button outline">YouTube Channel</a>
-                </div>
-            </div>
-            <div class="interest-card">
-                <div class="interest-image">
-                    <img src="images/treeclimb.jpg" alt="Adventure Activities">
-                </div>
-                <div class="interest-content">
-                    <h3>Adventure</h3>
-                    <p>Tree climbing, hiking, and exploring the outdoors</p>
-                </div>
-            </div>
-            <div class="interest-card">
-                <div class="interest-image">
-                    <img src="images/astroclub-exhibition.jpg" alt="Football">
-                </div>
-                <div class="interest-content">
-                    <h3>Sports</h3>
-                    <p>Active player and Arsenal FC supporter</p>
-                </div>
-            </div>
-            <div class="interest-card">
-                <div class="interest-image">
-                    <img src="images/teaching-english.jpg" alt="Teaching">
-                </div>
-                <div class="interest-content">
-                    <h3>Teaching</h3>
-                    <p>Dedicated educator with experience in:</p>
+                    <h3>Student Trainee, Reliance Industries</h3>
+                    <p class="role">Student Trainee</p>
+                    <p class="duration">May 2019 - July 2019</p>
+                    <p class="location">Jamnagar, India</p>
                     <ul>
-                        <li>Spoken English teaching in undergrad</li>
-                        <li>Science and Math teaching through eVidyaloka</li>
-                        <li>Math tutoring at CMU's PLUS program</li>
+                        <li>Inspected Gas Turbines and assisted the lead engineer by monitoring the maintenance cycle for 3/12 GE Turbines</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Renewable Energy Group</h3>
+                    <p class="role">Researcher & Presenter</p>
+                    <p class="duration">2019</p>
+                    <p class="location">Manipal, India & Cork, Ireland</p>
+                    <ul>
+                        <li>Researched diffuser aerodynamics and co-authored a <a href="https://wes.copernicus.org/articles/6/149/2021/" target="_blank">peer-reviewed paper</a> published in Wind Energy Science</li>
+                        <li><span class="image-link" data-image="images/ireland-presentation.jpg">Presented our paper at WESC 2019, UCC Ireland, Cork</span></li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="contact-header">
-                <span class="badge">Contact</span>
-                <h2>Get In Touch</h2>
-                <p>Have a question or want to work together? Feel free to reach out!</p>
-            </div>
+    <section id="fun-facts" class="container" style="margin-bottom: 3.5rem;">
+        <h2>Fun Facts</h2>
+        <ul class="fun-facts-list" style="list-style: disc inside; max-width:700px; margin:0 auto; padding:0;">
+            <li>When stars align I write songs and sometimes post them on <a href="https://www.youtube.com/@radprk42" target="_blank">YouTube</a>. I am usually shy but hand me a mic and a guitar, I will <span class="image-link" data-image="images/radha-performance.png">perform</span>.</li>
+            <li>Adrenaline fueled activities and being outside. I love <span class="image-link" data-image="images/treeclimb.jpg">climbing trees</span>, <span class="image-link" data-image="images/scuba-radha.jpg">scuba diving</span>, and someday I want to skydive!</li>
+            <li>I want to open a school one day when I have enough money and design my own curriculum and education system. I have taught <span class="image-link" data-image="images/teaching-english.jpg">spoken english</span> to kids in rural gujarat, taught science and math in regional language online during COVID-19. I also tutored math to middle schoolers in Pittsburgh through PLUS program at CMU!</li>
+            <li>I am going to buy a telescope with my first paycheck. I used to organize <span class="image-link" data-image="images/astroclub-exhibition.jpg">skywatches</span> in Manipal, find places with minimal pollution and we even built our own! I also started a <a href="https://open.spotify.com/show/0Cw5mj6y9oDh4wVzyK7Y68?si=2ee9fc6e15674ae0" target="_blank">podcast</a> during COVID-19 to keep astronomy spirit in our club members alive!</li>
+            <li>I like <span class="image-link" data-image="images/football-radha.jpg">playing football</span> (european) and watching. I am a non-spurs-hating Arsenal fan.</li>
+        </ul>
+    </section>
 
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="card">
-                        <h3>Contact Information</h3>
-                        <div class="contact-items">
-                            <div class="contact-item">
-                                <div class="icon">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div>
-                                    <h4>Email</h4>
-                                    <a href="mailto:rnparikh@andrew.cmu.edu">rnparikh@andrew.cmu.edu</a>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <div class="icon">
-                                    <i class="fas fa-phone"></i>
-                                </div>
-                                <div>
-                                    <h4>Phone</h4>
-                                    <a href="tel:4125960002">(412) 596-0002</a>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <div class="icon">
-                                    <i class="fab fa-linkedin"></i>
-                                </div>
-                                <div>
-                                    <h4>LinkedIn</h4>
-                                    <a href="https://linkedin.com/in/radprk" target="_blank">linkedin.com/radprk</a>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <div class="icon">
-                                    <i class="fab fa-github"></i>
-                                </div>
-                                <div>
-                                    <h4>GitHub</h4>
-                                    <a href="https://github.com/radprk" target="_blank">github.com/radprk</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="contact-buttons">
-                            <a href="https://calendly.com/radprk" target="_blank" class="button outline">
-                                <i class="fas fa-calendar"></i>
-                                Schedule a Meeting
-                            </a>
-                            <a href="#" download class="button gradient">
-                                <i class="fas fa-download"></i>
-                                Download Resume
-                            </a>
-                        </div>
-                    </div>
+    <section id="contact" class="container" style="margin-top: 3.5rem;">
+        <h2 style="text-align:center;">Get In Touch</h2>
+        <div class="contact-container" style="background:none; box-shadow:none; border:none; padding:0; display:flex; justify-content:center;">
+            <div class="contact-info" style="gap:1rem;">
+                <div class="contact-item" style="background:none; border:none; padding:0;">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:rnparikh@andrew.cmu.edu">rnparikh@andrew.cmu.edu</a>
                 </div>
-
-                <div class="contact-form">
-                    <div class="card">
-                        <h3>Send a Message</h3>
-                        <div id="success-message" class="success-message" style="display: none;">
-                            <i class="fas fa-check-circle"></i>
-                            <h4>Message Sent!</h4>
-                            <p>Thank you for reaching out. I'll get back to you as soon as possible.</p>
-                        </div>
-                        <form id="contact-form" class="form">
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" id="name" name="name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" id="email" name="email" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="subject">Subject</label>
-                                <input type="text" id="subject" name="subject" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Message</label>
-                                <textarea id="message" name="message" rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="button gradient" id="submit-button">
-                                <span>Send Message</span>
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
-                        </form>
-                    </div>
+                <div class="contact-item" style="background:none; border:none; padding:0;">
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:4125960002">(412) 596-0002</a>
+                </div>
+                <div class="contact-item" style="background:none; border:none; padding:0;">
+                    <i class="fab fa-linkedin"></i>
+                    <a href="https://linkedin.com/in/radprk" target="_blank">linkedin.com/in/radprk</a>
+                </div>
+                <div class="contact-item" style="background:none; border:none; padding:0;">
+                    <i class="fab fa-github"></i>
+                    <a href="https://github.com/radprk" target="_blank">github.com/radprk</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="academics" class="section">
-        <h2>Education & Campus Life</h2>
-        <div class="accordion">
-            <div class="accordion-item">
-                <button class="accordion-header" aria-expanded="false">
-                    <img src="images/cmu-wordmark-square-w-on-r.png" alt="CMU Logo" class="accordion-logo"> CMU
-                </button>
-                <div class="accordion-panel">
-                    <ul>
-                        <li><strong>Product Wars:</strong> <a href="https://docs.google.com/presentation/d/1RYe4sktyH5tJzo7tnmqJAE6OF61LHBX8ktL6fCS1w9E/edit?slide=id.g2b68167fecb_0_0" target="_blank">View Presentation</a></li>
-                        <li><strong>Hack-a-Startup:</strong> <a href="https://docs.google.com/presentation/d/1ZdZIi-DhEg_MiCdaeby8IfLPqj9pET7fvrJNX-sDC9s/edit#slide=id.g3116e6766e9_0_455" target="_blank">View Presentation</a></li>
-                        <li><strong>Courses:</strong> AI Venture Studio, Intro to Deep Learning</li>
-                    </ul>
-                    <div class="accordion-images">
-                        <img src="images/teaching-english.jpg" alt="Teaching English" class="accordion-thumb">
-                        <img src="images/teachingpeople-ansys.jpg" alt="Teaching ANSYS" class="accordion-thumb">
-                        <img src="images/radha-performance.png" alt="Music Performance" class="accordion-thumb">
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <button class="accordion-header" aria-expanded="false">Manipal</button>
-                <div class="accordion-panel">
-                    <ul>
-                        <li><strong>Aerodynamics Research:</strong> Renewable Energy Group
-                            <div class="accordion-images">
-                                <img src="images/ansys-flow.jpg" alt="ANSYS Flow" class="accordion-thumb">
-                                <img src="images/icem.jpg" alt="ICEM CFD" class="accordion-thumb">
-                                <img src="images/renewableenergy-1.jpg" alt="Renewable Energy" class="accordion-thumb">
-                                <img src="images/ireland-presentation.jpg" alt="Ireland Presentation" class="accordion-thumb">
-                            </div>
-                        </li>
-                        <li><strong>Astronomy Club:</strong> President, podcast, events
-                            <div class="accordion-images">
-                                <img src="images/astroclub-exhibition.jpg" alt="Astronomy Club Exhibition" class="accordion-thumb">
-                            </div>
-                        </li>
-                        <li><strong>DronAid:</strong> Student project
-                            <div class="accordion-images">
-                                <img src="images/drone.jpg" alt="DronAid" class="accordion-thumb">
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <footer>
-        <p>&copy; 2024 Radha Parikh. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; 2024 Radha Parikh | rnparikh@andrew.cmu.edu</p>
+        </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Mobile menu functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    const headerOffset = 70;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu after clicking a link
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+
+        // Active navigation highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Image modal functionality
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeModal = document.querySelector('.close-modal');
+        const imageLinks = document.querySelectorAll('.image-link');
+
+        imageLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const imagePath = this.getAttribute('data-image');
+                modalImg.src = imagePath;
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+            document.body.style.overflow = ''; // Re-enable scrolling
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Fade in animation for elements
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    fadeObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const fadeElements = document.querySelectorAll('.fact-item, .project-card, .timeline-item, .contact-item, .skill-category, .education-card');
+        
+        fadeElements.forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            fadeObserver.observe(element);
+        });
+    </script>
+    <!-- Completely new inline modal -->
+<div id="newModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center;">
+    <div style="position: relative; max-width: 90%; max-height: 90vh;">
+      <img id="newModalImg" style="max-width: 100%; max-height: 80vh; object-fit: contain;" src="">
+      <span id="newCloseBtn" style="position: absolute; top: -40px; right: 0; color: white; font-size: 40px; font-weight: bold; cursor: pointer;">&times;</span>
+    </div>
+  </div>
+  
+  <script>
+  // Brand new modal script
+  document.addEventListener('DOMContentLoaded', function() {
+    const newModal = document.getElementById('newModal');
+    const newModalImg = document.getElementById('newModalImg');
+    const newCloseBtn = document.getElementById('newCloseBtn');
+    
+    // Setup image link click handlers
+    document.querySelectorAll('.image-link').forEach(link => {
+      link.onclick = function(e) {
+        e.preventDefault();
+        const imagePath = this.getAttribute('data-image');
+        console.log('Opening new modal with image:', imagePath);
+        
+        // Set image source and show modal
+        newModalImg.src = imagePath;
+        newModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+        return false;
+      };
+    });
+    
+    // Close modal handlers
+    newCloseBtn.onclick = function() {
+      newModal.style.display = 'none';
+      document.body.style.overflow = '';
+    };
+    
+    newModal.onclick = function(e) {
+      if (e.target === newModal) {
+        newModal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    };
+  });
+  </script>
 </body>
 </html>
