@@ -1,0 +1,218 @@
+{
+  "2025-01-06": {
+    "day": "Monday",
+    "practice": {
+      "leetcode": [
+        {
+          "name": "Container With Most Water",
+          "difficulty": "medium",
+          "insight": "two pointers, always move the shorter side"
+        }
+      ],
+      "sql": [
+        {
+          "name": "Window functions on DataLemur",
+          "insight": "RANK vs DENSE_RANK clicked"
+        }
+      ],
+      "system_design": [
+        {
+          "name": "URL shortener HLD",
+          "type": "HLD",
+          "insight": "base62 encoding for short codes"
+        }
+      ],
+      "ml": []
+    },
+    "building": [
+      {
+        "project": "Journal pipeline",
+        "work": "got the parser working, handles empty sections now"
+      }
+    ],
+    "reading": [
+      {
+        "book": "DDIA",
+        "chapter": 3,
+        "pages": [
+          72,
+          89
+        ],
+        "insight": "LSM trees optimize for writes, B-trees better for reads"
+      }
+    ],
+    "exploring": [
+      {
+        "topic": "astronomy",
+        "content": "Watched a video on gravitational lensing. Space itself bends, not just light's path through it. Wild."
+      }
+    ],
+    "notes": "Felt scattered today. Need to focus tomorrow - just leetcode and DDIA."
+  },
+  "2025-01-07": {
+    "day": "Tuesday",
+    "practice": {
+      "leetcode": [
+        {
+          "name": "Valid Parentheses",
+          "difficulty": "easy",
+          "insight": "stack is perfect for matching pairs"
+        },
+        {
+          "name": "Trapping Rain Water",
+          "difficulty": "hard",
+          "insight": "two pointer approach, track max left and right heights"
+        }
+      ],
+      "sql": [],
+      "system_design": [],
+      "ml": [
+        {
+          "name": "Gradient descent deep dive",
+          "insight": "learning rate too high = overshoot, too low = slow"
+        }
+      ]
+    },
+    "building": [
+      {
+        "project": "Journal pipeline",
+        "work": "added Ollama integration, mistral extracts themes nicely"
+      }
+    ],
+    "reading": [
+      {
+        "book": "AI_Engineering",
+        "chapter": 1,
+        "pages": [
+          1,
+          32
+        ],
+        "insight": "Chip's framing of AI eng vs ML eng is useful"
+      }
+    ],
+    "exploring": [
+      {
+        "topic": "philosophy",
+        "content": "Thinking about stoicism lately. The dichotomy of control feels relevant to job searching."
+      }
+    ],
+    "notes": "Better day. Focused blocks work."
+  },
+  "2025-01-08": {
+    "day": "Wednesday",
+    "practice": {
+      "leetcode": [
+        {
+          "name": "Number of Islands",
+          "difficulty": "medium",
+          "insight": "BFS/DFS to explore connected components"
+        },
+        {
+          "name": "Clone Graph",
+          "difficulty": "medium",
+          "insight": "need to track visited nodes to avoid cycles"
+        }
+      ],
+      "sql": [
+        {
+          "name": "Subqueries practice",
+          "insight": "correlated vs non-correlated finally makes sense"
+        }
+      ],
+      "system_design": [],
+      "ml": []
+    },
+    "building": [
+      {
+        "project": "Journal pipeline",
+        "work": "working on stats computation now"
+      }
+    ],
+    "reading": [
+      {
+        "book": "DDIA",
+        "chapter": 3,
+        "pages": [
+          90,
+          110
+        ],
+        "insight": "finished the chapter, column-oriented storage for analytics is clever"
+      }
+    ],
+    "exploring": [],
+    "notes": null
+  },
+  "2025-01-09": {
+    "day": "Thursday",
+    "practice": {
+      "leetcode": [],
+      "sql": [],
+      "system_design": [
+        {
+          "name": "Twitter feed design",
+          "type": null,
+          "insight": "fan-out on write vs read tradeoff"
+        }
+      ],
+      "ml": []
+    },
+    "building": [],
+    "reading": [
+      {
+        "book": "DDIA",
+        "chapter": 4,
+        "pages": [
+          111,
+          125
+        ],
+        "insight": "started encoding chapter, JSON vs binary formats"
+      }
+    ],
+    "exploring": [
+      {
+        "topic": "history",
+        "content": "Found a cool podcast on the history of computing. ENIAC weighed 30 tons!"
+      }
+    ],
+    "notes": "Lighter day, needed the break."
+  },
+  "2025-01-10": {
+    "day": "Friday",
+    "practice": {
+      "leetcode": [
+        {
+          "name": "Course Schedule",
+          "difficulty": "medium",
+          "insight": "topological sort using DFS"
+        }
+      ],
+      "sql": [],
+      "system_design": [],
+      "ml": [
+        {
+          "name": "Backpropagation intuition",
+          "insight": "chain rule all the way down"
+        }
+      ]
+    },
+    "building": [
+      {
+        "project": "Journal pipeline",
+        "work": "React frontend scaffolding started"
+      }
+    ],
+    "reading": [
+      {
+        "book": "AI_Engineering",
+        "chapter": 1,
+        "pages": [
+          33,
+          40
+        ],
+        "insight": "finished chapter 1"
+      }
+    ],
+    "exploring": [],
+    "notes": "Productive week overall. Ready for the weekend."
+  }
+}
