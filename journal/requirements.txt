@@ -1,0 +1,9 @@
+# Journal Sync Pipeline Dependencies
+
+# Google Drive API
+google-api-python-client>=2.100.0
+google-auth-oauthlib>=1.1.0
+google-auth>=2.23.0
+
+# Note: Ollama is installed separately (not via pip)
+# Download from: https://ollama.ai
