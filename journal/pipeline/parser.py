@@ -92,13 +92,22 @@ Return JSON matching this structure:
 
 def call_ollama(prompt: str, model: str = "mistral") -> Optional[str]:
     """Call local Ollama with the given prompt."""
+    import os
+
+    # Set UTF-8 encoding for Windows compatibility
+    env = os.environ.copy()
+    env["PYTHONIOENCODING"] = "utf-8"
+
     try:
         result = subprocess.run(
             ["ollama", "run", model],
             input=prompt,
             capture_output=True,
             text=True,
-            timeout=120  # 2 minute timeout
+            encoding='utf-8',
+            errors='replace',  # Replace undecodable chars instead of failing
+            timeout=120,  # 2 minute timeout
+            env=env
         )
 
         if result.returncode != 0:
