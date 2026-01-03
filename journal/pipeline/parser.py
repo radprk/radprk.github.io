@@ -106,7 +106,7 @@ def call_ollama(prompt: str, model: str = "mistral") -> Optional[str]:
             text=True,
             encoding='utf-8',
             errors='replace',  # Replace undecodable chars instead of failing
-            timeout=120,  # 2 minute timeout
+            timeout=300,  # 5 minute timeout
             env=env
         )
 
