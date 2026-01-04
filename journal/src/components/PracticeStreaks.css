@@ -1,0 +1,99 @@
+.practice-streaks h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+}
+
+.streaks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.streak-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: border-color 0.2s ease;
+}
+
+.streak-card:hover {
+    border-color: var(--accent);
+}
+
+.streak-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.streak-emoji {
+    font-size: 1.5rem;
+}
+
+.streak-label {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.streak-stats {
+    margin-bottom: 16px;
+}
+
+.streak-current {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.streak-number {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.streak-text {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.streak-longest,
+.streak-total {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.streak-visual {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 12px;
+}
+
+.streak-box {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    background: var(--border);
+    transition: all 0.2s ease;
+}
+
+.streak-box.active {
+    background: var(--accent);
+    box-shadow: 0 0 8px rgba(94, 234, 212, 0.4);
+}
+
+@media (max-width: 768px) {
+    .streaks-grid {
+        grid-template-columns: 1fr;
+    }
+}
+

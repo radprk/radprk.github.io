@@ -1,0 +1,356 @@
+.day-cards h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+}
+
+.day-cards-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.filter-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+}
+
+.topic-filter-indicator {
+    background: var(--bg);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+}
+
+.topic-filter-indicator strong {
+    color: var(--accent);
+}
+
+.topic-filter-indicator button {
+    margin-left: auto;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 4px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.topic-filter-indicator button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.day-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.day-card:hover {
+    border-color: var(--accent);
+}
+
+.day-card.expanded {
+    border-color: var(--accent);
+}
+
+.day-card.highlight {
+    animation: highlight 2s ease;
+}
+
+@keyframes highlight {
+    0%, 100% { border-color: var(--accent); }
+    50% { border-color: var(--accent-dim); box-shadow: 0 0 20px rgba(94, 234, 212, 0.5); }
+}
+
+.day-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    cursor: pointer;
+    gap: 16px;
+}
+
+.day-card-date {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.date-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.day-name {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.day-card-preview {
+    flex: 2;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-align: right;
+}
+
+.day-card-toggle {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--accent);
+    font-weight: 300;
+    flex-shrink: 0;
+}
+
+.day-card-content {
+    padding: 0 20px 20px 20px;
+    animation: expand 0.3s ease;
+}
+
+@keyframes expand {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        max-height: 2000px;
+    }
+}
+
+.section {
+    margin-bottom: 24px;
+}
+
+.section:last-child {
+    margin-bottom: 0;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 12px;
+}
+
+.section ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.section li {
+    padding: 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: border-color 0.2s ease;
+}
+
+.section li:hover {
+    border-color: var(--accent);
+}
+
+.practice-category {
+    margin-bottom: 16px;
+}
+
+.practice-category:last-child {
+    margin-bottom: 0;
+}
+
+.practice-category h4 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+}
+
+.problem-name {
+    font-weight: 500;
+    color: var(--text);
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.difficulty {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    margin-left: 8px;
+}
+
+.difficulty.easy {
+    background: rgba(94, 234, 212, 0.2);
+    color: var(--accent);
+}
+
+.difficulty.medium {
+    background: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+}
+
+.difficulty.hard {
+    background: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+}
+
+.type-tag {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    margin-left: 8px;
+}
+
+.insight {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.5;
+}
+
+.project-name {
+    font-weight: 500;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.work-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.book-name {
+    font-weight: 500;
+    color: var(--text);
+    margin-right: 8px;
+}
+
+.chapter-info {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    margin-right: 8px;
+}
+
+.pages-info {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.topic-name {
+    font-weight: 500;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+    text-transform: capitalize;
+}
+
+.exploring-content {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.notes-content {
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.6;
+    font-style: italic;
+}
+
+.no-entries {
+    text-align: center;
+    padding: 48px;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .day-cards-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .day-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .day-card-preview {
+        text-align: left;
+        width: 100%;
+    }
+
+    .day-card-toggle {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+}
+

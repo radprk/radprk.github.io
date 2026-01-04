@@ -1,0 +1,121 @@
+{
+  "DDIA": {
+    "full_title": "Designing Data-Intensive Applications",
+    "author": "Martin Kleppmann",
+    "total_pages": 562,
+    "chapters": {
+      "1": {
+        "title": "Reliable, Scalable, Maintainable Applications",
+        "pages": [3, 22],
+        "themes": ["reliability", "scalability", "maintainability"]
+      },
+      "2": {
+        "title": "Data Models and Query Languages",
+        "pages": [27, 64],
+        "themes": ["relational", "document", "graph", "query languages"]
+      },
+      "3": {
+        "title": "Storage and Retrieval",
+        "pages": [69, 110],
+        "themes": ["LSM trees", "B-trees", "OLTP", "OLAP", "indexing"]
+      },
+      "4": {
+        "title": "Encoding and Evolution",
+        "pages": [111, 142],
+        "themes": ["serialization", "schema evolution", "protobuf", "avro"]
+      },
+      "5": {
+        "title": "Replication",
+        "pages": [151, 196],
+        "themes": ["leader-follower", "multi-leader", "leaderless", "consistency"]
+      },
+      "6": {
+        "title": "Partitioning",
+        "pages": [199, 218],
+        "themes": ["sharding", "partitioning strategies", "rebalancing"]
+      },
+      "7": {
+        "title": "Transactions",
+        "pages": [221, 266],
+        "themes": ["ACID", "isolation levels", "serializability"]
+      },
+      "8": {
+        "title": "The Trouble with Distributed Systems",
+        "pages": [273, 310],
+        "themes": ["faults", "unreliable networks", "clocks", "timing"]
+      },
+      "9": {
+        "title": "Consistency and Consensus",
+        "pages": [321, 372],
+        "themes": ["linearizability", "consensus", "total order broadcast"]
+      },
+      "10": {
+        "title": "Batch Processing",
+        "pages": [389, 430],
+        "themes": ["MapReduce", "dataflow", "batch workflows"]
+      },
+      "11": {
+        "title": "Stream Processing",
+        "pages": [439, 488],
+        "themes": ["message brokers", "event sourcing", "stream processing"]
+      },
+      "12": {
+        "title": "The Future of Data Systems",
+        "pages": [489, 516],
+        "themes": ["data integration", "unbundling", "correctness"]
+      }
+    }
+  },
+  "AI_Engineering": {
+    "full_title": "AI Engineering",
+    "author": "Chip Huyen",
+    "total_pages": 385,
+    "chapters": {
+      "1": {
+        "title": "Introduction to AI Engineering",
+        "pages": [1, 40],
+        "themes": ["AI engineering", "ML engineering", "landscape", "roles"]
+      },
+      "2": {
+        "title": "Understanding Foundation Models",
+        "pages": [41, 85],
+        "themes": ["transformers", "LLMs", "training", "capabilities"]
+      },
+      "3": {
+        "title": "Prompt Engineering",
+        "pages": [86, 130],
+        "themes": ["prompting", "few-shot", "chain of thought", "techniques"]
+      },
+      "4": {
+        "title": "RAG and Information Retrieval",
+        "pages": [131, 175],
+        "themes": ["RAG", "embeddings", "vector databases", "retrieval"]
+      },
+      "5": {
+        "title": "Fine-tuning",
+        "pages": [176, 220],
+        "themes": ["fine-tuning", "PEFT", "LoRA", "data preparation"]
+      },
+      "6": {
+        "title": "Evaluation",
+        "pages": [221, 265],
+        "themes": ["evaluation", "metrics", "benchmarks", "human eval"]
+      },
+      "7": {
+        "title": "Agents and Tool Use",
+        "pages": [266, 310],
+        "themes": ["agents", "tool use", "planning", "memory"]
+      },
+      "8": {
+        "title": "Deployment and Operations",
+        "pages": [311, 355],
+        "themes": ["deployment", "inference", "monitoring", "cost"]
+      },
+      "9": {
+        "title": "AI Safety and Ethics",
+        "pages": [356, 385],
+        "themes": ["safety", "alignment", "ethics", "responsible AI"]
+      }
+    }
+  }
+}

@@ -1,0 +1,3 @@
+# Config files are symlinked or copied here for development
+# In production, they should be at the same level as index.html
+

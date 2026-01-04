@@ -1,0 +1,50 @@
+name: Deploy Journal Frontend
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'journal/src/**'
+      - 'journal/data/**'
+      - 'journal/config/**'
+      - 'journal/package.json'
+      - 'journal/vite.config.js'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: journal/package.json
+      
+      - name: Install dependencies
+        working-directory: journal
+        run: npm ci
+      
+      - name: Build
+        working-directory: journal
+        run: npm run build
+      
+      - name: Copy build output
+        run: |
+          mkdir -p journal-build
+          cp -r journal/dist/* journal-build/
+          cp -r journal/data journal-build/
+          cp -r journal/config journal-build/
+      
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./journal-build
+          destination_dir: journal
+
