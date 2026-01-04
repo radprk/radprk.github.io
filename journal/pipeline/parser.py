@@ -93,13 +93,18 @@ def call_ollama(prompt: str, model: str = "mistral") -> Optional[str]:
     """Call local Ollama via HTTP API (more reliable than subprocess on Windows)."""
     import urllib.request
     import urllib.error
+    import time
 
     url = "http://localhost:11434/api/generate"
 
     payload = json.dumps({
         "model": model,
         "prompt": prompt,
-        "stream": False
+        "stream": False,
+        "options": {
+            "num_predict": 4096,  # Limit output tokens to prevent runaway generation
+            "temperature": 0.1   # Low temperature for more deterministic JSON output
+        }
     }).encode('utf-8')
 
     headers = {
@@ -109,9 +114,14 @@ def call_ollama(prompt: str, model: str = "mistral") -> Optional[str]:
     try:
         req = urllib.request.Request(url, data=payload, headers=headers, method='POST')
 
-        # 5 minute timeout
-        with urllib.request.urlopen(req, timeout=300) as response:
+        print("Waiting for Mistral (this may take 2-3 minutes)...")
+        start = time.time()
+
+        # 10 minute timeout
+        with urllib.request.urlopen(req, timeout=600) as response:
             result = json.loads(response.read().decode('utf-8'))
+            elapsed = time.time() - start
+            print(f"Completed in {elapsed:.1f} seconds")
             return result.get("response", "").strip()
 
     except urllib.error.URLError as e:
@@ -119,7 +129,7 @@ def call_ollama(prompt: str, model: str = "mistral") -> Optional[str]:
         print("Make sure Ollama is running: ollama serve")
         return None
     except TimeoutError:
-        print("Ollama request timed out (5 minutes)")
+        print("Ollama request timed out (10 minutes)")
         return None
     except Exception as e:
         print(f"Error calling Ollama: {e}")
