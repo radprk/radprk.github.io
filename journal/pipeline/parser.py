@@ -1,296 +1,394 @@
 """
 Journal Parser using local Ollama (Mistral) for flexible extraction.
-Converts natural journal entries into structured JSON.
+Processes day-by-day for faster parsing.
 """
 
 import json
 import re
-import subprocess
-from datetime import datetime
+import time
+import urllib.request
+import urllib.error
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Optional
 
 
-# Schema that Ollama should return
-OUTPUT_SCHEMA = {
-    "weekly_goals": ["string"],
-    "days": {
-        "YYYY-MM-DD": {
-            "day": "string (Monday, Tuesday, etc)",
-            "practice": {
-                "leetcode": [{"name": "string", "difficulty": "easy|medium|hard", "insight": "string"}],
-                "sql": [{"name": "string", "insight": "string"}],
-                "system_design": [{"name": "string", "type": "HLD|LLD", "insight": "string"}],
-                "ml": [{"name": "string", "insight": "string"}]
-            },
-            "building": [{"project": "string", "work": "string"}],
-            "reading": [{"book": "string", "chapter": "number|null", "pages": "[start, end]|null", "insight": "string"}],
-            "exploring": [{"topic": "string", "content": "string"}],
-            "notes": "string|null"
+def get_day_prompt(day_text: str, date_str: str, day_name: str) -> str:
+    """Generate a compact prompt for a single day."""
+    return f'''Extract JSON from this journal day. Return ONLY valid JSON, no explanation.
+
+Date: {date_str} ({day_name})
+
+TEXT:
+{day_text}
+
+Return this exact structure:
+{{"practice": {{"leetcode": [{{"name": "...", "difficulty": "easy|medium|hard", "insight": "..."}}], "sql": [...], "system_design": [{{"name": "...", "type": "HLD|LLD", "insight": "..."}}], "ml": [...]}}, "building": [{{"project": "...", "work": "..."}}], "reading": [{{"book": "DDIA or AI_Engineering", "chapter": 1, "pages": [1, 20], "insight": "..."}}], "exploring": [{{"topic": "astronomy|philosophy|history|technology|etc", "content": "..."}}], "notes": "..." or null}}'''
+
+
+def get_goals_prompt(goals_text: str) -> str:
+    """Generate prompt for weekly goals."""
+    return f'''Extract the weekly goals as a JSON array. Return ONLY the JSON array.
+
+TEXT:
+{goals_text}
+
+Return like: ["goal 1", "goal 2", "goal 3"]'''
+
+
+def get_review_prompt(review_text: str) -> str:
+    """Generate prompt for week review."""
+    return f'''Extract week review as JSON. Return ONLY JSON.
+
+TEXT:
+{review_text}
+
+Return: {{"summary": "...", "goals_completed": ["goal1", "goal2"], "highlight": "...", "next_week": "..."}}'''
+
+
+def call_ollama(prompt: str, model: str = "mistral", timeout: int = 120) -> Optional[str]:
+    """Call Ollama with a shorter timeout for day-by-day processing."""
+    url = "http://localhost:11434/api/generate"
+
+    payload = json.dumps({
+        "model": model,
+        "prompt": prompt,
+        "stream": False,
+        "options": {
+            "num_predict": 1024,  # Smaller limit for single day
+            "temperature": 0.1
         }
-    },
-    "week_review": {
-        "summary": "string",
-        "goals_completed": ["string"],
-        "highlight": "string|null",
-        "next_week": "string|null"
-    }
-}
-
-
-def get_extraction_prompt(journal_text: str, week_start_date: str) -> str:
-    """Generate the prompt for Ollama to extract structured data."""
-    return f'''You are a precise JSON extractor. Extract structured data from this journal and return ONLY valid JSON, no other text.
-
-CRITICAL RULES:
-1. Return ONLY the JSON object, no explanations or markdown code blocks
-2. Use the exact date format YYYY-MM-DD for day keys
-3. The week starts on {week_start_date} (Monday)
-4. For practice items, categorize into: leetcode, sql, system_design, ml
-5. Extract difficulty (easy/medium/hard) from leetcode entries if mentioned
-6. For system design, identify if it's HLD or LLD
-7. For reading, extract book abbreviation, chapter number, and page range if present
-8. For exploring, identify the general topic (astronomy, philosophy, music, history, technology, etc.)
-9. If a section is empty or missing for a day, use empty arrays []
-10. Preserve the original insight/notes text as written
-
-BOOK ABBREVIATIONS TO RECOGNIZE:
-- "DDIA" = Designing Data-Intensive Applications
-- "AI Engineering" or "AI Eng" = AI Engineering by Chip Huyen
-
-JOURNAL TEXT:
----
-{journal_text}
----
-
-Return JSON matching this structure:
-{{
-  "weekly_goals": ["goal1", "goal2"],
-  "days": {{
-    "2025-01-06": {{
-      "day": "Monday",
-      "practice": {{
-        "leetcode": [{{"name": "Problem Name", "difficulty": "medium", "insight": "key learning"}}],
-        "sql": [{{"name": "Topic/Problem", "insight": "what clicked"}}],
-        "system_design": [{{"name": "System", "type": "HLD", "insight": "key concept"}}],
-        "ml": [{{"name": "Topic", "insight": "learning"}}]
-      }},
-      "building": [{{"project": "Project Name", "work": "what was done"}}],
-      "reading": [{{"book": "DDIA", "chapter": 3, "pages": [72, 89], "insight": "key takeaway"}}],
-      "exploring": [{{"topic": "astronomy", "content": "what was explored"}}],
-      "notes": "personal reflection or null"
-    }}
-  }},
-  "week_review": {{
-    "summary": "goals hit summary",
-    "goals_completed": ["completed goal 1"],
-    "highlight": "week highlight",
-    "next_week": "plans for next week"
-  }}
-}}'''
-
-
-def call_ollama(prompt: str, model: str = "mistral") -> Optional[str]:
-    """Call local Ollama with the given prompt."""
-    import os
-
-    # Set UTF-8 encoding for Windows compatibility
-    env = os.environ.copy()
-    env["PYTHONIOENCODING"] = "utf-8"
+    }).encode('utf-8')
 
     try:
-        result = subprocess.run(
-            ["ollama", "run", model],
-            input=prompt,
-            capture_output=True,
-            text=True,
-            encoding='utf-8',
-            errors='replace',  # Replace undecodable chars instead of failing
-            timeout=120,  # 2 minute timeout
-            env=env
+        req = urllib.request.Request(
+            url,
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method='POST'
         )
 
-        if result.returncode != 0:
-            print(f"Ollama error: {result.stderr}")
-            return None
+        start = time.time()
+        with urllib.request.urlopen(req, timeout=timeout) as response:
+            result = json.loads(response.read().decode('utf-8'))
+            elapsed = time.time() - start
+            return result.get("response", "").strip(), elapsed
 
-        return result.stdout.strip()
-    except subprocess.TimeoutExpired:
-        print("Ollama request timed out")
-        return None
-    except FileNotFoundError:
-        print("Ollama not found. Make sure it's installed and in PATH")
-        return None
+    except urllib.error.URLError as e:
+        print(f"  Connection error: {e}")
+        return None, 0
     except Exception as e:
-        print(f"Error calling Ollama: {e}")
-        return None
+        print(f"  Error: {e}")
+        return None, 0
 
 
-def extract_json_from_response(response: str) -> Optional[dict]:
-    """Extract JSON from Ollama response, handling markdown code blocks."""
+def extract_json(response: str) -> Optional[dict]:
+    """Extract JSON from response."""
     if not response:
         return None
 
-    # Try to find JSON in code blocks first
-    code_block_pattern = r'```(?:json)?\s*\n?(.*?)\n?```'
-    matches = re.findall(code_block_pattern, response, re.DOTALL)
+    # Try code blocks first
+    match = re.search(r'```(?:json)?\s*([\s\S]*?)```', response)
+    if match:
+        try:
+            return json.loads(match.group(1).strip())
+        except json.JSONDecodeError:
+            pass
 
-    if matches:
-        for match in matches:
-            try:
-                return json.loads(match.strip())
-            except json.JSONDecodeError:
-                continue
-
-    # Try parsing the whole response as JSON
+    # Try direct parse
     try:
         return json.loads(response)
     except json.JSONDecodeError:
         pass
 
-    # Try to find JSON object in the response
-    json_pattern = r'\{[\s\S]*\}'
-    match = re.search(json_pattern, response)
+    # Try finding JSON object
+    match = re.search(r'(\{[\s\S]*\})', response)
     if match:
         try:
-            return json.loads(match.group())
+            return json.loads(match.group(1))
         except json.JSONDecodeError:
             pass
 
-    print("Could not extract valid JSON from response")
+    # Try finding JSON array
+    match = re.search(r'(\[[\s\S]*\])', response)
+    if match:
+        try:
+            return json.loads(match.group(1))
+        except json.JSONDecodeError:
+            pass
+
     return None
 
 
-def parse_week_identifier(filename: str) -> tuple[int, int]:
-    """Extract year and week number from filename like '2025-W02.md'."""
-    match = re.match(r'(\d{4})-W(\d{2})', filename)
-    if match:
-        return int(match.group(1)), int(match.group(2))
-    raise ValueError(f"Invalid week filename format: {filename}")
-
-
-def get_week_start_date(year: int, week: int) -> str:
-    """Get the Monday date for a given ISO week."""
-    # ISO week 1 is the week containing Jan 4th
-    jan4 = datetime(year, 1, 4)
-    # Find Monday of week 1
-    week1_monday = jan4 - __import__('datetime').timedelta(days=jan4.weekday())
-    # Add weeks
-    target_monday = week1_monday + __import__('datetime').timedelta(weeks=week - 1)
-    return target_monday.strftime("%Y-%m-%d")
-
-
-def validate_parsed_data(data: dict) -> dict:
-    """Validate and normalize the parsed data structure."""
-    validated = {
-        "weekly_goals": data.get("weekly_goals", []),
+def split_journal(markdown: str) -> dict:
+    """Split journal into goals, days, and review sections."""
+    sections = {
+        "goals": "",
         "days": {},
-        "week_review": data.get("week_review", {})
+        "review": ""
     }
 
-    # Normalize each day's data
-    for date_key, day_data in data.get("days", {}).items():
-        validated["days"][date_key] = {
-            "day": day_data.get("day", ""),
-            "practice": {
-                "leetcode": day_data.get("practice", {}).get("leetcode", []),
-                "sql": day_data.get("practice", {}).get("sql", []),
-                "system_design": day_data.get("practice", {}).get("system_design", []),
-                "ml": day_data.get("practice", {}).get("ml", [])
-            },
-            "building": day_data.get("building", []),
-            "reading": day_data.get("reading", []),
-            "exploring": day_data.get("exploring", []),
-            "notes": day_data.get("notes")
+    # Extract goals section
+    goals_match = re.search(r'##\s*goals?\s*\n(.*?)(?=\n---|\n#\s+\w+day)', markdown, re.DOTALL | re.IGNORECASE)
+    if goals_match:
+        sections["goals"] = goals_match.group(1).strip()
+
+    # Extract each day
+    day_pattern = r'#\s+(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\s+(\w+)\s+(\d+)(.*?)(?=\n#\s+\w+day|\n##\s*week-review|$)'
+    for match in re.finditer(day_pattern, markdown, re.DOTALL | re.IGNORECASE):
+        day_name = match.group(1)
+        day_text = match.group(4).strip()
+        sections["days"][day_name] = day_text
+
+    # Extract week review
+    review_match = re.search(r'##\s*week-review\s*\n(.*?)(?=\n---\s*$|$)', markdown, re.DOTALL | re.IGNORECASE)
+    if review_match:
+        sections["review"] = review_match.group(1).strip()
+
+    return sections
+
+
+def get_date_for_day(day_name: str, year: int, week: int) -> str:
+    """Get the date string for a day name in a given week."""
+    days = {"monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3, "friday": 4, "saturday": 5, "sunday": 6}
+    offset = days.get(day_name.lower(), 0)
+
+    jan4 = datetime(year, 1, 4)
+    week1_monday = jan4 - timedelta(days=jan4.weekday())
+    target_monday = week1_monday + timedelta(weeks=week - 1)
+    target_day = target_monday + timedelta(days=offset)
+
+    return target_day.strftime("%Y-%m-%d")
+
+
+def normalize_day_data(data: dict) -> dict:
+    """Normalize a single day's data structure."""
+    if not isinstance(data, dict):
+        return {"practice": {"leetcode": [], "sql": [], "system_design": [], "ml": []},
+                "building": [], "reading": [], "exploring": [], "notes": None}
+
+    # Handle practice
+    practice_data = data.get("practice", {})
+    if isinstance(practice_data, dict):
+        practice = {
+            "leetcode": practice_data.get("leetcode", []) or [],
+            "sql": practice_data.get("sql", []) or [],
+            "system_design": practice_data.get("system_design", []) or [],
+            "ml": practice_data.get("ml", []) or []
         }
+    else:
+        practice = {"leetcode": [], "sql": [], "system_design": [], "ml": []}
 
-    # Normalize week review
-    if validated["week_review"]:
-        validated["week_review"] = {
-            "summary": validated["week_review"].get("summary", ""),
-            "goals_completed": validated["week_review"].get("goals_completed", []),
-            "highlight": validated["week_review"].get("highlight"),
-            "next_week": validated["week_review"].get("next_week")
-        }
-
-    return validated
+    return {
+        "practice": practice,
+        "building": data.get("building", []) or [],
+        "reading": data.get("reading", []) or [],
+        "exploring": data.get("exploring", []) or [],
+        "notes": data.get("notes")
+    }
 
 
-def parse_journal(markdown_text: str, week_filename: str, model: str = "mistral") -> Optional[dict]:
+def parse_journal_daily(
+    markdown_text: str,
+    week_filename: str,
+    model: str = "mistral",
+    existing_entries: Optional[dict] = None,
+    force_days: Optional[list] = None
+) -> Optional[dict]:
     """
-    Parse a journal markdown file using Ollama.
+    Parse journal day-by-day for faster processing.
 
     Args:
-        markdown_text: The raw markdown content of the journal
-        week_filename: The filename (e.g., "2025-W02.md") to determine dates
-        model: The Ollama model to use (default: mistral)
-
-    Returns:
-        Parsed and validated journal data as a dictionary, or None on failure
+        markdown_text: Raw journal markdown
+        week_filename: e.g., "2025-W02.md"
+        model: Ollama model to use
+        existing_entries: Already parsed entries (for CDC - skip existing days)
+        force_days: List of day names to force re-parse (e.g., ["Thursday", "Friday"])
     """
-    try:
-        year, week = parse_week_identifier(week_filename)
-        week_start = get_week_start_date(year, week)
-    except ValueError as e:
-        print(f"Error parsing week identifier: {e}")
+    # Parse week identifier
+    match = re.match(r'(\d{4})-W(\d{2})', week_filename)
+    if not match:
+        print(f"Invalid week filename: {week_filename}")
         return None
 
-    prompt = get_extraction_prompt(markdown_text, week_start)
+    year, week = int(match.group(1)), int(match.group(2))
 
-    print(f"Calling Ollama ({model}) to parse journal...")
-    response = call_ollama(prompt, model)
+    print(f"Parsing {week_filename} (incremental mode)")
+    print("=" * 50)
 
-    if not response:
-        return None
+    # Split into sections
+    sections = split_journal(markdown_text)
 
-    print("Extracting JSON from response...")
-    parsed = extract_json_from_response(response)
+    result = {
+        "weekly_goals": [],
+        "days": {},
+        "week_review": {}
+    }
 
-    if not parsed:
-        return None
+    total_time = 0
+    skipped = 0
 
-    print("Validating parsed data...")
-    validated = validate_parsed_data(parsed)
+    # Parse goals (always, they might change)
+    if sections["goals"]:
+        print("Parsing weekly goals...", end=" ", flush=True)
+        response, elapsed = call_ollama(get_goals_prompt(sections["goals"]), model, timeout=60)
+        total_time += elapsed
+        if response:
+            goals = extract_json(response)
+            if isinstance(goals, list):
+                result["weekly_goals"] = goals
+                print(f"OK ({elapsed:.1f}s) - {len(goals)} goals")
+            else:
+                print(f"OK ({elapsed:.1f}s) - couldn't parse")
+        else:
+            print("TIMEOUT")
 
-    return validated
+    # Parse each day
+    for day_name, day_text in sections["days"].items():
+        if not day_text.strip():
+            continue
+
+        date_str = get_date_for_day(day_name, year, week)
+
+        # Check if we should skip this day (CDC logic)
+        force_this_day = force_days and day_name.lower() in [d.lower() for d in force_days]
+        already_exists = existing_entries and date_str in existing_entries
+
+        if already_exists and not force_this_day:
+            print(f"Skipping {day_name} ({date_str}) - already parsed")
+            # Copy existing data to result
+            result["days"][date_str] = existing_entries[date_str]
+            skipped += 1
+            continue
+
+        print(f"Parsing {day_name} ({date_str})...", end=" ", flush=True)
+
+        response, elapsed = call_ollama(get_day_prompt(day_text, date_str, day_name), model, timeout=90)
+        total_time += elapsed
+
+        if response:
+            day_data = extract_json(response)
+            if day_data:
+                result["days"][date_str] = {
+                    "day": day_name.capitalize(),
+                    **normalize_day_data(day_data)
+                }
+                print(f"OK ({elapsed:.1f}s)")
+            else:
+                print(f"OK ({elapsed:.1f}s) - couldn't parse JSON")
+        else:
+            print("TIMEOUT")
+
+    # Parse week review (always, might change)
+    if sections["review"]:
+        print("Parsing week review...", end=" ", flush=True)
+        response, elapsed = call_ollama(get_review_prompt(sections["review"]), model, timeout=60)
+        total_time += elapsed
+        if response:
+            review = extract_json(response)
+            if isinstance(review, dict):
+                result["week_review"] = review
+                print(f"OK ({elapsed:.1f}s)")
+            else:
+                print(f"OK ({elapsed:.1f}s) - couldn't parse")
+        else:
+            print("TIMEOUT")
+
+    print("=" * 50)
+    parsed_count = len(result['days']) - skipped
+    print(f"Total: {total_time:.1f}s | Parsed: {parsed_count} days | Skipped: {skipped} days")
+
+    return result
 
 
-def parse_journal_file(filepath: Path, model: str = "mistral") -> Optional[dict]:
+def load_existing_entries(data_dir: Path) -> dict:
+    """Load existing entries.json if it exists."""
+    entries_file = data_dir / "entries.json"
+    if entries_file.exists():
+        try:
+            return json.loads(entries_file.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            return {}
+    return {}
+
+
+def parse_journal_file(
+    filepath: Path,
+    model: str = "mistral",
+    incremental: bool = True,
+    force_days: Optional[list] = None
+) -> Optional[dict]:
     """
-    Parse a journal file from disk.
+    Parse a journal file from disk using day-by-day processing.
 
     Args:
-        filepath: Path to the markdown file
-        model: The Ollama model to use
-
-    Returns:
-        Parsed journal data or None on failure
+        filepath: Path to journal markdown file
+        model: Ollama model to use
+        incremental: If True, skip days already in entries.json (CDC mode)
+        force_days: List of day names to force re-parse even if they exist
     """
     if not filepath.exists():
         print(f"File not found: {filepath}")
         return None
 
+    # Load existing entries for CDC mode
+    existing = None
+    if incremental:
+        data_dir = filepath.parent.parent / "data"
+        existing = load_existing_entries(data_dir)
+        if existing:
+            print(f"Loaded {len(existing)} existing entries (CDC mode)")
+
     markdown_text = filepath.read_text(encoding="utf-8")
-    return parse_journal(markdown_text, filepath.name, model)
+    return parse_journal_daily(
+        markdown_text,
+        filepath.name,
+        model,
+        existing_entries=existing,
+        force_days=force_days
+    )
 
 
 if __name__ == "__main__":
-    # Test with sample file
     import sys
 
-    if len(sys.argv) > 1:
-        filepath = Path(sys.argv[1])
-    else:
-        # Default to sample file
+    # Parse arguments
+    args = sys.argv[1:]
+    filepath = None
+    force_days = []
+    full_parse = False
+
+    for arg in args:
+        if arg == "--full":
+            full_parse = True
+        elif arg.startswith("--force="):
+            # e.g., --force=Thursday,Friday
+            force_days = arg.split("=")[1].split(",")
+        elif not arg.startswith("-"):
+            filepath = Path(arg)
+
+    if not filepath:
         filepath = Path(__file__).parent.parent / "weeks" / "2025-W02.md"
 
-    print(f"Parsing: {filepath}")
-    result = parse_journal_file(filepath)
+    print(f"File: {filepath}")
+    if force_days:
+        print(f"Force re-parse: {force_days}")
+    if full_parse:
+        print("Mode: Full parse (no CDC)")
+    else:
+        print("Mode: Incremental (CDC)")
+    print()
+
+    result = parse_journal_file(
+        filepath,
+        incremental=not full_parse,
+        force_days=force_days if force_days else None
+    )
 
     if result:
-        print("\n" + "="*50)
+        print("\n" + "=" * 50)
         print("PARSED RESULT:")
-        print("="*50)
+        print("=" * 50)
         print(json.dumps(result, indent=2))
     else:
         print("Failed to parse journal")
