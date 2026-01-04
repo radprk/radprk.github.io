@@ -5,7 +5,6 @@ Converts natural journal entries into structured JSON.
 
 import json
 import re
-import subprocess
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
@@ -91,35 +90,46 @@ Return JSON matching this structure:
 
 
 def call_ollama(prompt: str, model: str = "mistral") -> Optional[str]:
-    """Call local Ollama with the given prompt."""
-    import os
+    """Call local Ollama via HTTP API (more reliable than subprocess on Windows)."""
+    import urllib.request
+    import urllib.error
+    import time
 
-    # Set UTF-8 encoding for Windows compatibility
-    env = os.environ.copy()
-    env["PYTHONIOENCODING"] = "utf-8"
+    url = "http://localhost:11434/api/generate"
+
+    payload = json.dumps({
+        "model": model,
+        "prompt": prompt,
+        "stream": False,
+        "options": {
+            "num_predict": 4096,  # Limit output tokens to prevent runaway generation
+            "temperature": 0.1   # Low temperature for more deterministic JSON output
+        }
+    }).encode('utf-8')
+
+    headers = {
+        "Content-Type": "application/json"
+    }
 
     try:
-        result = subprocess.run(
-            ["ollama", "run", model],
-            input=prompt,
-            capture_output=True,
-            text=True,
-            encoding='utf-8',
-            errors='replace',  # Replace undecodable chars instead of failing
-            timeout=120,  # 2 minute timeout
-            env=env
-        )
+        req = urllib.request.Request(url, data=payload, headers=headers, method='POST')
 
-        if result.returncode != 0:
-            print(f"Ollama error: {result.stderr}")
-            return None
+        print("Waiting for Mistral (this may take 2-3 minutes)...")
+        start = time.time()
 
-        return result.stdout.strip()
-    except subprocess.TimeoutExpired:
-        print("Ollama request timed out")
+        # 10 minute timeout
+        with urllib.request.urlopen(req, timeout=600) as response:
+            result = json.loads(response.read().decode('utf-8'))
+            elapsed = time.time() - start
+            print(f"Completed in {elapsed:.1f} seconds")
+            return result.get("response", "").strip()
+
+    except urllib.error.URLError as e:
+        print(f"Ollama connection error: {e}")
+        print("Make sure Ollama is running: ollama serve")
         return None
-    except FileNotFoundError:
-        print("Ollama not found. Make sure it's installed and in PATH")
+    except TimeoutError:
+        print("Ollama request timed out (10 minutes)")
         return None
     except Exception as e:
         print(f"Error calling Ollama: {e}")
