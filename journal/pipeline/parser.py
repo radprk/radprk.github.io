@@ -200,28 +200,57 @@ def validate_parsed_data(data: dict) -> dict:
 
     # Normalize each day's data
     for date_key, day_data in data.get("days", {}).items():
+        if not isinstance(day_data, dict):
+            continue
+
+        # Handle practice - might be dict or list
+        practice_data = day_data.get("practice", {})
+        if isinstance(practice_data, dict):
+            practice = {
+                "leetcode": practice_data.get("leetcode", []),
+                "sql": practice_data.get("sql", []),
+                "system_design": practice_data.get("system_design", []),
+                "ml": practice_data.get("ml", [])
+            }
+        else:
+            # Practice is a list or other format - try to categorize
+            practice = {"leetcode": [], "sql": [], "system_design": [], "ml": []}
+            if isinstance(practice_data, list):
+                for item in practice_data:
+                    if isinstance(item, dict):
+                        # Try to categorize based on content
+                        name = str(item.get("name", "")).lower()
+                        if "leetcode" in name or item.get("type") == "leetcode":
+                            practice["leetcode"].append(item)
+                        elif "sql" in name or item.get("type") == "sql":
+                            practice["sql"].append(item)
+                        elif "design" in name or item.get("type") in ["system_design", "HLD", "LLD"]:
+                            practice["system_design"].append(item)
+                        elif "ml" in name or "machine" in name or item.get("type") == "ml":
+                            practice["ml"].append(item)
+                        else:
+                            # Default to leetcode if unclear
+                            practice["leetcode"].append(item)
+
         validated["days"][date_key] = {
             "day": day_data.get("day", ""),
-            "practice": {
-                "leetcode": day_data.get("practice", {}).get("leetcode", []),
-                "sql": day_data.get("practice", {}).get("sql", []),
-                "system_design": day_data.get("practice", {}).get("system_design", []),
-                "ml": day_data.get("practice", {}).get("ml", [])
-            },
-            "building": day_data.get("building", []),
-            "reading": day_data.get("reading", []),
-            "exploring": day_data.get("exploring", []),
-            "notes": day_data.get("notes")
+            "practice": practice,
+            "building": day_data.get("building", []) if isinstance(day_data.get("building"), list) else [],
+            "reading": day_data.get("reading", []) if isinstance(day_data.get("reading"), list) else [],
+            "exploring": day_data.get("exploring", []) if isinstance(day_data.get("exploring"), list) else [],
+            "notes": day_data.get("notes") if isinstance(day_data.get("notes"), (str, type(None))) else str(day_data.get("notes", ""))
         }
 
     # Normalize week review
-    if validated["week_review"]:
+    if validated["week_review"] and isinstance(validated["week_review"], dict):
         validated["week_review"] = {
             "summary": validated["week_review"].get("summary", ""),
             "goals_completed": validated["week_review"].get("goals_completed", []),
             "highlight": validated["week_review"].get("highlight"),
             "next_week": validated["week_review"].get("next_week")
         }
+    else:
+        validated["week_review"] = {"summary": "", "goals_completed": [], "highlight": None, "next_week": None}
 
     return validated
 
