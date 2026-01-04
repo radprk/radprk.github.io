@@ -188,9 +188,22 @@ def normalize_day_data(data: dict) -> dict:
     }
 
 
-def parse_journal_daily(markdown_text: str, week_filename: str, model: str = "mistral") -> Optional[dict]:
+def parse_journal_daily(
+    markdown_text: str,
+    week_filename: str,
+    model: str = "mistral",
+    existing_entries: Optional[dict] = None,
+    force_days: Optional[list] = None
+) -> Optional[dict]:
     """
     Parse journal day-by-day for faster processing.
+
+    Args:
+        markdown_text: Raw journal markdown
+        week_filename: e.g., "2025-W02.md"
+        model: Ollama model to use
+        existing_entries: Already parsed entries (for CDC - skip existing days)
+        force_days: List of day names to force re-parse (e.g., ["Thursday", "Friday"])
     """
     # Parse week identifier
     match = re.match(r'(\d{4})-W(\d{2})', week_filename)
@@ -200,7 +213,7 @@ def parse_journal_daily(markdown_text: str, week_filename: str, model: str = "mi
 
     year, week = int(match.group(1)), int(match.group(2))
 
-    print(f"Parsing {week_filename} day-by-day...")
+    print(f"Parsing {week_filename} (incremental mode)")
     print("=" * 50)
 
     # Split into sections
@@ -213,8 +226,9 @@ def parse_journal_daily(markdown_text: str, week_filename: str, model: str = "mi
     }
 
     total_time = 0
+    skipped = 0
 
-    # Parse goals
+    # Parse goals (always, they might change)
     if sections["goals"]:
         print("Parsing weekly goals...", end=" ", flush=True)
         response, elapsed = call_ollama(get_goals_prompt(sections["goals"]), model, timeout=60)
@@ -235,6 +249,18 @@ def parse_journal_daily(markdown_text: str, week_filename: str, model: str = "mi
             continue
 
         date_str = get_date_for_day(day_name, year, week)
+
+        # Check if we should skip this day (CDC logic)
+        force_this_day = force_days and day_name.lower() in [d.lower() for d in force_days]
+        already_exists = existing_entries and date_str in existing_entries
+
+        if already_exists and not force_this_day:
+            print(f"Skipping {day_name} ({date_str}) - already parsed")
+            # Copy existing data to result
+            result["days"][date_str] = existing_entries[date_str]
+            skipped += 1
+            continue
+
         print(f"Parsing {day_name} ({date_str})...", end=" ", flush=True)
 
         response, elapsed = call_ollama(get_day_prompt(day_text, date_str, day_name), model, timeout=90)
@@ -253,7 +279,7 @@ def parse_journal_daily(markdown_text: str, week_filename: str, model: str = "mi
         else:
             print("TIMEOUT")
 
-    # Parse week review
+    # Parse week review (always, might change)
     if sections["review"]:
         print("Parsing week review...", end=" ", flush=True)
         response, elapsed = call_ollama(get_review_prompt(sections["review"]), model, timeout=60)
@@ -269,31 +295,95 @@ def parse_journal_daily(markdown_text: str, week_filename: str, model: str = "mi
             print("TIMEOUT")
 
     print("=" * 50)
-    print(f"Total time: {total_time:.1f}s ({len(result['days'])} days parsed)")
+    parsed_count = len(result['days']) - skipped
+    print(f"Total: {total_time:.1f}s | Parsed: {parsed_count} days | Skipped: {skipped} days")
 
     return result
 
 
-def parse_journal_file(filepath: Path, model: str = "mistral") -> Optional[dict]:
-    """Parse a journal file from disk using day-by-day processing."""
+def load_existing_entries(data_dir: Path) -> dict:
+    """Load existing entries.json if it exists."""
+    entries_file = data_dir / "entries.json"
+    if entries_file.exists():
+        try:
+            return json.loads(entries_file.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            return {}
+    return {}
+
+
+def parse_journal_file(
+    filepath: Path,
+    model: str = "mistral",
+    incremental: bool = True,
+    force_days: Optional[list] = None
+) -> Optional[dict]:
+    """
+    Parse a journal file from disk using day-by-day processing.
+
+    Args:
+        filepath: Path to journal markdown file
+        model: Ollama model to use
+        incremental: If True, skip days already in entries.json (CDC mode)
+        force_days: List of day names to force re-parse even if they exist
+    """
     if not filepath.exists():
         print(f"File not found: {filepath}")
         return None
 
+    # Load existing entries for CDC mode
+    existing = None
+    if incremental:
+        data_dir = filepath.parent.parent / "data"
+        existing = load_existing_entries(data_dir)
+        if existing:
+            print(f"Loaded {len(existing)} existing entries (CDC mode)")
+
     markdown_text = filepath.read_text(encoding="utf-8")
-    return parse_journal_daily(markdown_text, filepath.name, model)
+    return parse_journal_daily(
+        markdown_text,
+        filepath.name,
+        model,
+        existing_entries=existing,
+        force_days=force_days
+    )
 
 
 if __name__ == "__main__":
     import sys
 
-    if len(sys.argv) > 1:
-        filepath = Path(sys.argv[1])
-    else:
+    # Parse arguments
+    args = sys.argv[1:]
+    filepath = None
+    force_days = []
+    full_parse = False
+
+    for arg in args:
+        if arg == "--full":
+            full_parse = True
+        elif arg.startswith("--force="):
+            # e.g., --force=Thursday,Friday
+            force_days = arg.split("=")[1].split(",")
+        elif not arg.startswith("-"):
+            filepath = Path(arg)
+
+    if not filepath:
         filepath = Path(__file__).parent.parent / "weeks" / "2025-W02.md"
 
-    print(f"File: {filepath}\n")
-    result = parse_journal_file(filepath)
+    print(f"File: {filepath}")
+    if force_days:
+        print(f"Force re-parse: {force_days}")
+    if full_parse:
+        print("Mode: Full parse (no CDC)")
+    else:
+        print("Mode: Incremental (CDC)")
+    print()
+
+    result = parse_journal_file(
+        filepath,
+        incremental=not full_parse,
+        force_days=force_days if force_days else None
+    )
 
     if result:
         print("\n" + "=" * 50)
