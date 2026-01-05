@@ -65,18 +65,20 @@ def test_workflow():
     print("\n[3/5] Testing parser...")
     try:
         from fallback_parser import parse_journal_fallback
-        test_md = """## Monday
-### Practice
+        test_md = """# Monday, January 6
+
+## Practice
 - Leetcode: Test Problem (easy) - test insight
-### Reading
+
+## Reading
 - DDIA chapter 1, pages 1-10 - test
 """
-        result = parse_journal_fallback(test_md, "2026-W01.md")
-        if result.get("entries"):
-            print(f"  ✅ Parser works: found {len(result['entries'])} entries")
+        result = parse_journal_fallback(test_md, "2026-W02.md")
+        if result.get("days"):
+            print(f"  ✅ Parser works: found {len(result['days'])} days")
             results.append(("Parser", True))
         else:
-            print("  ⚠️  Parser returned no entries")
+            print("  ⚠️  Parser returned no days")
             results.append(("Parser", False))
     except Exception as e:
         print(f"  ❌ Parser error: {e}")
