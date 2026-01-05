@@ -1,9 +1,11 @@
 # Week of January 6, 2026
 
 ## Goals
-- Goal 1
-- Goal 2
-- Goal 3
+- 5 leetcode problems
+- Finish DDIA chapter 4
+- Read 50 pages
+- Work on journal pipeline
+- 2 system design problems
 
 ---
 
