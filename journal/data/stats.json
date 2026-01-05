@@ -1,16 +1,69 @@
 {
   "practice": {
-    "leetcode": {"total": 0, "easy": 0, "medium": 0, "hard": 0, "current_streak": 0, "longest_streak": 0},
-    "sql": {"total": 0, "current_streak": 0, "longest_streak": 0},
-    "system_design": {"total": 0, "hld": 0, "lld": 0, "current_streak": 0, "longest_streak": 0},
-    "ml": {"total": 0, "current_streak": 0, "longest_streak": 0}
+    "leetcode": {
+      "total": 0,
+      "easy": 0,
+      "medium": 0,
+      "hard": 0,
+      "current_streak": 0,
+      "longest_streak": 0
+    },
+    "sql": {
+      "total": 0,
+      "current_streak": 0,
+      "longest_streak": 0
+    },
+    "system_design": {
+      "total": 0,
+      "hld": 0,
+      "lld": 0,
+      "current_streak": 0,
+      "longest_streak": 0
+    },
+    "ml": {
+      "total": 0,
+      "current_streak": 0,
+      "longest_streak": 0
+    }
   },
-  "reading": {},
-  "building": {"projects": {}},
-  "exploring": {"topics": {}},
+  "reading": {
+    "DDIA or AI_Engineering": {
+      "pages_read": 20,
+      "total_pages": 0,
+      "percentage": 0,
+      "chapters_completed": [],
+      "themes_covered": []
+    }
+  },
+  "building": {
+    "projects": {
+      "": {
+        "days_worked": 5,
+        "last_active": "2026-01-09"
+      },
+      "Unknown": {
+        "days_worked": 1,
+        "last_active": "2026-01-10"
+      }
+    }
+  },
+  "exploring": {
+    "topics": {
+      "": 5,
+      "astronomy|philosophy|history|technology|etc": 1
+    }
+  },
   "goals": {
-    "current_week": {"total": 0, "completed": 0, "percentage": 0},
-    "all_time": {"total": 0, "completed": 0, "percentage": 0},
+    "current_week": {
+      "total": 8,
+      "completed": 0,
+      "percentage": 0.0
+    },
+    "all_time": {
+      "total": 8,
+      "completed": 0,
+      "percentage": 0.0
+    },
     "streak": 0
   }
 }

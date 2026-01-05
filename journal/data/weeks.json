@@ -1,1 +1,17 @@
-{}
+{
+  "2026-W02": {
+    "goals": [
+      "18 Leetcode Problems (12 medium, 6 hard)",
+      "5 system designs ( Bit.ly, Dropbox, Local Delivery System, News Aggregator, TicketMaster)",
+      "10 SQL questions",
+      "extend voice support to AI call center + improve RAG",
+      "Read 3 chapters of DDIA",
+      "Read 3 chapters of AIE",
+      "Read 1 section of MLSys",
+      "Spend 21 hours in JobSearch (cold apply + cold email + cold DM + networking)"
+    ],
+    "goals_completed": [],
+    "review": "",
+    "highlight": null
+  }
+}
