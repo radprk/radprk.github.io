@@ -1237,17 +1237,8 @@
                         </div>
                     </div>
 
-                    <div class="journal-books">
-                        <div class="book-progress" id="book-ddia">
-                            <span class="book-name">DDIA</span>
-                            <div class="book-bar"><div class="book-fill" style="width: 0%"></div></div>
-                            <span class="book-pct">0%</span>
-                        </div>
-                        <div class="book-progress" id="book-ai">
-                            <span class="book-name">AI Engineering</span>
-                            <div class="book-bar"><div class="book-fill" style="width: 0%"></div></div>
-                            <span class="book-pct">0%</span>
-                        </div>
+                    <div class="journal-books" id="journal-books">
+                        <!-- Books loaded dynamically -->
                     </div>
                 </div>
 
@@ -1442,19 +1433,26 @@
                 // Calculate streak (days with entries)
                 if (streakCount) streakCount.textContent = Object.keys(entries).length;
 
-                // Update book progress
-                if (stats.reading?.DDIA) {
-                    const ddiaFill = document.querySelector('#book-ddia .book-fill');
-                    const ddiaPct = document.querySelector('#book-ddia .book-pct');
-                    if (ddiaFill) ddiaFill.style.width = `${stats.reading.DDIA.percentage}%`;
-                    if (ddiaPct) ddiaPct.textContent = `${Math.round(stats.reading.DDIA.percentage)}%`;
-                }
+                // Render all books dynamically
+                const booksContainer = document.getElementById('journal-books');
+                if (booksContainer && stats.reading) {
+                    const bookNames = {
+                        DDIA: 'DDIA',
+                        AI_Engineering: 'AI Engineering'
+                    };
 
-                if (stats.reading?.AI_Engineering) {
-                    const aiFill = document.querySelector('#book-ai .book-fill');
-                    const aiPct = document.querySelector('#book-ai .book-pct');
-                    if (aiFill) aiFill.style.width = `${stats.reading.AI_Engineering.percentage}%`;
-                    if (aiPct) aiPct.textContent = `${Math.round(stats.reading.AI_Engineering.percentage)}%`;
+                    booksContainer.innerHTML = Object.entries(stats.reading)
+                        .map(([key, book]) => {
+                            const name = bookNames[key] || key.replace(/_/g, ' ');
+                            const pct = Math.round(book.percentage || 0);
+                            return `
+                                <div class="book-progress">
+                                    <span class="book-name">${name}</span>
+                                    <div class="book-bar"><div class="book-fill" style="width: ${pct}%"></div></div>
+                                    <span class="book-pct">${pct}%</span>
+                                </div>
+                            `;
+                        }).join('');
                 }
             } catch (e) {
                 console.log('Journal stats not available');

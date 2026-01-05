@@ -113,15 +113,61 @@ def parse_ml(line: str) -> Optional[dict]:
     return {"name": name, "insight": insight}
 
 
+def load_book_aliases() -> dict:
+    """Load book aliases from config."""
+    import json
+    from pathlib import Path
+    config_path = Path(__file__).parent.parent / "config" / "books.json"
+
+    aliases = {}
+    if config_path.exists():
+        books = json.loads(config_path.read_text())
+        for key, book in books.items():
+            # Add the key itself
+            aliases[key.lower()] = key
+            # Add aliases if defined
+            for alias in book.get("aliases", []):
+                aliases[alias.lower()] = key
+            # Add title words
+            title = book.get("full_title", "").lower()
+            if title:
+                aliases[title] = key
+                # First two words
+                words = title.split()
+                if len(words) >= 2:
+                    aliases[" ".join(words[:2])] = key
+
+    # Hardcoded fallbacks
+    aliases.setdefault("ddia", "DDIA")
+    aliases.setdefault("designing data", "DDIA")
+    aliases.setdefault("ai engineering", "AI_Engineering")
+    aliases.setdefault("ai eng", "AI_Engineering")
+
+    return aliases
+
+
+# Cache book aliases
+_BOOK_ALIASES = None
+
+def get_book_aliases() -> dict:
+    global _BOOK_ALIASES
+    if _BOOK_ALIASES is None:
+        _BOOK_ALIASES = load_book_aliases()
+    return _BOOK_ALIASES
+
+
 def parse_reading(line: str) -> Optional[dict]:
     """Parse a reading entry line."""
     result = {"book": None, "chapter": None, "pages": None, "insight": ""}
 
-    # Look for book abbreviations
-    if "ddia" in line.lower():
-        result["book"] = "DDIA"
-    elif "ai engineering" in line.lower() or "ai eng" in line.lower():
-        result["book"] = "AI_Engineering"
+    line_lower = line.lower()
+    aliases = get_book_aliases()
+
+    # Look for book names/aliases
+    for alias, book_key in aliases.items():
+        if alias in line_lower:
+            result["book"] = book_key
+            break
 
     if not result["book"]:
         return None
