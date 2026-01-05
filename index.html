@@ -602,6 +602,111 @@
             border-color: var(--accent-dim);
         }
 
+        /* Journal Preview */
+        .journal-preview {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin: 24px 0;
+        }
+
+        .journal-stats {
+            display: flex;
+            gap: 48px;
+            margin-bottom: 32px;
+        }
+
+        .journal-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .journal-books {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .book-progress {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .book-name {
+            width: 120px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .book-bar {
+            flex: 1;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .book-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .book-pct {
+            width: 50px;
+            text-align: right;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .journal-link {
+            display: inline-block;
+            margin-top: 24px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 14px 28px;
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .journal-link:hover {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        @media (max-width: 640px) {
+            .journal-stats {
+                flex-direction: column;
+                gap: 24px;
+            }
+            .stat-number {
+                font-size: 2rem;
+            }
+            .book-name {
+                width: 80px;
+            }
+        }
+
         /* Navigation */
         .nav {
             position: fixed;
@@ -809,7 +914,7 @@
                 </div>
             </div>
             <div class="nav">
-                <span class="nav-counter">1 / 9</span>
+                <span class="nav-counter">1 / 10</span>
                 <div class="nav-buttons">
                     <button class="nav-btn" onclick="prevCard()" disabled>←</button>
                     <button class="nav-btn" onclick="nextCard()">→</button>
@@ -864,7 +969,7 @@
                 </div>
             </div>
             <div class="nav">
-                <span class="nav-counter">2 / 9</span>
+                <span class="nav-counter">2 / 10</span>
                 <div class="nav-buttons">
                     <button class="nav-btn" onclick="prevCard()">←</button>
                     <button class="nav-btn" onclick="nextCard()">→</button>
@@ -895,7 +1000,7 @@
                 </div>
             </div>
             <div class="nav">
-                <span class="nav-counter">3 / 9</span>
+                <span class="nav-counter">3 / 10</span>
                 <div class="nav-buttons">
                     <button class="nav-btn" onclick="prevCard()">←</button>
                     <button class="nav-btn" onclick="nextCard()">→</button>
@@ -931,7 +1036,7 @@
                 </div>
             </div>
             <div class="nav">
-                <span class="nav-counter">4 / 9</span>
+                <span class="nav-counter">4 / 10</span>
                 <div class="nav-buttons">
                     <button class="nav-btn" onclick="prevCard()">←</button>
                     <button class="nav-btn" onclick="nextCard()">→</button>
@@ -963,7 +1068,7 @@
                 </div>
             </div>
             <div class="nav">
-                <span class="nav-counter">5 / 9</span>
+                <span class="nav-counter">5 / 10</span>
                 <div class="nav-buttons">
                     <button class="nav-btn" onclick="prevCard()">←</button>
                     <button class="nav-btn" onclick="nextCard()">→</button>
@@ -993,7 +1098,7 @@
                 </div>
             </div>
             <div class="nav">
-                <span class="nav-counter">6 / 9</span>
+                <span class="nav-counter">6 / 10</span>
                 <div class="nav-buttons">
                     <button class="nav-btn" onclick="prevCard()">←</button>
                     <button class="nav-btn" onclick="nextCard()">→</button>
@@ -1055,7 +1160,7 @@
                 </div>
             </div>
             <div class="nav">
-                <span class="nav-counter">7 / 9</span>
+                <span class="nav-counter">7 / 10</span>
                 <div class="nav-buttons">
                     <button class="nav-btn" onclick="prevCard()">←</button>
                     <button class="nav-btn" onclick="nextCard()">→</button>
@@ -1101,23 +1206,77 @@
                 </div>
             </div>
             <div class="nav">
-                <span class="nav-counter">8 / 9</span>
+                <span class="nav-counter">8 / 10</span>
                 <div class="nav-buttons">
                     <button class="nav-btn" onclick="prevCard()">←</button>
                     <button class="nav-btn" onclick="nextCard()">→</button>
                 </div>
             </div>
-            <div class="progress-bar" style="width: 88.8%"></div>
+            <div class="progress-bar" style="width: 80%"></div>
         </div>
 
-        <!-- Card 9: Contact -->
+        <!-- Card 9: Journal -->
         <div class="card" data-card="9">
+            <div class="card-content">
+                <h2>Curious what I'm working on today?</h2>
+                <p style="margin-bottom: 32px;">I keep a public learning journal. Practice problems, books I'm reading, projects I'm building, and random things I find interesting.</p>
+
+                <div class="journal-preview">
+                    <div class="journal-stats">
+                        <div class="journal-stat">
+                            <span class="stat-number" id="lc-count">--</span>
+                            <span class="stat-label">LeetCode</span>
+                        </div>
+                        <div class="journal-stat">
+                            <span class="stat-number" id="pages-count">--</span>
+                            <span class="stat-label">Pages Read</span>
+                        </div>
+                        <div class="journal-stat">
+                            <span class="stat-number" id="streak-count">--</span>
+                            <span class="stat-label">Day Streak</span>
+                        </div>
+                    </div>
+
+                    <div class="journal-books">
+                        <div class="book-progress" id="book-ddia">
+                            <span class="book-name">DDIA</span>
+                            <div class="book-bar"><div class="book-fill" style="width: 0%"></div></div>
+                            <span class="book-pct">0%</span>
+                        </div>
+                        <div class="book-progress" id="book-ai">
+                            <span class="book-name">AI Engineering</span>
+                            <div class="book-bar"><div class="book-fill" style="width: 0%"></div></div>
+                            <span class="book-pct">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="/journal/" class="journal-link">
+                    Open Full Journal →
+                </a>
+
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 24px;">
+                    Updated daily. Eventually I'll add blog posts here too.
+                </p>
+            </div>
+            <div class="nav">
+                <span class="nav-counter">9 / 10</span>
+                <div class="nav-buttons">
+                    <button class="nav-btn" onclick="prevCard()">←</button>
+                    <button class="nav-btn" onclick="nextCard()">→</button>
+                </div>
+            </div>
+            <div class="progress-bar" style="width: 90%"></div>
+        </div>
+
+        <!-- Card 10: Contact -->
+        <div class="card" data-card="10">
             <div class="card-content">
                 <h2>I'm a generalist thriving in the age of AI.</h2>
                 <p>Ideas person. Builder. Curious about energy, healthcare, future of work, and whatever problem is next.</p>
                 <p>I have the fundamentals: distributed systems, PyTorch from scratch, production pipelines, agents. I'm learning how to work with AI better every day. That's what matters now.</p>
                 <p style="color: var(--accent); font-size: 1.15rem; margin-top: 24px;">Let's talk.</p>
-                
+
                 <div class="contact-links">
                     <a href="mailto:radha.parikh11@gmail.com" class="contact-link primary">radha.parikh11@gmail.com</a>
                     <a href="https://linkedin.com/in/radprk" target="_blank" class="contact-link">LinkedIn</a>
@@ -1126,7 +1285,7 @@
                 </div>
             </div>
             <div class="nav">
-                <span class="nav-counter">9 / 9</span>
+                <span class="nav-counter">10 / 10</span>
                 <div class="nav-buttons">
                     <button class="nav-btn" onclick="prevCard()">←</button>
                     <button class="nav-btn" onclick="goToStart()">↺</button>
@@ -1142,7 +1301,7 @@
 
     <script>
         let currentCard = 1;
-        const totalCards = 9;
+        const totalCards = 10;
 
         function showCard(num) {
             document.querySelectorAll('.card').forEach(card => {
@@ -1250,6 +1409,60 @@
                 }
             }
         }
+
+        // Load journal stats
+        async function loadJournalStats() {
+            try {
+                const [statsRes, entriesRes] = await Promise.all([
+                    fetch('/journal/data/stats.json'),
+                    fetch('/journal/data/entries.json')
+                ]);
+
+                if (!statsRes.ok || !entriesRes.ok) return;
+
+                const stats = await statsRes.json();
+                const entries = await entriesRes.json();
+
+                // Update stats
+                const lcCount = document.getElementById('lc-count');
+                const pagesCount = document.getElementById('pages-count');
+                const streakCount = document.getElementById('streak-count');
+
+                if (lcCount) lcCount.textContent = stats.practice?.leetcode?.total || 0;
+
+                // Calculate total pages read
+                let totalPages = 0;
+                if (stats.reading) {
+                    Object.values(stats.reading).forEach(book => {
+                        totalPages += book.pages_read || 0;
+                    });
+                }
+                if (pagesCount) pagesCount.textContent = totalPages;
+
+                // Calculate streak (days with entries)
+                if (streakCount) streakCount.textContent = Object.keys(entries).length;
+
+                // Update book progress
+                if (stats.reading?.DDIA) {
+                    const ddiaFill = document.querySelector('#book-ddia .book-fill');
+                    const ddiaPct = document.querySelector('#book-ddia .book-pct');
+                    if (ddiaFill) ddiaFill.style.width = `${stats.reading.DDIA.percentage}%`;
+                    if (ddiaPct) ddiaPct.textContent = `${Math.round(stats.reading.DDIA.percentage)}%`;
+                }
+
+                if (stats.reading?.AI_Engineering) {
+                    const aiFill = document.querySelector('#book-ai .book-fill');
+                    const aiPct = document.querySelector('#book-ai .book-pct');
+                    if (aiFill) aiFill.style.width = `${stats.reading.AI_Engineering.percentage}%`;
+                    if (aiPct) aiPct.textContent = `${Math.round(stats.reading.AI_Engineering.percentage)}%`;
+                }
+            } catch (e) {
+                console.log('Journal stats not available');
+            }
+        }
+
+        // Load stats when page loads
+        loadJournalStats();
     </script>
 </body>
 </html>
