@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
     async function loadData() {
       try {
-        const basePath = import.meta.env.DEV ? '/data' : '/journal/data'
+        const basePath = `${import.meta.env.BASE_URL}data`
 
         const [entriesRes, statsRes, weeksRes] = await Promise.all([
           fetch(`${basePath}/entries.json`),
