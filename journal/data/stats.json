@@ -76,9 +76,9 @@
   },
   "goals": {
     "current_week": {
-      "total": 4,
-      "completed": 3,
-      "percentage": 75.0
+      "total": 0,
+      "completed": 0,
+      "percentage": 0
     },
     "all_time": {
       "total": 4,
