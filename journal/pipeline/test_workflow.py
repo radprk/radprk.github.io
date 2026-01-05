@@ -71,7 +71,7 @@ def test_workflow():
 ### Reading
 - DDIA chapter 1, pages 1-10 - test
 """
-        result = parse_journal_fallback(test_md, "test.md")
+        result = parse_journal_fallback(test_md, "2026-W01.md")
         if result.get("entries"):
             print(f"  ✅ Parser works: found {len(result['entries'])} entries")
             results.append(("Parser", True))
