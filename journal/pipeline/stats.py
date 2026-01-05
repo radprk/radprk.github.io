@@ -307,13 +307,150 @@ def merge_entries(existing: dict, new_parsed: dict) -> dict:
     return merged
 
 
-def update_weeks(existing_weeks: dict, new_parsed: dict, week_id: str) -> dict:
+def detect_goal_completion(goal: str, entries: dict, week_id: str) -> bool:
+    """
+    Smart detection of goal completion based on entries.
+
+    Detects patterns like:
+    - "5 leetcode" → count leetcode problems
+    - "Finish DDIA chapter 4" → check if chapter 4 was read
+    - "Read X pages" → count pages read
+    - "Work on project X" → check if project appears
+    """
+    import re
+    goal_lower = goal.lower()
+
+    # Get entries for this week only
+    year, week_num = int(week_id[:4]), int(week_id[-2:])
+    week_entries = {}
+    for date, data in entries.items():
+        try:
+            entry_date = datetime.strptime(date, "%Y-%m-%d")
+            entry_week = entry_date.isocalendar()[1]
+            entry_year = entry_date.isocalendar()[0]
+            if entry_year == year and entry_week == week_num:
+                week_entries[date] = data
+        except:
+            continue
+
+    # Count activities for this week
+    leetcode_count = 0
+    sql_count = 0
+    system_design_count = 0
+    ml_count = 0
+    pages_read = {}  # book -> total pages
+    chapters_read = {}  # book -> set of chapters
+    projects_worked = set()
+
+    for date, day_data in week_entries.items():
+        practice = day_data.get("practice", {})
+        leetcode_count += len(practice.get("leetcode", []))
+        sql_count += len(practice.get("sql", []))
+        system_design_count += len(practice.get("system_design", []))
+        ml_count += len(practice.get("ml", []))
+
+        for reading in day_data.get("reading", []):
+            book = reading.get("book", "")
+            if book:
+                pages = reading.get("pages", [])
+                if pages and len(pages) == 2:
+                    pages_read[book] = pages_read.get(book, 0) + (pages[1] - pages[0])
+                ch = reading.get("chapter")
+                if ch:
+                    if book not in chapters_read:
+                        chapters_read[book] = set()
+                    chapters_read[book].add(ch)
+
+        for building in day_data.get("building", []):
+            project = building.get("project", "").lower()
+            if project:
+                projects_worked.add(project)
+
+    # Pattern: "X leetcode" or "X lc"
+    lc_match = re.search(r'(\d+)\s*(?:leetcode|lc|problems?)', goal_lower)
+    if lc_match:
+        target = int(lc_match.group(1))
+        return leetcode_count >= target
+
+    # Pattern: "finish/complete/read BOOK chapter X"
+    chapter_match = re.search(r'(?:finish|complete|read)?\s*(ddia|ai.?eng\w*|[\w\s]+?)\s*(?:ch(?:apter)?\.?\s*(\d+)|chapter\s*(\d+))', goal_lower)
+    if chapter_match:
+        book_hint = chapter_match.group(1).strip()
+        ch_num = int(chapter_match.group(2) or chapter_match.group(3))
+
+        # Match book name
+        for book_key in chapters_read:
+            if book_hint in book_key.lower() or book_key.lower() in book_hint:
+                if ch_num in chapters_read[book_key]:
+                    return True
+        return False
+
+    # Pattern: "read X pages"
+    pages_match = re.search(r'read\s*(\d+)\s*pages?', goal_lower)
+    if pages_match:
+        target = int(pages_match.group(1))
+        total = sum(pages_read.values())
+        return total >= target
+
+    # Pattern: "work on PROJECT" or "build PROJECT"
+    project_match = re.search(r'(?:work\s*on|build|finish|complete)\s+(.+?)(?:\s*-|$)', goal_lower)
+    if project_match:
+        target_project = project_match.group(1).strip()
+        for project in projects_worked:
+            if target_project in project or project in target_project:
+                return True
+        return False
+
+    # Pattern: "X sql" or "sql practice"
+    sql_match = re.search(r'(\d+)\s*sql|sql', goal_lower)
+    if sql_match and 'sql' in goal_lower:
+        if sql_match.group(1):
+            return sql_count >= int(sql_match.group(1))
+        return sql_count > 0
+
+    # Pattern: "system design"
+    if 'system design' in goal_lower:
+        sd_match = re.search(r'(\d+)\s*system', goal_lower)
+        if sd_match:
+            return system_design_count >= int(sd_match.group(1))
+        return system_design_count > 0
+
+    return False
+
+
+def auto_detect_completed_goals(goals: list, entries: dict, week_id: str) -> list:
+    """Auto-detect which goals are completed based on entries."""
+    completed = []
+    for goal in goals:
+        if detect_goal_completion(goal, entries, week_id):
+            completed.append(goal)
+    return completed
+
+
+def update_weeks(existing_weeks: dict, new_parsed: dict, week_id: str, entries: dict = None) -> dict:
     """Update weeks data with new parsed data."""
     updated = existing_weeks.copy()
 
+    goals = new_parsed.get("weekly_goals", [])
+
+    # Get explicitly marked completed goals from week review
+    explicit_completed = new_parsed.get("week_review", {}).get("goals_completed", [])
+
+    # Auto-detect completed goals from entries
+    auto_completed = []
+    if entries and goals:
+        auto_completed = auto_detect_completed_goals(goals, entries, week_id)
+
+    # Merge: explicit wins, then add auto-detected
+    completed_set = set(g.lower() for g in explicit_completed)
+    all_completed = list(explicit_completed)
+    for goal in auto_completed:
+        if goal.lower() not in completed_set:
+            all_completed.append(goal)
+
     updated[week_id] = {
-        "goals": new_parsed.get("weekly_goals", []),
-        "goals_completed": new_parsed.get("week_review", {}).get("goals_completed", []),
+        "goals": goals,
+        "goals_completed": all_completed,
         "review": new_parsed.get("week_review", {}).get("summary", ""),
         "highlight": new_parsed.get("week_review", {}).get("highlight")
     }

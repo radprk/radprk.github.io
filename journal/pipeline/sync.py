@@ -197,7 +197,7 @@ def sync_week(
 
     # Merge data
     entries = merge_entries(existing_entries, parsed)
-    weeks = update_weeks(existing_weeks, parsed, week_id)
+    weeks = update_weeks(existing_weeks, parsed, week_id, entries)
 
     # Compute stats
     stats = compute_all_stats(entries, weeks, books_config)
