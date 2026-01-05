@@ -5,8 +5,15 @@ export default defineConfig({
   plugins: [react()],
   base: '/journal/',
   build: {
-    outDir: '../dist',
-    emptyOutDir: true,
+    outDir: '..',
+    emptyOutDir: false,
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+      }
+    }
   },
   server: {
     port: 3000
