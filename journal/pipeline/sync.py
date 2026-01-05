@@ -39,7 +39,7 @@ from stats import (
 
 # Try to import optional modules
 try:
-    from parser import parse_journal
+    from parser import parse_journal_daily
     OLLAMA_AVAILABLE = True
 except ImportError:
     OLLAMA_AVAILABLE = False
@@ -135,7 +135,7 @@ def parse_content(content: str, week_id: str, use_fallback: bool = False) -> dic
         return parse_journal_fallback(content, filename)
     else:
         logger.info("Parsing with Ollama (Mistral)")
-        result = parse_journal(content, filename)
+        result = parse_journal_daily(content, filename)
         if result is None:
             logger.warning("Ollama parsing failed, falling back to regex")
             return parse_journal_fallback(content, filename)
