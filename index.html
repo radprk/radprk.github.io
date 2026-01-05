@@ -172,26 +172,32 @@
         .now-goals {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 16px;
+            gap: 10px;
+            margin-top: 20px;
         }
 
         .now-goal {
-            font-size: 0.85rem;
-            padding: 6px 12px;
-            border-radius: 16px;
-            background: var(--bg);
+            font-size: 0.8rem;
+            padding: 8px 14px;
+            border-radius: 20px;
+            background: transparent;
             border: 1px solid var(--border);
             color: var(--text-muted);
+            max-width: 280px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .now-goal.completed {
+            background: rgba(94, 234, 212, 0.1);
             border-color: var(--accent);
             color: var(--accent);
         }
 
         .now-goal .check {
-            margin-right: 4px;
+            margin-right: 6px;
+            font-weight: bold;
         }
 
         @media (max-width: 640px) {
@@ -1003,11 +1009,11 @@
                         </div>
                         <div class="now-stat">
                             <span class="now-number" id="hero-pages">--</span>
-                            <span class="now-label">Pages Read</span>
+                            <span class="now-label">Pages</span>
                         </div>
                         <div class="now-stat">
-                            <span class="now-number" id="hero-days">--</span>
-                            <span class="now-label">Days Tracked</span>
+                            <span class="now-number" id="hero-goal-progress">--</span>
+                            <span class="now-label">Goals</span>
                         </div>
                     </div>
                     <div class="now-goals" id="hero-goals"></div>
@@ -1529,25 +1535,35 @@
                 // Update Hero section (Card 1)
                 const heroLc = document.getElementById('hero-lc');
                 const heroPages = document.getElementById('hero-pages');
-                const heroDays = document.getElementById('hero-days');
+                const heroGoalProgress = document.getElementById('hero-goal-progress');
                 if (heroLc) heroLc.textContent = lcTotal;
                 if (heroPages) heroPages.textContent = totalPages;
-                if (heroDays) heroDays.textContent = daysTracked;
 
                 // Show current week goals in hero
                 const heroGoals = document.getElementById('hero-goals');
-                if (heroGoals && Object.keys(weeks).length > 0) {
+                if (Object.keys(weeks).length > 0) {
                     const currentWeekId = Object.keys(weeks).sort().reverse()[0];
                     const currentWeek = weeks[currentWeekId];
                     const goals = currentWeek.goals || [];
-                    const completed = new Set((currentWeek.goals_completed || []).map(g => g.toLowerCase()));
+                    const completedList = currentWeek.goals_completed || [];
+                    const completed = new Set(completedList.map(g => g.toLowerCase()));
 
-                    heroGoals.innerHTML = goals.map(goal => {
-                        const isComplete = completed.has(goal.toLowerCase());
-                        return `<span class="now-goal ${isComplete ? 'completed' : ''}">
-                            ${isComplete ? '<span class="check">✓</span>' : ''}${goal}
-                        </span>`;
-                    }).join('');
+                    // Update goal progress stat
+                    if (heroGoalProgress) {
+                        heroGoalProgress.textContent = `${completedList.length}/${goals.length}`;
+                    }
+
+                    // Render goal tags
+                    if (heroGoals) {
+                        heroGoals.innerHTML = goals.map(goal => {
+                            const isComplete = completed.has(goal.toLowerCase());
+                            return `<span class="now-goal ${isComplete ? 'completed' : ''}" title="${goal}">
+                                ${isComplete ? '<span class="check">✓</span>' : '○ '}${goal}
+                            </span>`;
+                        }).join('');
+                    }
+                } else if (heroGoalProgress) {
+                    heroGoalProgress.textContent = '0/0';
                 }
 
                 // Update Card 9 Journal preview
