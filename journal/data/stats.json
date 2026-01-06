@@ -1,12 +1,12 @@
 {
   "practice": {
     "leetcode": {
-      "total": 0,
-      "easy": 0,
-      "medium": 0,
+      "total": 5,
+      "easy": 2,
+      "medium": 3,
       "hard": 0,
-      "current_streak": 0,
-      "longest_streak": 0
+      "current_streak": 2,
+      "longest_streak": 1
     },
     "sql": {
       "total": 0,
@@ -49,8 +49,8 @@
   },
   "exploring": {
     "topics": {
-      "": 5,
-      "astronomy|philosophy|history|technology|etc": 1
+      "": 4,
+      "misc": 1
     }
   },
   "goals": {
