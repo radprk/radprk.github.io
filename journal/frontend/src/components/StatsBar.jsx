@@ -8,34 +8,41 @@ function StatsBar({ stats, entries }) {
     (practice.system_design?.total || 0) +
     (practice.ml?.total || 0)
 
-  const bestStreak = Math.max(
-    practice.leetcode?.longest_streak || 0,
-    practice.sql?.longest_streak || 0,
-    practice.system_design?.longest_streak || 0,
-    practice.ml?.longest_streak || 0
-  )
-
+  const currentStreak = practice.leetcode?.current_streak || 0
+  const longestStreak = practice.leetcode?.longest_streak || 0
   const goalRate = stats.goals?.all_time?.percentage || 0
-  const booksInProgress = Object.keys(stats.reading || {}).length
+  const daysTracked = Object.keys(entries || {}).length
 
-  const statItems = [
-    { label: 'Problems Solved', value: totalProblems, icon: '🧩' },
-    { label: 'Best Streak', value: `${bestStreak} days`, icon: '🔥' },
-    { label: 'Goal Rate', value: `${goalRate}%`, icon: '🎯' },
-    { label: 'Books Active', value: booksInProgress, icon: '📚' },
+  // Calculate total pages read
+  let totalPages = 0
+  if (stats.reading) {
+    Object.values(stats.reading).forEach(book => {
+      totalPages += book.pages_read || 0
+    })
+  }
+
+  const tickerItems = [
+    `${totalProblems} problems solved`,
+    `${currentStreak} day streak`,
+    `${totalPages} pages read`,
+    `${goalRate}% goal rate`,
+    `${daysTracked} days tracked`,
+    `${longestStreak} day best streak`,
   ]
 
+  // Duplicate for seamless loop
+  const allItems = [...tickerItems, ...tickerItems]
+
   return (
-    <div className="stats-bar">
-      {statItems.map((item, i) => (
-        <div key={i} className="stat-item">
-          <span className="stat-icon">{item.icon}</span>
-          <div className="stat-content">
-            <span className="stat-value">{item.value}</span>
-            <span className="stat-label">{item.label}</span>
-          </div>
-        </div>
-      ))}
+    <div className="stats-ticker">
+      <div className="ticker-track">
+        {allItems.map((item, i) => (
+          <span key={i} className="ticker-item">
+            {item}
+            <span className="ticker-dot">•</span>
+          </span>
+        ))}
+      </div>
     </div>
   )
 }
