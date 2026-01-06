@@ -1,164 +1,113 @@
 {
-  "2026-01-05": {
-    "day": "Monday",
+  "2025-12-22": {
+    "date": "2025-12-22",
     "practice": {
       "leetcode": [
-        {
-          "name": "container with most water (medium)",
-          "difficulty": "medium",
-          "insight": "two pointers, min height, max area"
-        },
-        {
-          "name": "two sum (easy)",
-          "difficulty": "easy"
-        },
-        {
-          "name": "valid anagram (easy)",
-          "difficulty": "easy"
-        },
-        {
-          "name": "top k frequent elements (medium)",
-          "difficulty": "medium"
-        },
-        {
-          "name": "product of array except self (medium)",
-          "difficulty": "medium"
-        }
+        {"name": "Two Sum", "difficulty": "easy", "url": "https://leetcode.com/problems/two-sum", "notes": "Hash map for O(n) lookup. Classic pattern: complement = target - num"},
+        {"name": "Valid Parentheses", "difficulty": "easy", "url": "https://leetcode.com/problems/valid-parentheses", "notes": "Stack pattern. Push opening, pop and match for closing"}
+      ]
+    },
+    "reading": {
+      "DDIA": {"pages": [1, 28], "chapter": 1, "notes": "Reliability, scalability, maintainability. The three pillars of data systems."}
+    },
+    "exploring": [
+      "The human brain has about 86 billion neurons, roughly the same number as stars in the Milky Way"
+    ]
+  },
+  "2025-12-23": {
+    "date": "2025-12-23",
+    "practice": {
+      "leetcode": [
+        {"name": "Best Time to Buy and Sell Stock", "difficulty": "easy", "notes": "Track min price so far, max profit = current - min"},
+        {"name": "Contains Duplicate", "difficulty": "easy", "notes": "Set for O(1) lookup. Return true if len(set) != len(array)"},
+        {"name": "Product of Array Except Self", "difficulty": "medium", "notes": "Two passes: left products then right products. Avoid division."}
+      ]
+    },
+    "reading": {
+      "DDIA": {"pages": [28, 55], "chapter": 2, "notes": "Data models: relational vs document vs graph. Each has trade-offs."}
+    }
+  },
+  "2025-12-24": {
+    "date": "2025-12-24",
+    "practice": {
+      "leetcode": [
+        {"name": "Maximum Subarray", "difficulty": "medium", "notes": "Kadane's algorithm: max(num, currentMax + num). Reset when sum goes negative."},
+        {"name": "3Sum", "difficulty": "medium", "notes": "Sort first, then two pointers. Skip duplicates to avoid repeated triplets."}
       ],
-      "sql": [],
-      "system_design": [],
-      "ml": []
+      "system_design": [
+        {"name": "Twitter Feed", "type": "HLD", "notes": "Fan-out on write vs fan-out on read. Celebrities are special case - hybrid approach."}
+      ]
     },
-    "building": [
-      {
-        "project": "journal frontend",
-        "work": "added"
-      }
-    ],
-    "reading": [
-      {
-        "book": "DDIA or AI_Engineering",
-        "chapter": 1,
-        "pages": [
-          1,
-          20
-        ]
-      }
-    ],
-    "exploring": [],
-    "notes": null
+    "reading": {
+      "DDIA": {"pages": [55, 85], "chapter": 3, "notes": "Storage engines: LSM trees vs B-trees. Log-structured vs page-oriented."}
+    },
+    "exploring": [
+      "Octopuses have three hearts and blue blood. Two hearts pump blood to gills, one to the body."
+    ]
   },
-  "2026-01-06": {
-    "day": "Tuesday",
+  "2025-12-25": {
+    "date": "2025-12-25",
     "practice": {
-      "leetcode": [],
-      "sql": [],
-      "system_design": [],
-      "ml": []
+      "leetcode": [
+        {"name": "Merge Two Sorted Lists", "difficulty": "easy", "notes": "Dummy head trick. Compare and advance pointers."},
+        {"name": "Linked List Cycle", "difficulty": "easy", "notes": "Floyd's tortoise and hare. Fast catches slow if cycle exists."}
+      ]
+    },
+    "reading": {
+      "AI_Engineering": {"pages": [1, 35], "chapter": 1, "notes": "LLM fundamentals: tokens, context windows, temperature. Foundation for everything else."}
     },
     "building": [
-      {}
-    ],
-    "reading": [
-      {
-        "book": "DDIA or AI_Engineering",
-        "chapter": 1,
-        "pages": [],
-        "insight": ""
-      }
-    ],
-    "exploring": [],
-    "notes": null
+      {"project": "Portfolio site", "work": "Added dark mode toggle and improved mobile responsiveness"}
+    ]
   },
-  "2026-01-07": {
-    "day": "Wednesday",
+  "2025-12-26": {
+    "date": "2025-12-26",
     "practice": {
-      "leetcode": [],
-      "sql": [],
-      "system_design": [],
-      "ml": []
+      "leetcode": [
+        {"name": "Reverse Linked List", "difficulty": "easy", "notes": "Three pointers: prev, curr, next. Iterative is cleaner than recursive."},
+        {"name": "Merge k Sorted Lists", "difficulty": "hard", "notes": "Min heap of list heads. Pop smallest, push its next. O(N log k)."},
+        {"name": "LRU Cache", "difficulty": "medium", "notes": "HashMap + doubly linked list. O(1) get and put."}
+      ],
+      "system_design": [
+        {"name": "Rate Limiter", "type": "LLD", "notes": "Token bucket vs sliding window. Trade-offs: memory vs accuracy."}
+      ]
     },
-    "building": [
-      {}
-    ],
-    "reading": [
-      {
-        "book": "DDIA or AI_Engineering",
-        "chapter": 1,
-        "pages": [],
-        "insight": ""
-      }
-    ],
-    "exploring": [],
-    "notes": null
+    "reading": {
+      "DDIA": {"pages": [85, 115], "chapter": 3, "notes": "Indexing strategies. B-tree for range queries, hash for point lookups."}
+    }
   },
-  "2026-01-08": {
-    "day": "Thursday",
+  "2025-12-27": {
+    "date": "2025-12-27",
     "practice": {
-      "leetcode": [],
-      "sql": [],
-      "system_design": [],
-      "ml": []
+      "leetcode": [
+        {"name": "Binary Tree Level Order Traversal", "difficulty": "medium", "notes": "BFS with queue. Track level size to separate levels."},
+        {"name": "Validate Binary Search Tree", "difficulty": "medium", "notes": "Pass min/max bounds down. Or do inorder and check sorted."},
+        {"name": "Lowest Common Ancestor", "difficulty": "medium", "notes": "Post-order: if both sides return non-null, current is LCA."}
+      ]
     },
-    "building": [
-      {}
-    ],
-    "reading": [
-      {
-        "book": "DDIA or AI_Engineering",
-        "chapter": 1,
-        "pages": [],
-        "insight": ""
-      }
-    ],
-    "exploring": [],
-    "notes": null
+    "reading": {
+      "AI_Engineering": {"pages": [35, 70], "chapter": 2, "notes": "Prompt engineering patterns: few-shot, chain of thought, self-consistency."}
+    },
+    "exploring": [
+      "A day on Venus is longer than its year. It takes 243 Earth days to rotate but only 225 to orbit the Sun."
+    ]
   },
-  "2026-01-09": {
-    "day": "Friday",
+  "2025-12-28": {
+    "date": "2025-12-28",
     "practice": {
-      "leetcode": [],
-      "sql": [],
-      "system_design": [],
-      "ml": []
+      "leetcode": [
+        {"name": "Number of Islands", "difficulty": "medium", "notes": "DFS flood fill. Mark visited by changing to '0'. Count DFS calls."},
+        {"name": "Course Schedule", "difficulty": "medium", "notes": "Topological sort with cycle detection. Three colors: unvisited, visiting, visited."}
+      ],
+      "system_design": [
+        {"name": "URL Shortener", "type": "HLD", "notes": "Base62 encoding, consistent hashing for distribution. Read-heavy: cache aggressively."}
+      ]
+    },
+    "reading": {
+      "DDIA": {"pages": [115, 150], "chapter": 4, "notes": "Encoding formats: JSON, Thrift, Protobuf. Schema evolution and compatibility."}
     },
     "building": [
-      {
-        "project": "",
-        "work": ""
-      }
-    ],
-    "reading": [
-      {
-        "book": "",
-        "chapter": 0,
-        "pages": [],
-        "insight": ""
-      }
-    ],
-    "exploring": [],
-    "notes": null
-  },
-  "2026-01-10": {
-    "day": "Saturday",
-    "practice": {
-      "leetcode": [],
-      "sql": [],
-      "system_design": [],
-      "ml": []
-    },
-    "building": [
-      {}
-    ],
-    "reading": [
-      {
-        "book": "DDIA or AI_Engineering",
-        "chapter": 1,
-        "pages": [],
-        "insight": ""
-      }
-    ],
-    "exploring": [],
-    "notes": null
+      {"project": "Journal pipeline", "work": "Set up Python sync script to extract data from Google Docs"}
+    ]
   }
 }
