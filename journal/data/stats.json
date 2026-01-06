@@ -37,21 +37,22 @@
   },
   "building": {
     "projects": {
-      "": {
-        "days_worked": 5,
-        "last_active": "2026-01-09"
+      "journal frontend": {
+        "days_worked": 1,
+        "last_active": "2026-01-05"
       },
       "Unknown": {
-        "days_worked": 1,
+        "days_worked": 4,
         "last_active": "2026-01-10"
+      },
+      "": {
+        "days_worked": 1,
+        "last_active": "2026-01-09"
       }
     }
   },
   "exploring": {
-    "topics": {
-      "": 4,
-      "misc": 1
-    }
+    "topics": {}
   },
   "goals": {
     "current_week": {

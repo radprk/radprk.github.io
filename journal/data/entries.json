@@ -4,29 +4,25 @@
     "practice": {
       "leetcode": [
         {
-          "name": "Leetcode: container with most water (medium)",
+          "name": "container with most water (medium)",
           "difficulty": "medium",
-          "insight": "- two pointers, min height, max area"
+          "insight": "two pointers, min height, max area"
         },
         {
-          "name": "Leetcode: two sum (easy)",
-          "difficulty": "easy",
-          "insight": ""
+          "name": "two sum (easy)",
+          "difficulty": "easy"
         },
         {
-          "name": "Leetcode: valid anagram (easy)",
-          "difficulty": "easy",
-          "insight": ""
+          "name": "valid anagram (easy)",
+          "difficulty": "easy"
         },
         {
-          "name": "Leetcode: top k frequent elements (medium)",
-          "difficulty": "medium",
-          "insight": ""
+          "name": "top k frequent elements (medium)",
+          "difficulty": "medium"
         },
         {
-          "name": "Leetcode: product of array except self (medium)",
-          "difficulty": "medium",
-          "insight": ""
+          "name": "product of array except self (medium)",
+          "difficulty": "medium"
         }
       ],
       "sql": [],
@@ -35,8 +31,8 @@
     },
     "building": [
       {
-        "project": "",
-        "work": "added journal frontend to portfolio, scheduled refresh, debugged parsing errors"
+        "project": "journal frontend",
+        "work": "added"
       }
     ],
     "reading": [
@@ -46,8 +42,7 @@
         "pages": [
           1,
           20
-        ],
-        "insight": ""
+        ]
       }
     ],
     "exploring": [],
@@ -62,28 +57,17 @@
       "ml": []
     },
     "building": [
-      {
-        "project": "",
-        "work": ""
-      }
+      {}
     ],
     "reading": [
       {
         "book": "DDIA or AI_Engineering",
         "chapter": 1,
-        "pages": [
-          1,
-          20
-        ],
+        "pages": [],
         "insight": ""
       }
     ],
-    "exploring": [
-      {
-        "topic": "",
-        "content": ""
-      }
-    ],
+    "exploring": [],
     "notes": null
   },
   "2026-01-07": {
@@ -95,28 +79,17 @@
       "ml": []
     },
     "building": [
-      {
-        "project": "",
-        "work": ""
-      }
+      {}
     ],
     "reading": [
       {
         "book": "DDIA or AI_Engineering",
         "chapter": 1,
-        "pages": [
-          1,
-          20
-        ],
+        "pages": [],
         "insight": ""
       }
     ],
-    "exploring": [
-      {
-        "topic": "",
-        "content": ""
-      }
-    ],
+    "exploring": [],
     "notes": null
   },
   "2026-01-08": {
@@ -128,28 +101,17 @@
       "ml": []
     },
     "building": [
-      {
-        "project": "",
-        "work": ""
-      }
+      {}
     ],
     "reading": [
       {
         "book": "DDIA or AI_Engineering",
         "chapter": 1,
-        "pages": [
-          1,
-          20
-        ],
+        "pages": [],
         "insight": ""
       }
     ],
-    "exploring": [
-      {
-        "topic": "",
-        "content": ""
-      }
-    ],
+    "exploring": [],
     "notes": null
   },
   "2026-01-09": {
@@ -168,18 +130,13 @@
     ],
     "reading": [
       {
-        "book": "DDIA or AI_Engineering",
-        "chapter": 1,
+        "book": "",
+        "chapter": 0,
         "pages": [],
         "insight": ""
       }
     ],
-    "exploring": [
-      {
-        "topic": "",
-        "content": ""
-      }
-    ],
+    "exploring": [],
     "notes": null
   },
   "2026-01-10": {
@@ -201,9 +158,7 @@
         "insight": ""
       }
     ],
-    "exploring": [
-      {}
-    ],
+    "exploring": [],
     "notes": null
   }
 }
