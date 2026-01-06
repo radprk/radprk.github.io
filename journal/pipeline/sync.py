@@ -36,6 +36,7 @@ from stats import (
     merge_entries,
     update_weeks,
 )
+from topics import compute_weekly_summary, load_blog_posts
 
 # Try to import optional modules
 try:
@@ -64,10 +65,13 @@ def get_paths():
         "config": base / "config",
         "data": base / "data",
         "weeks": base / "weeks",
+        "blog": base / "blog",
         "books_config": base / "config" / "books.json",
         "entries": base / "data" / "entries.json",
         "stats": base / "data" / "stats.json",
         "weeks_data": base / "data" / "weeks.json",
+        "summaries": base / "data" / "summaries.json",
+        "blog_data": base / "data" / "blog.json",
         "log": base / "logs" / "sync.log",
     }
 
@@ -96,7 +100,7 @@ def load_existing_data(paths: dict) -> tuple[dict, dict]:
     return entries, weeks
 
 
-def save_data(paths: dict, entries: dict, weeks: dict, stats: dict):
+def save_data(paths: dict, entries: dict, weeks: dict, stats: dict, summaries: dict = None, blog: list = None):
     """Save all data files."""
     paths["data"].mkdir(exist_ok=True)
 
@@ -112,6 +116,18 @@ def save_data(paths: dict, entries: dict, weeks: dict, stats: dict):
         json.dumps(weeks, indent=2, ensure_ascii=False),
         encoding="utf-8"
     )
+
+    if summaries:
+        paths["summaries"].write_text(
+            json.dumps(summaries, indent=2, ensure_ascii=False),
+            encoding="utf-8"
+        )
+
+    if blog is not None:
+        paths["blog_data"].write_text(
+            json.dumps(blog, indent=2, ensure_ascii=False),
+            encoding="utf-8"
+        )
 
     logger.info(f"Saved {len(entries)} entries, {len(weeks)} weeks")
 
@@ -147,10 +163,11 @@ def sync_week(
     paths: dict,
     existing_entries: dict,
     existing_weeks: dict,
+    existing_summaries: dict,
     books_config: dict,
     use_fallback: bool = False,
     from_file: bool = False
-) -> tuple[dict, dict, dict]:
+) -> tuple[dict, dict, dict, dict]:
     """
     Sync a single week's journal.
 
@@ -159,12 +176,13 @@ def sync_week(
         paths: Path dictionary
         existing_entries: Existing entries data
         existing_weeks: Existing weeks data
+        existing_summaries: Existing weekly summaries
         books_config: Books configuration
         use_fallback: Force use of regex parser
         from_file: Load from local file instead of Google Drive
 
     Returns:
-        Updated (entries, weeks, stats) tuple
+        Updated (entries, weeks, stats, summaries) tuple
     """
     logger.info(f"Syncing week: {week_id}")
 
@@ -202,7 +220,15 @@ def sync_week(
     # Compute stats
     stats = compute_all_stats(entries, weeks, books_config)
 
-    return entries, weeks, stats
+    # Generate weekly summary with topics
+    logger.info("Generating weekly summary...")
+    use_ollama = OLLAMA_AVAILABLE and not use_fallback
+    summary = compute_weekly_summary(entries, week_id, use_ollama=use_ollama)
+    summaries = existing_summaries.copy()
+    summaries[week_id] = summary
+    logger.info(f"Generated summary with {len(summary.get('topics', []))} topics")
+
+    return entries, weeks, stats, summaries
 
 
 def main():
@@ -294,6 +320,11 @@ def main():
     existing_entries, existing_weeks = load_existing_data(paths)
     books_config = load_books_config(paths["books_config"])
 
+    # Load existing summaries
+    existing_summaries = {}
+    if paths["summaries"].exists():
+        existing_summaries = json.loads(paths["summaries"].read_text(encoding="utf-8"))
+
     logger.info(f"Loaded {len(existing_entries)} existing entries")
 
     # Determine weeks to sync
@@ -333,15 +364,17 @@ def main():
     # Sync each week
     entries = existing_entries
     weeks = existing_weeks
+    summaries = existing_summaries
     stats = {}
 
     for week_id in sorted(weeks_to_sync):
         try:
-            entries, weeks, stats = sync_week(
+            entries, weeks, stats, summaries = sync_week(
                 week_id=week_id,
                 paths=paths,
                 existing_entries=entries,
                 existing_weeks=weeks,
+                existing_summaries=summaries,
                 books_config=books_config,
                 use_fallback=args.fallback,
                 from_file=args.local
@@ -352,8 +385,13 @@ def main():
                 sys.exit(1)
             continue
 
+    # Load blog posts
+    blog_posts = load_blog_posts(paths["blog"])
+    if blog_posts:
+        logger.info(f"Loaded {len(blog_posts)} blog posts")
+
     # Save data
-    save_data(paths, entries, weeks, stats)
+    save_data(paths, entries, weeks, stats, summaries, blog_posts)
 
     # Git operations
     if not args.no_commit and GIT_AVAILABLE:

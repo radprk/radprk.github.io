@@ -1545,20 +1545,33 @@
                     const currentWeekId = Object.keys(weeks).sort().reverse()[0];
                     const currentWeek = weeks[currentWeekId];
                     const goals = currentWeek.goals || [];
+                    const goalsProgress = currentWeek.goals_progress || [];
                     const completedList = currentWeek.goals_completed || [];
-                    const completed = new Set(completedList.map(g => g.toLowerCase()));
 
                     // Update goal progress stat
                     if (heroGoalProgress) {
                         heroGoalProgress.textContent = `${completedList.length}/${goals.length}`;
                     }
 
-                    // Render goal tags
+                    // Render goal tags with progress
                     if (heroGoals) {
-                        heroGoals.innerHTML = goals.map(goal => {
-                            const isComplete = completed.has(goal.toLowerCase());
+                        heroGoals.innerHTML = goals.map((goal, idx) => {
+                            const progress = goalsProgress[idx] || {};
+                            const isComplete = progress.completed || false;
+                            const isNumeric = progress.type === 'numeric';
+
+                            // Build progress indicator
+                            let progressText = '';
+                            if (isNumeric && progress.target > 0) {
+                                progressText = `${progress.current}/${progress.target} `;
+                            } else if (isComplete) {
+                                progressText = '<span class="check">✓</span>';
+                            } else {
+                                progressText = '○ ';
+                            }
+
                             return `<span class="now-goal ${isComplete ? 'completed' : ''}" title="${goal}">
-                                ${isComplete ? '<span class="check">✓</span>' : '○ '}${goal}
+                                ${progressText}${goal}
                             </span>`;
                         }).join('');
                     }
