@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import Header from './components/Header'
 import StatsBar from './components/StatsBar'
-import PracticeStreaks from './components/PracticeStreaks'
 import Heatmap from './components/Heatmap'
 import ReadingProgress from './components/ReadingProgress'
 import GoalsSection from './components/GoalsSection'
@@ -134,7 +133,6 @@ function App() {
           <aside className="side-column">
             <GoalsSection weeks={weeks} />
             <ReadingProgress stats={stats} />
-            <PracticeStreaks stats={stats} />
             <Heatmap entries={entries} />
             <TopicsCloud stats={stats} />
           </aside>
