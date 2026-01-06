@@ -25,12 +25,10 @@ function App() {
       try {
         const basePath = `${import.meta.env.BASE_URL}data`
 
-        const [entriesRes, statsRes, weeksRes, summariesRes, blogRes] = await Promise.all([
+        const [entriesRes, statsRes, weeksRes] = await Promise.all([
           fetch(`${basePath}/entries.json`),
           fetch(`${basePath}/stats.json`),
-          fetch(`${basePath}/weeks.json`),
-          fetch(`${basePath}/summaries.json`).catch(() => ({ ok: false })),
-          fetch(`${basePath}/blog.json`).catch(() => ({ ok: false }))
+          fetch(`${basePath}/weeks.json`)
         ])
 
         if (!entriesRes.ok || !statsRes.ok || !weeksRes.ok) {
@@ -43,9 +41,27 @@ function App() {
           weeksRes.json()
         ])
 
-        // Optional data
-        const summariesData = summariesRes.ok ? await summariesRes.json() : {}
-        const blogData = blogRes.ok ? await blogRes.json() : []
+        // Optional data - fetch separately with proper error handling
+        let summariesData = {}
+        let blogData = []
+
+        try {
+          const summariesRes = await fetch(`${basePath}/summaries.json`)
+          if (summariesRes.ok) {
+            summariesData = await summariesRes.json()
+          }
+        } catch (e) {
+          console.log('Summaries not available')
+        }
+
+        try {
+          const blogRes = await fetch(`${basePath}/blog.json`)
+          if (blogRes.ok) {
+            blogData = await blogRes.json()
+          }
+        } catch (e) {
+          console.log('Blog not available')
+        }
 
         setEntries(entriesData)
         setStats(statsData)
