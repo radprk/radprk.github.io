@@ -1,62 +1,130 @@
 {
-  "2026-W02": {
-    "week_id": "2026-W02",
-    "narrative": "This week I explored consistent hashing while designing a URL shortener, worked through graph algorithms like BFS and topological sort, and discovered that dragonflies have a 95% hunting success rate — the highest of any predator on Earth.",
+  "2025-W52": {
+    "week_id": "2025-W52",
+    "narrative": "This week I dove deep into fundamentals — from hash maps and stacks to heaps and graphs. I explored how data systems handle storage through LSM trees and B-trees in DDIA, learned about fan-out strategies for Twitter's feed, and discovered that octopuses have three hearts. The brain-neuron-star connection blew my mind.",
     "topics": [
       {
-        "name": "graphs",
+        "name": "arrays & hashing",
         "type": "leetcode",
-        "count": 3,
-        "preview": "BFS for shortest path, DFS for cycle detection",
+        "count": 5,
+        "preview": "Hash maps for O(1) lookups, two-pass patterns",
         "items": [
-          {"name": "Number of Islands", "difficulty": "medium", "insight": "DFS flood fill to mark visited cells", "date": "2026-01-06"},
-          {"name": "Course Schedule", "difficulty": "medium", "insight": "Topological sort with cycle detection using colors", "date": "2026-01-07"},
-          {"name": "Clone Graph", "difficulty": "medium", "insight": "BFS with hashmap to track cloned nodes", "date": "2026-01-07"}
+          {"name": "Two Sum", "difficulty": "easy", "insight": "Hash map for O(n) lookup. Classic pattern: complement = target - num", "date": "2025-12-22"},
+          {"name": "Valid Parentheses", "difficulty": "easy", "insight": "Stack pattern. Push opening, pop and match for closing", "date": "2025-12-22"},
+          {"name": "Best Time to Buy and Sell Stock", "difficulty": "easy", "insight": "Track min price so far, max profit = current - min", "date": "2025-12-23"},
+          {"name": "Contains Duplicate", "difficulty": "easy", "insight": "Set for O(1) lookup. Return true if len(set) != len(array)", "date": "2025-12-23"},
+          {"name": "Product of Array Except Self", "difficulty": "medium", "insight": "Two passes: left products then right products. Avoid division.", "date": "2025-12-23"}
         ]
       },
       {
         "name": "two pointers",
         "type": "leetcode",
         "count": 2,
-        "preview": "Shrink window from both ends",
+        "preview": "Kadane's algorithm, sorting + two pointers",
         "items": [
-          {"name": "Container With Most Water", "difficulty": "medium", "insight": "Two pointers shrink from both ends, move the shorter one", "date": "2026-01-06"},
-          {"name": "Trapping Rain Water", "difficulty": "hard", "insight": "Track max from left and right, water = min(maxL, maxR) - height", "date": "2026-01-08"}
+          {"name": "Maximum Subarray", "difficulty": "medium", "insight": "Kadane's algorithm: max(num, currentMax + num). Reset when sum goes negative.", "date": "2025-12-24"},
+          {"name": "3Sum", "difficulty": "medium", "insight": "Sort first, then two pointers. Skip duplicates to avoid repeated triplets.", "date": "2025-12-24"}
         ]
       },
       {
-        "name": "bit.ly",
+        "name": "linked lists",
+        "type": "leetcode",
+        "count": 5,
+        "preview": "Floyd's cycle detection, dummy heads, heap for merge k",
+        "items": [
+          {"name": "Merge Two Sorted Lists", "difficulty": "easy", "insight": "Dummy head trick. Compare and advance pointers.", "date": "2025-12-25"},
+          {"name": "Linked List Cycle", "difficulty": "easy", "insight": "Floyd's tortoise and hare. Fast catches slow if cycle exists.", "date": "2025-12-25"},
+          {"name": "Reverse Linked List", "difficulty": "easy", "insight": "Three pointers: prev, curr, next. Iterative is cleaner than recursive.", "date": "2025-12-26"},
+          {"name": "Merge k Sorted Lists", "difficulty": "hard", "insight": "Min heap of list heads. Pop smallest, push its next. O(N log k).", "date": "2025-12-26"},
+          {"name": "LRU Cache", "difficulty": "medium", "insight": "HashMap + doubly linked list. O(1) get and put.", "date": "2025-12-26"}
+        ]
+      },
+      {
+        "name": "trees",
+        "type": "leetcode",
+        "count": 3,
+        "preview": "BFS level order, BST validation, LCA pattern",
+        "items": [
+          {"name": "Binary Tree Level Order Traversal", "difficulty": "medium", "insight": "BFS with queue. Track level size to separate levels.", "date": "2025-12-27"},
+          {"name": "Validate Binary Search Tree", "difficulty": "medium", "insight": "Pass min/max bounds down. Or do inorder and check sorted.", "date": "2025-12-27"},
+          {"name": "Lowest Common Ancestor", "difficulty": "medium", "insight": "Post-order: if both sides return non-null, current is LCA.", "date": "2025-12-27"}
+        ]
+      },
+      {
+        "name": "graphs",
+        "type": "leetcode",
+        "count": 2,
+        "preview": "DFS flood fill, topological sort with cycle detection",
+        "items": [
+          {"name": "Number of Islands", "difficulty": "medium", "insight": "DFS flood fill. Mark visited by changing to '0'. Count DFS calls.", "date": "2025-12-28"},
+          {"name": "Course Schedule", "difficulty": "medium", "insight": "Topological sort with cycle detection. Three colors: unvisited, visiting, visited.", "date": "2025-12-28"}
+        ]
+      },
+      {
+        "name": "Twitter Feed",
         "type": "system_design",
         "subtype": "HLD",
-        "preview": "Consistent hashing for distribution, base62 encoding for short URLs",
+        "preview": "Fan-out on write vs read, celebrity handling",
         "items": [
-          {"name": "bit.ly", "type": "HLD", "insight": "Consistent hashing for distribution, base62 encoding, read-heavy so cache aggressively", "date": "2026-01-06"}
+          {"name": "Twitter Feed", "type": "HLD", "insight": "Fan-out on write vs fan-out on read. Celebrities are special case - hybrid approach.", "date": "2025-12-24"}
+        ]
+      },
+      {
+        "name": "Rate Limiter",
+        "type": "system_design",
+        "subtype": "LLD",
+        "preview": "Token bucket vs sliding window algorithms",
+        "items": [
+          {"name": "Rate Limiter", "type": "LLD", "insight": "Token bucket vs sliding window. Trade-offs: memory vs accuracy.", "date": "2025-12-26"}
+        ]
+      },
+      {
+        "name": "URL Shortener",
+        "type": "system_design",
+        "subtype": "HLD",
+        "preview": "Base62 encoding, consistent hashing",
+        "items": [
+          {"name": "URL Shortener", "type": "HLD", "insight": "Base62 encoding, consistent hashing for distribution. Read-heavy: cache aggressively.", "date": "2025-12-28"}
         ]
       },
       {
         "name": "DDIA",
         "type": "reading",
-        "preview": "Replication lag patterns and eventual consistency trade-offs",
+        "preview": "Data models, storage engines, encoding formats",
         "items": [
-          {"chapter": 5, "pages": [151, 180], "insight": "Replication lag causes read-your-writes issues, solutions include reading from leader for own writes", "date": "2026-01-06"},
-          {"chapter": 5, "pages": [180, 197], "insight": "Multi-leader replication useful for multi-datacenter, but conflict resolution is hard", "date": "2026-01-07"}
+          {"chapter": 1, "pages": [1, 28], "insight": "Reliability, scalability, maintainability. The three pillars of data systems.", "date": "2025-12-22"},
+          {"chapter": 2, "pages": [28, 55], "insight": "Data models: relational vs document vs graph. Each has trade-offs.", "date": "2025-12-23"},
+          {"chapter": 3, "pages": [55, 85], "insight": "Storage engines: LSM trees vs B-trees. Log-structured vs page-oriented.", "date": "2025-12-24"},
+          {"chapter": 3, "pages": [85, 115], "insight": "Indexing strategies. B-tree for range queries, hash for point lookups.", "date": "2025-12-26"},
+          {"chapter": 4, "pages": [115, 150], "insight": "Encoding formats: JSON, Thrift, Protobuf. Schema evolution and compatibility.", "date": "2025-12-28"}
         ]
       },
       {
-        "name": "dragonflies",
+        "name": "AI Engineering",
+        "type": "reading",
+        "preview": "LLM fundamentals and prompt engineering",
+        "items": [
+          {"chapter": 1, "pages": [1, 35], "insight": "LLM fundamentals: tokens, context windows, temperature. Foundation for everything else.", "date": "2025-12-25"},
+          {"chapter": 2, "pages": [35, 70], "insight": "Prompt engineering patterns: few-shot, chain of thought, self-consistency.", "date": "2025-12-27"}
+        ]
+      },
+      {
+        "name": "random facts",
         "type": "exploring",
-        "preview": "95% hunting success rate — the most efficient predator on Earth",
+        "preview": "Neurons, octopuses, and Venus",
         "items": [
-          {"content": "Dragonflies have a 95% hunting success rate, making them the most efficient predators on Earth. They use predictive tracking, calculating where prey will be rather than chasing it.", "date": "2026-01-06"}
+          {"content": "The human brain has about 86 billion neurons, roughly the same number as stars in the Milky Way", "date": "2025-12-22"},
+          {"content": "Octopuses have three hearts and blue blood. Two hearts pump blood to gills, one to the body.", "date": "2025-12-24"},
+          {"content": "A day on Venus is longer than its year. It takes 243 Earth days to rotate but only 225 to orbit the Sun.", "date": "2025-12-27"}
         ]
       },
       {
-        "name": "Journal pipeline",
+        "name": "Portfolio & Journal",
         "type": "building",
-        "preview": "Topic extraction and weekly narrative generation",
+        "preview": "Dark mode, mobile responsive, sync pipeline",
         "items": [
-          {"project": "Journal pipeline", "work": "Built topic extraction system that groups LeetCode by algorithm", "date": "2026-01-06"},
-          {"project": "Journal pipeline", "work": "Added Ollama-powered weekly narrative generation", "date": "2026-01-07"}
+          {"project": "Portfolio site", "work": "Added dark mode toggle and improved mobile responsiveness", "date": "2025-12-25"},
+          {"project": "Journal pipeline", "work": "Set up Python sync script to extract data from Google Docs", "date": "2025-12-28"}
         ]
       }
     ]
