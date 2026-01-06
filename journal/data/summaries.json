@@ -1,1 +1,64 @@
-{}
+{
+  "2026-W02": {
+    "week_id": "2026-W02",
+    "narrative": "This week I explored consistent hashing while designing a URL shortener, worked through graph algorithms like BFS and topological sort, and discovered that dragonflies have a 95% hunting success rate — the highest of any predator on Earth.",
+    "topics": [
+      {
+        "name": "graphs",
+        "type": "leetcode",
+        "count": 3,
+        "preview": "BFS for shortest path, DFS for cycle detection",
+        "items": [
+          {"name": "Number of Islands", "difficulty": "medium", "insight": "DFS flood fill to mark visited cells", "date": "2026-01-06"},
+          {"name": "Course Schedule", "difficulty": "medium", "insight": "Topological sort with cycle detection using colors", "date": "2026-01-07"},
+          {"name": "Clone Graph", "difficulty": "medium", "insight": "BFS with hashmap to track cloned nodes", "date": "2026-01-07"}
+        ]
+      },
+      {
+        "name": "two pointers",
+        "type": "leetcode",
+        "count": 2,
+        "preview": "Shrink window from both ends",
+        "items": [
+          {"name": "Container With Most Water", "difficulty": "medium", "insight": "Two pointers shrink from both ends, move the shorter one", "date": "2026-01-06"},
+          {"name": "Trapping Rain Water", "difficulty": "hard", "insight": "Track max from left and right, water = min(maxL, maxR) - height", "date": "2026-01-08"}
+        ]
+      },
+      {
+        "name": "bit.ly",
+        "type": "system_design",
+        "subtype": "HLD",
+        "preview": "Consistent hashing for distribution, base62 encoding for short URLs",
+        "items": [
+          {"name": "bit.ly", "type": "HLD", "insight": "Consistent hashing for distribution, base62 encoding, read-heavy so cache aggressively", "date": "2026-01-06"}
+        ]
+      },
+      {
+        "name": "DDIA",
+        "type": "reading",
+        "preview": "Replication lag patterns and eventual consistency trade-offs",
+        "items": [
+          {"chapter": 5, "pages": [151, 180], "insight": "Replication lag causes read-your-writes issues, solutions include reading from leader for own writes", "date": "2026-01-06"},
+          {"chapter": 5, "pages": [180, 197], "insight": "Multi-leader replication useful for multi-datacenter, but conflict resolution is hard", "date": "2026-01-07"}
+        ]
+      },
+      {
+        "name": "dragonflies",
+        "type": "exploring",
+        "preview": "95% hunting success rate — the most efficient predator on Earth",
+        "items": [
+          {"content": "Dragonflies have a 95% hunting success rate, making them the most efficient predators on Earth. They use predictive tracking, calculating where prey will be rather than chasing it.", "date": "2026-01-06"}
+        ]
+      },
+      {
+        "name": "Journal pipeline",
+        "type": "building",
+        "preview": "Topic extraction and weekly narrative generation",
+        "items": [
+          {"project": "Journal pipeline", "work": "Built topic extraction system that groups LeetCode by algorithm", "date": "2026-01-06"},
+          {"project": "Journal pipeline", "work": "Added Ollama-powered weekly narrative generation", "date": "2026-01-07"}
+        ]
+      }
+    ]
+  }
+}
