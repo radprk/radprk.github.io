@@ -1,55 +1,69 @@
 {
   "practice": {
     "leetcode": {
-      "total": 18,
-      "easy": 8,
-      "medium": 9,
-      "hard": 1,
-      "current_streak": 7,
-      "longest_streak": 7
+      "total": 5,
+      "easy": 2,
+      "medium": 3,
+      "hard": 0,
+      "current_streak": 0,
+      "longest_streak": 1
     },
-    "sql": {"total": 0, "current_streak": 0, "longest_streak": 0},
+    "sql": {
+      "total": 0,
+      "current_streak": 0,
+      "longest_streak": 0
+    },
     "system_design": {
-      "total": 3,
-      "hld": 2,
-      "lld": 1,
-      "current_streak": 3,
-      "longest_streak": 3
+      "total": 0,
+      "hld": 0,
+      "lld": 0,
+      "current_streak": 0,
+      "longest_streak": 0
     },
-    "ml": {"total": 0, "current_streak": 0, "longest_streak": 0}
+    "ml": {
+      "total": 0,
+      "current_streak": 0,
+      "longest_streak": 0
+    }
   },
   "reading": {
-    "DDIA": {
-      "title": "Designing Data-Intensive Applications",
-      "total_pages": 550,
-      "pages_read": 150,
-      "percentage": 27,
-      "chapters_completed": [1, 2, 3, 4]
-    },
-    "AI_Engineering": {
-      "title": "AI Engineering",
-      "total_pages": 400,
-      "pages_read": 70,
-      "percentage": 18,
-      "chapters_completed": [1, 2]
+    "DDIA or AI_Engineering": {
+      "pages_read": 20,
+      "total_pages": 0,
+      "percentage": 0,
+      "chapters_completed": [],
+      "themes_covered": []
     }
   },
   "building": {
     "projects": {
-      "Portfolio site": {"entries": 1, "last_update": "2025-12-25"},
-      "Journal pipeline": {"entries": 1, "last_update": "2025-12-28"}
+      "": {
+        "days_worked": 5,
+        "last_active": "2026-01-09"
+      },
+      "Unknown": {
+        "days_worked": 1,
+        "last_active": "2026-01-10"
+      }
     }
   },
   "exploring": {
     "topics": {
-      "neuroscience": 1,
-      "biology": 1,
-      "astronomy": 1
+      "": 4,
+      "astronomy|philosophy|history|technology|etc": 1
     }
   },
   "goals": {
-    "current_week": {"total": 4, "completed": 4, "percentage": 100},
-    "all_time": {"total": 4, "completed": 4, "percentage": 100},
-    "streak": 1
+    "current_week": {
+      "total": 8,
+      "completed": 0,
+      "percentage": 0.0
+    },
+    "all_time": {
+      "total": 8,
+      "completed": 0,
+      "percentage": 0.0
+    },
+    "streak": 0
   }
 }

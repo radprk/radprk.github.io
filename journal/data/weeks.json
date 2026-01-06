@@ -1,21 +1,75 @@
 {
-  "2025-W52": {
-    "week_id": "2025-W52",
-    "start_date": "2025-12-22",
-    "end_date": "2025-12-28",
+  "2026-W02": {
     "goals": [
-      "18 LeetCode problems",
-      "Read 150 pages",
-      "1 system design problem",
-      "Start journal pipeline"
+      "18 Leetcode Problems (12 medium, 6 hard)",
+      "5 system designs ( Bit.ly, Dropbox, Local Delivery System, News Aggregator, TicketMaster)",
+      "10 SQL questions",
+      "extend voice support to AI call center + improve RAG",
+      "Read 3 chapters of DDIA",
+      "Read 3 chapters of AIE",
+      "Read 1 section of MLSys",
+      "Spend 21 hours in JobSearch (cold apply + cold email + cold DM + networking)"
     ],
-    "goals_completed": [1, 3],
+    "goals_completed": [],
     "goals_progress": [
-      {"type": "numeric", "current": 18, "target": 18, "completed": true},
-      {"type": "numeric", "current": 150, "target": 150, "completed": true},
-      {"type": "numeric", "current": 3, "target": 1, "completed": true},
-      {"type": "boolean", "completed": true}
+      {
+        "current": 5,
+        "target": 18,
+        "completed": false,
+        "type": "numeric",
+        "goal": "18 Leetcode Problems (12 medium, 6 hard)"
+      },
+      {
+        "current": 0,
+        "target": 5,
+        "completed": false,
+        "type": "numeric",
+        "goal": "5 system designs ( Bit.ly, Dropbox, Local Delivery System, News Aggregator, TicketMaster)"
+      },
+      {
+        "current": 0,
+        "target": 10,
+        "completed": false,
+        "type": "numeric",
+        "goal": "10 SQL questions"
+      },
+      {
+        "current": 0,
+        "target": 1,
+        "completed": false,
+        "type": "boolean",
+        "goal": "extend voice support to AI call center + improve RAG"
+      },
+      {
+        "current": 1,
+        "target": 3,
+        "completed": false,
+        "type": "numeric",
+        "goal": "Read 3 chapters of DDIA"
+      },
+      {
+        "current": 0,
+        "target": 3,
+        "completed": false,
+        "type": "numeric",
+        "goal": "Read 3 chapters of AIE"
+      },
+      {
+        "current": 0,
+        "target": 1,
+        "completed": false,
+        "type": "unknown",
+        "goal": "Read 1 section of MLSys"
+      },
+      {
+        "current": 0,
+        "target": 21,
+        "completed": false,
+        "type": "hours",
+        "goal": "Spend 21 hours in JobSearch (cold apply + cold email + cold DM + networking)"
+      }
     ],
-    "summary": "Solid week of fundamentals. Covered arrays, linked lists, trees, and graphs. Started two books and built the journal pipeline."
+    "review": "",
+    "highlight": null
   }
 }
