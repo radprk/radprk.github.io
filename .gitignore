@@ -31,4 +31,4 @@ __pycache__/
 *.py[cod]
 *.so
 .venv/
-venv/
+venv/journal/frontend/node_modules/
