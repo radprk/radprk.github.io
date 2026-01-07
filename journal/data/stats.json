@@ -55,14 +55,14 @@
   },
   "goals": {
     "current_week": {
-      "total": 8,
+      "total": 0,
       "completed": 0,
-      "percentage": 0.0
+      "percentage": 0
     },
     "all_time": {
-      "total": 8,
+      "total": 0,
       "completed": 0,
-      "percentage": 0.0
+      "percentage": 0
     },
     "streak": 0
   }
