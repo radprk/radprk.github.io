@@ -889,6 +889,22 @@
             z-index: 50;
         }
 
+        /* Visitor counter */
+        .visitor-counter {
+            position: fixed;
+            bottom: 12px;
+            right: 24px;
+            font-size: 0.6875rem;
+            color: var(--text-muted);
+            font-family: 'SF Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            z-index: 50;
+        }
+
+        .visitor-counter #visitor-count {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
         kbd {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
@@ -1178,10 +1194,26 @@
                 </div>
 
                 <div class="project-block">
+                    <div class="project-title">AIWF Odyssey</div>
+                    <div class="project-desc">An agentic AI system for exploring the future of work. Multi-agent simulations that model economic policies and workforce transformation scenarios.</div>
+                    <div class="project-links">
+                        <a href="https://github.com/radprk/AIWF-odyssey" target="_blank" class="project-link">View code →</a>
+                    </div>
+                </div>
+
+                <div class="project-block">
                     <div class="project-title">PittPool</div>
                     <div class="project-desc">No one was carpooling in Pittsburgh. I'm a public transit nerd. I care about sustainability. So I built a rideshare matching app for CMU students.</div>
                     <div class="project-links">
                         <a href="https://pittpool.vercel.app/" target="_blank" class="project-link">Try it →</a>
+                    </div>
+                </div>
+
+                <div class="project-block">
+                    <div class="project-title">This Portfolio</div>
+                    <div class="project-desc">Built with vanilla HTML/CSS/JS. Features a learning journal synced from Google Docs, light/dark mode, and live stats from my daily practice.</div>
+                    <div class="project-links">
+                        <a href="https://github.com/radprk/radprk.github.io" target="_blank" class="project-link">View code →</a>
                     </div>
                 </div>
             </div>
@@ -1400,6 +1432,10 @@
 
         <div class="keyboard-hint">
             Use <kbd>←</kbd> <kbd>→</kbd> arrow keys to navigate
+        </div>
+
+        <div class="visitor-counter">
+            <span id="visitor-count">--</span> visitors
         </div>
     </div>
 
@@ -1636,6 +1672,24 @@
         }
 
         loadJournalStats();
+
+        // Visitor counter
+        async function updateVisitorCount() {
+            try {
+                // Using hits.seeyoufarm.com - free and reliable
+                const response = await fetch('https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://radprk.github.io&count_bg=%23000000&title_bg=%23000000&icon=&icon_color=%23E7E7E7&title=&edge_flat=true');
+                // Parse the SVG response to extract the count
+                const text = await response.text();
+                const match = text.match(/>(\d+)</);
+                if (match) {
+                    document.getElementById('visitor-count').textContent = parseInt(match[1]).toLocaleString();
+                }
+            } catch (e) {
+                // Hide counter if API fails
+                document.querySelector('.visitor-counter').style.display = 'none';
+            }
+        }
+        updateVisitorCount();
     </script>
 </body>
 </html>
