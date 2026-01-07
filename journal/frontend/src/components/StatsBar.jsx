@@ -22,12 +22,12 @@ function StatsBar({ stats, entries }) {
   }
 
   const tickerItems = [
-    `${totalProblems} problems solved`,
-    `${currentStreak} day streak`,
-    `${totalPages} pages read`,
-    `${goalRate}% goal rate`,
-    `${daysTracked} days tracked`,
-    `${longestStreak} day best streak`,
+    { value: totalProblems, label: 'problems solved' },
+    { value: currentStreak, label: 'day streak' },
+    { value: totalPages, label: 'pages read' },
+    { value: `${goalRate}%`, label: 'goal rate' },
+    { value: daysTracked, label: 'days tracked' },
+    { value: longestStreak, label: 'best streak' },
   ]
 
   // Duplicate for seamless loop
@@ -38,8 +38,8 @@ function StatsBar({ stats, entries }) {
       <div className="ticker-track">
         {allItems.map((item, i) => (
           <span key={i} className="ticker-item">
-            {item}
-            <span className="ticker-dot">•</span>
+            <strong>{item.value}</strong> {item.label}
+            <span className="ticker-dot">·</span>
           </span>
         ))}
       </div>

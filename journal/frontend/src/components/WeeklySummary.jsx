@@ -131,13 +131,7 @@ function WeeklySummary({ summaries }) {
     }, {})
   }, [topics])
 
-  const typeIcons = {
-    leetcode: '💻',
-    system_design: '🏗️',
-    reading: '📚',
-    exploring: '🔭',
-    building: '🔨'
-  }
+  // No icons - clean minimal design
 
   return (
     <section className="weekly-summary card">
@@ -154,7 +148,6 @@ function WeeklySummary({ summaries }) {
             className={`topic-pill ${topic.type}`}
             onClick={() => setSelectedTopic(topic)}
           >
-            <span className="topic-icon">{typeIcons[topic.type] || '📌'}</span>
             <span className="topic-name">{topic.name}</span>
             {topic.count > 1 && (
               <span className="topic-count">{topic.count}</span>
