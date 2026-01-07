@@ -1,8 +1,74 @@
 {
   "2026-W02": {
-    "goals": [],
+    "goals": [
+      "18 Leetcode Problems (12 medium, 6 hard)",
+      "5 system designs ( Bit.ly, Dropbox, Local Delivery System, News Aggregator, TicketMaster)",
+      "10 SQL questions",
+      "extend voice support to AI call center + improve RAG",
+      "Read 3 chapters of DDIA",
+      "Read 3 chapters of AIE",
+      "Read 1 section of MLSys",
+      "Spend 21 hours in JobSearch (cold apply + cold email + cold DM + networking)"
+    ],
     "goals_completed": [],
-    "goals_progress": [],
+    "goals_progress": [
+      {
+        "current": 9,
+        "target": 18,
+        "completed": false,
+        "type": "numeric",
+        "goal": "18 Leetcode Problems (12 medium, 6 hard)"
+      },
+      {
+        "current": 0,
+        "target": 5,
+        "completed": false,
+        "type": "numeric",
+        "goal": "5 system designs ( Bit.ly, Dropbox, Local Delivery System, News Aggregator, TicketMaster)"
+      },
+      {
+        "current": 0,
+        "target": 10,
+        "completed": false,
+        "type": "numeric",
+        "goal": "10 SQL questions"
+      },
+      {
+        "current": 0,
+        "target": 1,
+        "completed": false,
+        "type": "boolean",
+        "goal": "extend voice support to AI call center + improve RAG"
+      },
+      {
+        "current": 2,
+        "target": 3,
+        "completed": false,
+        "type": "numeric",
+        "goal": "Read 3 chapters of DDIA"
+      },
+      {
+        "current": 0,
+        "target": 3,
+        "completed": false,
+        "type": "numeric",
+        "goal": "Read 3 chapters of AIE"
+      },
+      {
+        "current": 0,
+        "target": 1,
+        "completed": false,
+        "type": "unknown",
+        "goal": "Read 1 section of MLSys"
+      },
+      {
+        "current": 0,
+        "target": 21,
+        "completed": false,
+        "type": "hours",
+        "goal": "Spend 21 hours in JobSearch (cold apply + cold email + cold DM + networking)"
+      }
+    ],
     "review": "",
     "highlight": null
   }
