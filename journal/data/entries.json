@@ -6,15 +6,17 @@
         {
           "name": "container with most water (medium)",
           "difficulty": "medium",
-          "insight": "two pointers, min height, max area"
+          "insight": "- two pointers, min height, max area"
         },
         {
           "name": "two sum (easy)",
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "insight": ""
         },
         {
           "name": "valid anagram (easy)",
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "insight": ""
         }
       ],
       "sql": [],
@@ -23,8 +25,8 @@
     },
     "building": [
       {
-        "project": "journal frontend",
-        "work": "added"
+        "project": "",
+        "work": "added journal frontend to portfolio, scheduled refresh, debugged parsing errors"
       }
     ],
     "reading": [
@@ -34,7 +36,8 @@
         "pages": [
           1,
           20
-        ]
+        ],
+        "insight": ""
       }
     ],
     "exploring": [],
@@ -141,17 +144,28 @@
       "ml": []
     },
     "building": [
-      {}
+      {
+        "project": "",
+        "work": ""
+      }
     ],
     "reading": [
       {
         "book": "DDIA or AI_Engineering",
         "chapter": 1,
-        "pages": [],
+        "pages": [
+          1,
+          20
+        ],
         "insight": ""
       }
     ],
-    "exploring": [],
+    "exploring": [
+      {
+        "topic": "",
+        "content": ""
+      }
+    ],
     "notes": null
   },
   "2026-01-09": {
@@ -199,18 +213,12 @@
       {
         "book": "DDIA or AI_Engineering",
         "chapter": 1,
-        "pages": [
-          1,
-          20
-        ],
-        "insight": "..."
+        "pages": [],
+        "insight": ""
       }
     ],
     "exploring": [
-      {
-        "topic": "astronomy|philosophy|history|technology|etc",
-        "content": "..."
-      }
+      {}
     ],
     "notes": null
   }
