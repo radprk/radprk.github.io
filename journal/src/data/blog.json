@@ -1,0 +1,14 @@
+{
+  "posts": [
+    {
+      "id": "example-post-1",
+      "title": "Building My Journal Pipeline",
+      "subtitle": "How I automated my daily journal sync from Google Docs to GitHub Pages",
+      "date": "2025-01-10",
+      "tags": ["automation", "python", "ollama", "journaling"],
+      "excerpt": "I wanted a way to write my daily journal entries naturally in Google Docs, then automatically sync them to my portfolio site. Here's how I built a local pipeline using Python, Ollama, and GitHub Pages.",
+      "content": "<p>This is an example blog post. You can add your own content here.</p><p>To add a new blog post, edit the <code>blog.json</code> file in the <code>journal/src/data/</code> directory.</p>"
+    }
+  ]
+}
+

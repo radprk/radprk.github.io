@@ -32,3 +32,9 @@ __pycache__/
 *.so
 .venv/
 venv/
+
+# OAuth tokens and credentials - DO NOT COMMIT
+journal/config/token.json
+journal/config/oauth_credentials.json
+**/token.json
+**/oauth_credentials.json

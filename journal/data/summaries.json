@@ -9,11 +9,36 @@
         "count": 5,
         "preview": "Hash maps for O(1) lookups, two-pass patterns",
         "items": [
-          {"name": "Two Sum", "difficulty": "easy", "insight": "Hash map for O(n) lookup. Classic pattern: complement = target - num", "date": "2025-12-22"},
-          {"name": "Valid Parentheses", "difficulty": "easy", "insight": "Stack pattern. Push opening, pop and match for closing", "date": "2025-12-22"},
-          {"name": "Best Time to Buy and Sell Stock", "difficulty": "easy", "insight": "Track min price so far, max profit = current - min", "date": "2025-12-23"},
-          {"name": "Contains Duplicate", "difficulty": "easy", "insight": "Set for O(1) lookup. Return true if len(set) != len(array)", "date": "2025-12-23"},
-          {"name": "Product of Array Except Self", "difficulty": "medium", "insight": "Two passes: left products then right products. Avoid division.", "date": "2025-12-23"}
+          {
+            "name": "Two Sum",
+            "difficulty": "easy",
+            "insight": "Hash map for O(n) lookup. Classic pattern: complement = target - num",
+            "date": "2025-12-22"
+          },
+          {
+            "name": "Valid Parentheses",
+            "difficulty": "easy",
+            "insight": "Stack pattern. Push opening, pop and match for closing",
+            "date": "2025-12-22"
+          },
+          {
+            "name": "Best Time to Buy and Sell Stock",
+            "difficulty": "easy",
+            "insight": "Track min price so far, max profit = current - min",
+            "date": "2025-12-23"
+          },
+          {
+            "name": "Contains Duplicate",
+            "difficulty": "easy",
+            "insight": "Set for O(1) lookup. Return true if len(set) != len(array)",
+            "date": "2025-12-23"
+          },
+          {
+            "name": "Product of Array Except Self",
+            "difficulty": "medium",
+            "insight": "Two passes: left products then right products. Avoid division.",
+            "date": "2025-12-23"
+          }
         ]
       },
       {
@@ -22,8 +47,18 @@
         "count": 2,
         "preview": "Kadane's algorithm, sorting + two pointers",
         "items": [
-          {"name": "Maximum Subarray", "difficulty": "medium", "insight": "Kadane's algorithm: max(num, currentMax + num). Reset when sum goes negative.", "date": "2025-12-24"},
-          {"name": "3Sum", "difficulty": "medium", "insight": "Sort first, then two pointers. Skip duplicates to avoid repeated triplets.", "date": "2025-12-24"}
+          {
+            "name": "Maximum Subarray",
+            "difficulty": "medium",
+            "insight": "Kadane's algorithm: max(num, currentMax + num). Reset when sum goes negative.",
+            "date": "2025-12-24"
+          },
+          {
+            "name": "3Sum",
+            "difficulty": "medium",
+            "insight": "Sort first, then two pointers. Skip duplicates to avoid repeated triplets.",
+            "date": "2025-12-24"
+          }
         ]
       },
       {
@@ -32,11 +67,36 @@
         "count": 5,
         "preview": "Floyd's cycle detection, dummy heads, heap for merge k",
         "items": [
-          {"name": "Merge Two Sorted Lists", "difficulty": "easy", "insight": "Dummy head trick. Compare and advance pointers.", "date": "2025-12-25"},
-          {"name": "Linked List Cycle", "difficulty": "easy", "insight": "Floyd's tortoise and hare. Fast catches slow if cycle exists.", "date": "2025-12-25"},
-          {"name": "Reverse Linked List", "difficulty": "easy", "insight": "Three pointers: prev, curr, next. Iterative is cleaner than recursive.", "date": "2025-12-26"},
-          {"name": "Merge k Sorted Lists", "difficulty": "hard", "insight": "Min heap of list heads. Pop smallest, push its next. O(N log k).", "date": "2025-12-26"},
-          {"name": "LRU Cache", "difficulty": "medium", "insight": "HashMap + doubly linked list. O(1) get and put.", "date": "2025-12-26"}
+          {
+            "name": "Merge Two Sorted Lists",
+            "difficulty": "easy",
+            "insight": "Dummy head trick. Compare and advance pointers.",
+            "date": "2025-12-25"
+          },
+          {
+            "name": "Linked List Cycle",
+            "difficulty": "easy",
+            "insight": "Floyd's tortoise and hare. Fast catches slow if cycle exists.",
+            "date": "2025-12-25"
+          },
+          {
+            "name": "Reverse Linked List",
+            "difficulty": "easy",
+            "insight": "Three pointers: prev, curr, next. Iterative is cleaner than recursive.",
+            "date": "2025-12-26"
+          },
+          {
+            "name": "Merge k Sorted Lists",
+            "difficulty": "hard",
+            "insight": "Min heap of list heads. Pop smallest, push its next. O(N log k).",
+            "date": "2025-12-26"
+          },
+          {
+            "name": "LRU Cache",
+            "difficulty": "medium",
+            "insight": "HashMap + doubly linked list. O(1) get and put.",
+            "date": "2025-12-26"
+          }
         ]
       },
       {
@@ -45,9 +105,24 @@
         "count": 3,
         "preview": "BFS level order, BST validation, LCA pattern",
         "items": [
-          {"name": "Binary Tree Level Order Traversal", "difficulty": "medium", "insight": "BFS with queue. Track level size to separate levels.", "date": "2025-12-27"},
-          {"name": "Validate Binary Search Tree", "difficulty": "medium", "insight": "Pass min/max bounds down. Or do inorder and check sorted.", "date": "2025-12-27"},
-          {"name": "Lowest Common Ancestor", "difficulty": "medium", "insight": "Post-order: if both sides return non-null, current is LCA.", "date": "2025-12-27"}
+          {
+            "name": "Binary Tree Level Order Traversal",
+            "difficulty": "medium",
+            "insight": "BFS with queue. Track level size to separate levels.",
+            "date": "2025-12-27"
+          },
+          {
+            "name": "Validate Binary Search Tree",
+            "difficulty": "medium",
+            "insight": "Pass min/max bounds down. Or do inorder and check sorted.",
+            "date": "2025-12-27"
+          },
+          {
+            "name": "Lowest Common Ancestor",
+            "difficulty": "medium",
+            "insight": "Post-order: if both sides return non-null, current is LCA.",
+            "date": "2025-12-27"
+          }
         ]
       },
       {
@@ -56,8 +131,18 @@
         "count": 2,
         "preview": "DFS flood fill, topological sort with cycle detection",
         "items": [
-          {"name": "Number of Islands", "difficulty": "medium", "insight": "DFS flood fill. Mark visited by changing to '0'. Count DFS calls.", "date": "2025-12-28"},
-          {"name": "Course Schedule", "difficulty": "medium", "insight": "Topological sort with cycle detection. Three colors: unvisited, visiting, visited.", "date": "2025-12-28"}
+          {
+            "name": "Number of Islands",
+            "difficulty": "medium",
+            "insight": "DFS flood fill. Mark visited by changing to '0'. Count DFS calls.",
+            "date": "2025-12-28"
+          },
+          {
+            "name": "Course Schedule",
+            "difficulty": "medium",
+            "insight": "Topological sort with cycle detection. Three colors: unvisited, visiting, visited.",
+            "date": "2025-12-28"
+          }
         ]
       },
       {
@@ -66,7 +151,12 @@
         "subtype": "HLD",
         "preview": "Fan-out on write vs read, celebrity handling",
         "items": [
-          {"name": "Twitter Feed", "type": "HLD", "insight": "Fan-out on write vs fan-out on read. Celebrities are special case - hybrid approach.", "date": "2025-12-24"}
+          {
+            "name": "Twitter Feed",
+            "type": "HLD",
+            "insight": "Fan-out on write vs fan-out on read. Celebrities are special case - hybrid approach.",
+            "date": "2025-12-24"
+          }
         ]
       },
       {
@@ -75,7 +165,12 @@
         "subtype": "LLD",
         "preview": "Token bucket vs sliding window algorithms",
         "items": [
-          {"name": "Rate Limiter", "type": "LLD", "insight": "Token bucket vs sliding window. Trade-offs: memory vs accuracy.", "date": "2025-12-26"}
+          {
+            "name": "Rate Limiter",
+            "type": "LLD",
+            "insight": "Token bucket vs sliding window. Trade-offs: memory vs accuracy.",
+            "date": "2025-12-26"
+          }
         ]
       },
       {
@@ -84,7 +179,12 @@
         "subtype": "HLD",
         "preview": "Base62 encoding, consistent hashing",
         "items": [
-          {"name": "URL Shortener", "type": "HLD", "insight": "Base62 encoding, consistent hashing for distribution. Read-heavy: cache aggressively.", "date": "2025-12-28"}
+          {
+            "name": "URL Shortener",
+            "type": "HLD",
+            "insight": "Base62 encoding, consistent hashing for distribution. Read-heavy: cache aggressively.",
+            "date": "2025-12-28"
+          }
         ]
       },
       {
@@ -92,11 +192,51 @@
         "type": "reading",
         "preview": "Data models, storage engines, encoding formats",
         "items": [
-          {"chapter": 1, "pages": [1, 28], "insight": "Reliability, scalability, maintainability. The three pillars of data systems.", "date": "2025-12-22"},
-          {"chapter": 2, "pages": [28, 55], "insight": "Data models: relational vs document vs graph. Each has trade-offs.", "date": "2025-12-23"},
-          {"chapter": 3, "pages": [55, 85], "insight": "Storage engines: LSM trees vs B-trees. Log-structured vs page-oriented.", "date": "2025-12-24"},
-          {"chapter": 3, "pages": [85, 115], "insight": "Indexing strategies. B-tree for range queries, hash for point lookups.", "date": "2025-12-26"},
-          {"chapter": 4, "pages": [115, 150], "insight": "Encoding formats: JSON, Thrift, Protobuf. Schema evolution and compatibility.", "date": "2025-12-28"}
+          {
+            "chapter": 1,
+            "pages": [
+              1,
+              28
+            ],
+            "insight": "Reliability, scalability, maintainability. The three pillars of data systems.",
+            "date": "2025-12-22"
+          },
+          {
+            "chapter": 2,
+            "pages": [
+              28,
+              55
+            ],
+            "insight": "Data models: relational vs document vs graph. Each has trade-offs.",
+            "date": "2025-12-23"
+          },
+          {
+            "chapter": 3,
+            "pages": [
+              55,
+              85
+            ],
+            "insight": "Storage engines: LSM trees vs B-trees. Log-structured vs page-oriented.",
+            "date": "2025-12-24"
+          },
+          {
+            "chapter": 3,
+            "pages": [
+              85,
+              115
+            ],
+            "insight": "Indexing strategies. B-tree for range queries, hash for point lookups.",
+            "date": "2025-12-26"
+          },
+          {
+            "chapter": 4,
+            "pages": [
+              115,
+              150
+            ],
+            "insight": "Encoding formats: JSON, Thrift, Protobuf. Schema evolution and compatibility.",
+            "date": "2025-12-28"
+          }
         ]
       },
       {
@@ -104,8 +244,24 @@
         "type": "reading",
         "preview": "LLM fundamentals and prompt engineering",
         "items": [
-          {"chapter": 1, "pages": [1, 35], "insight": "LLM fundamentals: tokens, context windows, temperature. Foundation for everything else.", "date": "2025-12-25"},
-          {"chapter": 2, "pages": [35, 70], "insight": "Prompt engineering patterns: few-shot, chain of thought, self-consistency.", "date": "2025-12-27"}
+          {
+            "chapter": 1,
+            "pages": [
+              1,
+              35
+            ],
+            "insight": "LLM fundamentals: tokens, context windows, temperature. Foundation for everything else.",
+            "date": "2025-12-25"
+          },
+          {
+            "chapter": 2,
+            "pages": [
+              35,
+              70
+            ],
+            "insight": "Prompt engineering patterns: few-shot, chain of thought, self-consistency.",
+            "date": "2025-12-27"
+          }
         ]
       },
       {
@@ -113,9 +269,18 @@
         "type": "exploring",
         "preview": "Neurons, octopuses, and Venus",
         "items": [
-          {"content": "The human brain has about 86 billion neurons, roughly the same number as stars in the Milky Way", "date": "2025-12-22"},
-          {"content": "Octopuses have three hearts and blue blood. Two hearts pump blood to gills, one to the body.", "date": "2025-12-24"},
-          {"content": "A day on Venus is longer than its year. It takes 243 Earth days to rotate but only 225 to orbit the Sun.", "date": "2025-12-27"}
+          {
+            "content": "The human brain has about 86 billion neurons, roughly the same number as stars in the Milky Way",
+            "date": "2025-12-22"
+          },
+          {
+            "content": "Octopuses have three hearts and blue blood. Two hearts pump blood to gills, one to the body.",
+            "date": "2025-12-24"
+          },
+          {
+            "content": "A day on Venus is longer than its year. It takes 243 Earth days to rotate but only 225 to orbit the Sun.",
+            "date": "2025-12-27"
+          }
         ]
       },
       {
@@ -123,10 +288,355 @@
         "type": "building",
         "preview": "Dark mode, mobile responsive, sync pipeline",
         "items": [
-          {"project": "Portfolio site", "work": "Added dark mode toggle and improved mobile responsiveness", "date": "2025-12-25"},
-          {"project": "Journal pipeline", "work": "Set up Python sync script to extract data from Google Docs", "date": "2025-12-28"}
+          {
+            "project": "Portfolio site",
+            "work": "Added dark mode toggle and improved mobile responsiveness",
+            "date": "2025-12-25"
+          },
+          {
+            "project": "Journal pipeline",
+            "work": "Set up Python sync script to extract data from Google Docs",
+            "date": "2025-12-28"
+          }
         ]
       }
     ]
+  },
+  "2026-W02": {
+    "week_id": "2026-W02",
+    "narrative": "This week, I honed my problem-solving skills with two pointers and string manipulation techniques on LeetCode, successfully added a dynamic journal frontend to my portfolio, and debugged persistent parsing errors, marking a significant step towards refining my web development abilities.",
+    "topics": [
+      {
+        "name": "two pointers",
+        "type": "leetcode",
+        "count": 1,
+        "preview": "- two pointers, min height, max area",
+        "items": [
+          {
+            "name": "container with most water (medium)",
+            "difficulty": "medium",
+            "insight": "- two pointers, min height, max area",
+            "date": "2026-01-05"
+          }
+        ]
+      },
+      {
+        "name": "general",
+        "type": "leetcode",
+        "count": 4,
+        "preview": "4 problems",
+        "items": [
+          {
+            "name": "two sum (easy)",
+            "difficulty": "easy",
+            "insight": "",
+            "date": "2026-01-05"
+          },
+          {
+            "name": "Best time to buy or sell a stock",
+            "difficulty": "",
+            "insight": "",
+            "date": "2026-01-06"
+          },
+          {
+            "name": "Find Duplicates",
+            "difficulty": "",
+            "insight": "",
+            "date": "2026-01-06"
+          },
+          {
+            "name": "Two Sum (revise)",
+            "difficulty": "",
+            "insight": "",
+            "date": "2026-01-06"
+          }
+        ]
+      },
+      {
+        "name": "strings",
+        "type": "leetcode",
+        "count": 3,
+        "preview": "3 problems",
+        "items": [
+          {
+            "name": "valid anagram (easy)",
+            "difficulty": "easy",
+            "insight": "",
+            "date": "2026-01-05"
+          },
+          {
+            "name": "valid anagram (revise)",
+            "difficulty": "",
+            "insight": "",
+            "date": "2026-01-06"
+          },
+          {
+            "name": "group anagrams",
+            "difficulty": "",
+            "insight": "",
+            "date": "2026-01-06"
+          }
+        ]
+      },
+      {
+        "name": "arrays",
+        "type": "leetcode",
+        "count": 1,
+        "preview": "1 problems",
+        "items": [
+          {
+            "name": "product of array except self (revisit)",
+            "difficulty": "",
+            "insight": "",
+            "date": "2026-01-06"
+          }
+        ]
+      },
+      {
+        "name": "",
+        "type": "building",
+        "preview": "added journal frontend to portfolio, scheduled refresh, debugged parsing errors",
+        "items": [
+          {
+            "project": "",
+            "work": "added journal frontend to portfolio, scheduled refresh, debugged parsing errors",
+            "date": "2026-01-05"
+          }
+        ]
+      },
+      {
+        "name": "",
+        "type": "building",
+        "preview": "",
+        "items": [
+          {
+            "project": "",
+            "work": "",
+            "date": "2026-01-06"
+          }
+        ]
+      },
+      {
+        "name": "",
+        "type": "building",
+        "preview": "",
+        "items": [
+          {
+            "project": "",
+            "work": "",
+            "date": "2026-01-07"
+          }
+        ]
+      },
+      {
+        "name": "",
+        "type": "building",
+        "preview": "",
+        "items": [
+          {
+            "project": "",
+            "work": "",
+            "date": "2026-01-08"
+          }
+        ]
+      },
+      {
+        "name": "",
+        "type": "building",
+        "preview": "",
+        "items": [
+          {
+            "project": "",
+            "work": "",
+            "date": "2026-01-09"
+          }
+        ]
+      },
+      {
+        "name": "Unknown",
+        "type": "building",
+        "preview": "",
+        "items": [
+          {
+            "project": "Unknown",
+            "work": "",
+            "date": "2026-01-10"
+          }
+        ]
+      }
+    ],
+    "raw_topics": {
+      "leetcode": {
+        "two pointers": [
+          {
+            "name": "container with most water (medium)",
+            "difficulty": "medium",
+            "insight": "- two pointers, min height, max area",
+            "date": "2026-01-05"
+          }
+        ],
+        "general": [
+          {
+            "name": "two sum (easy)",
+            "difficulty": "easy",
+            "insight": "",
+            "date": "2026-01-05"
+          },
+          {
+            "name": "Best time to buy or sell a stock",
+            "difficulty": "",
+            "insight": "",
+            "date": "2026-01-06"
+          },
+          {
+            "name": "Find Duplicates",
+            "difficulty": "",
+            "insight": "",
+            "date": "2026-01-06"
+          },
+          {
+            "name": "Two Sum (revise)",
+            "difficulty": "",
+            "insight": "",
+            "date": "2026-01-06"
+          }
+        ],
+        "strings": [
+          {
+            "name": "valid anagram (easy)",
+            "difficulty": "easy",
+            "insight": "",
+            "date": "2026-01-05"
+          },
+          {
+            "name": "valid anagram (revise)",
+            "difficulty": "",
+            "insight": "",
+            "date": "2026-01-06"
+          },
+          {
+            "name": "group anagrams",
+            "difficulty": "",
+            "insight": "",
+            "date": "2026-01-06"
+          }
+        ],
+        "arrays": [
+          {
+            "name": "product of array except self (revisit)",
+            "difficulty": "",
+            "insight": "",
+            "date": "2026-01-06"
+          }
+        ]
+      },
+      "system_design": [],
+      "reading": {
+        "DDIA or AI_Engineering": [
+          {
+            "chapter": 1,
+            "pages": [
+              1,
+              20
+            ],
+            "insight": "",
+            "date": "2026-01-05"
+          },
+          {
+            "chapter": 2,
+            "pages": [
+              1,
+              50
+            ],
+            "insight": "",
+            "date": "2026-01-06"
+          },
+          {
+            "chapter": 1,
+            "pages": [
+              1,
+              20
+            ],
+            "insight": "",
+            "date": "2026-01-07"
+          },
+          {
+            "chapter": 1,
+            "pages": [
+              1,
+              20
+            ],
+            "insight": "",
+            "date": "2026-01-08"
+          },
+          {
+            "chapter": 1,
+            "pages": [],
+            "insight": "",
+            "date": "2026-01-09"
+          },
+          {
+            "chapter": 1,
+            "pages": [],
+            "insight": "",
+            "date": "2026-01-10"
+          }
+        ]
+      },
+      "exploring": {
+        "": [
+          {
+            "content": "",
+            "date": "2026-01-07"
+          },
+          {
+            "content": "",
+            "date": "2026-01-08"
+          },
+          {
+            "content": "",
+            "date": "2026-01-09"
+          }
+        ],
+        "misc": [
+          {
+            "content": "",
+            "date": "2026-01-10"
+          }
+        ]
+      },
+      "building": [
+        {
+          "project": "",
+          "work": "added journal frontend to portfolio, scheduled refresh, debugged parsing errors",
+          "date": "2026-01-05"
+        },
+        {
+          "project": "",
+          "work": "",
+          "date": "2026-01-06"
+        },
+        {
+          "project": "",
+          "work": "",
+          "date": "2026-01-07"
+        },
+        {
+          "project": "",
+          "work": "",
+          "date": "2026-01-08"
+        },
+        {
+          "project": "",
+          "work": "",
+          "date": "2026-01-09"
+        },
+        {
+          "project": "Unknown",
+          "work": "",
+          "date": "2026-01-10"
+        }
+      ]
+    }
   }
 }

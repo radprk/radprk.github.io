@@ -1,0 +1,186 @@
+.current-week-goals {
+    background: linear-gradient(135deg, var(--card-bg) 0%, rgba(94, 234, 212, 0.05) 100%);
+    border: 2px solid var(--accent);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 32px;
+}
+
+.goals-header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.goals-header-main h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.week-badge {
+    display: inline-block;
+    margin-left: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    background: var(--bg);
+    padding: 4px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+}
+
+.completion-circle {
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.completion-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.completion-percent {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1;
+}
+
+.completion-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 2px;
+}
+
+.goals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.goal-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.goal-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(94, 234, 212, 0.1);
+}
+
+.goal-card.completed {
+    opacity: 0.8;
+    background: rgba(94, 234, 212, 0.05);
+}
+
+.goal-check {
+    flex-shrink: 0;
+}
+
+.check-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.check-circle.checked {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.check-mark {
+    color: var(--bg);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.goal-content {
+    flex: 1;
+}
+
+.goal-text {
+    color: var(--text);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.goal-card.completed .goal-text {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.week-review-card,
+.week-highlight-card {
+    padding: 20px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-top: 16px;
+}
+
+.week-highlight-card {
+    border-color: var(--accent);
+    background: rgba(94, 234, 212, 0.05);
+}
+
+.review-header,
+.highlight-header {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.highlight-header {
+    color: var(--accent);
+}
+
+.review-content,
+.highlight-content {
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .goals-header-main {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .goals-grid {
+        grid-template-columns: 1fr;
+    }
+}
+

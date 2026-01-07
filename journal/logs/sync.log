@@ -1,0 +1,182 @@
+2026-01-03 16:44:31,311 - INFO - ==================================================
+2026-01-03 16:44:31,311 - INFO - Journal Sync Pipeline
+2026-01-03 16:44:31,311 - INFO - ==================================================
+2026-01-03 16:44:31,315 - INFO - Loaded 5 existing entries
+2026-01-03 16:44:31,315 - INFO - Weeks to sync: ['2026-W01']
+2026-01-03 16:44:31,315 - INFO - Syncing week: 2026-W01
+2026-01-03 16:44:31,315 - ERROR - Failed to sync 2026-W01: Local file not found: C:\Users\radha\radprk.github.io\journal\weeks\2026-W01.md
+2026-01-03 16:51:20,891 - INFO - ==================================================
+2026-01-03 16:51:20,891 - INFO - Journal Sync Pipeline
+2026-01-03 16:51:20,891 - INFO - ==================================================
+2026-01-03 16:51:20,891 - INFO - Loaded 5 existing entries
+2026-01-03 16:51:20,895 - INFO - Weeks to sync: ['2025-W02']
+2026-01-03 16:51:20,895 - INFO - Syncing week: 2025-W02
+2026-01-03 16:51:20,895 - INFO - Loaded from local file: C:\Users\radha\radprk.github.io\journal\weeks\2025-W02.md
+2026-01-03 16:51:20,895 - INFO - Parsing with regex fallback parser
+2026-01-03 16:51:20,903 - INFO - Saved 5 entries, 1 weeks
+2026-01-03 16:51:20,903 - INFO - Skipping git commit (--no-commit)
+2026-01-03 16:51:20,903 - INFO - Sync complete!
+2026-01-05 12:02:30,293 - INFO - ==================================================
+2026-01-05 12:02:30,293 - INFO - Journal Sync Pipeline
+2026-01-05 12:02:30,293 - INFO - ==================================================
+2026-01-05 12:02:30,293 - INFO - Loaded 5 existing entries
+2026-01-05 12:02:30,293 - INFO - Weeks to sync: ['2026-W02']
+2026-01-05 12:02:30,293 - INFO - Syncing week: 2026-W02
+2026-01-05 12:02:31,840 - INFO - Fetched from Google Drive (modified: 2026-01-05T17:01:21.603Z)
+2026-01-05 12:02:31,840 - INFO - Saved raw markdown: 2026-W02.md
+2026-01-05 12:02:31,840 - WARNING - Ollama parser not available, using fallback
+2026-01-05 12:02:31,840 - INFO - Parsing with regex fallback parser
+2026-01-05 12:02:31,840 - INFO - Saved 5 entries, 2 weeks
+2026-01-05 12:02:31,840 - INFO - Committing changes...
+2026-01-05 12:02:35,604 - INFO - Git: Committed: Update journal data for 2026-W02
+Pushed to claude/journal-sync-pipeline-W1rxd
+2026-01-05 12:02:35,604 - INFO - Sync complete!
+2026-01-05 12:02:42,121 - INFO - ==================================================
+2026-01-05 12:02:42,123 - INFO - Journal Sync Pipeline
+2026-01-05 12:02:42,123 - INFO - ==================================================
+2026-01-05 12:02:42,199 - INFO - Loaded 5 existing entries
+2026-01-05 12:02:42,208 - INFO - Weeks to sync: ['2026-W02']
+2026-01-05 12:02:42,214 - INFO - Syncing week: 2026-W02
+2026-01-05 12:02:44,245 - INFO - Fetched from Google Drive (modified: 2026-01-05T17:01:21.603Z)
+2026-01-05 12:02:44,245 - INFO - Saved raw markdown: 2026-W02.md
+2026-01-05 12:02:44,245 - WARNING - Ollama parser not available, using fallback
+2026-01-05 12:02:44,245 - INFO - Parsing with regex fallback parser
+2026-01-05 12:02:44,249 - INFO - Saved 5 entries, 2 weeks
+2026-01-05 12:02:44,249 - INFO - Committing changes...
+2026-01-05 12:02:44,343 - INFO - Git: No changes to commit
+2026-01-05 12:02:44,343 - INFO - Sync complete!
+2026-01-05 12:21:54,531 - INFO - ==================================================
+2026-01-05 12:21:54,531 - INFO - Journal Sync Pipeline
+2026-01-05 12:21:54,531 - INFO - ==================================================
+2026-01-05 12:21:54,561 - INFO - Loaded 5 existing entries
+2026-01-05 12:21:54,561 - INFO - Weeks to sync: ['2026-W02']
+2026-01-05 12:21:54,561 - INFO - Syncing week: 2026-W02
+2026-01-05 12:21:56,161 - INFO - Fetched from Google Drive (modified: 2026-01-05T17:01:21.603Z)
+2026-01-05 12:21:56,161 - INFO - Saved raw markdown: 2026-W02.md
+2026-01-05 12:21:56,161 - INFO - Parsing with Ollama (Mistral)
+2026-01-05 12:21:56,171 - INFO - Saved 5 entries, 2 weeks
+2026-01-05 12:21:56,171 - INFO - Committing changes...
+2026-01-05 12:21:56,246 - INFO - Git: No changes to commit
+2026-01-05 12:21:56,246 - INFO - Sync complete!
+2026-01-05 13:49:26,892 - INFO - ==================================================
+2026-01-05 13:49:26,892 - INFO - Journal Sync Pipeline
+2026-01-05 13:49:26,892 - INFO - ==================================================
+2026-01-05 13:49:26,892 - INFO - Loaded 0 existing entries
+2026-01-05 13:49:26,892 - INFO - Weeks to sync: ['2026-W02']
+2026-01-05 13:49:26,892 - INFO - Syncing week: 2026-W02
+2026-01-05 13:49:28,438 - INFO - Fetched from Google Drive (modified: 2026-01-05T18:46:12.300Z)
+2026-01-05 13:49:28,438 - INFO - Saved raw markdown: 2026-W02.md
+2026-01-05 13:49:28,438 - INFO - Parsing with Ollama (Mistral)
+2026-01-05 13:55:26,883 - INFO - Saved 6 entries, 1 weeks
+2026-01-05 13:55:26,883 - INFO - Committing changes...
+2026-01-05 13:55:32,839 - INFO - Git: Committed: Update journal data for 2026-W02
+Pushed to main
+2026-01-05 13:55:32,839 - INFO - Sync complete!
+2026-01-05 21:10:33,972 - INFO - ==================================================
+2026-01-05 21:10:33,974 - INFO - Journal Sync Pipeline
+2026-01-05 21:10:33,974 - INFO - ==================================================
+2026-01-05 21:10:33,976 - INFO - Loaded 0 existing entries
+2026-01-05 21:10:33,976 - INFO - Weeks to sync: ['2026-W02']
+2026-01-05 21:10:33,976 - INFO - Syncing week: 2026-W02
+2026-01-05 21:10:35,818 - INFO - Fetched from Google Drive (modified: 2026-01-06T01:37:35.284Z)
+2026-01-05 21:10:35,818 - INFO - Saved raw markdown: 2026-W02.md
+2026-01-05 21:10:35,818 - INFO - Parsing with Ollama (Mistral)
+2026-01-05 21:13:54,716 - INFO - Saved 6 entries, 1 weeks
+2026-01-05 21:13:54,716 - INFO - Committing changes...
+2026-01-05 21:13:57,639 - INFO - Git: Committed: Update journal data for 2026-W02
+Pushed to main
+2026-01-05 21:13:57,639 - INFO - Sync complete!
+2026-01-05 22:12:59,603 - INFO - ==================================================
+2026-01-05 22:12:59,603 - INFO - Journal Sync Pipeline
+2026-01-05 22:12:59,603 - INFO - ==================================================
+2026-01-05 22:12:59,603 - INFO - Loaded 6 existing entries
+2026-01-05 22:12:59,603 - INFO - Weeks to sync: ['2026-W02']
+2026-01-05 22:12:59,609 - INFO - Syncing week: 2026-W02
+2026-01-05 22:13:01,302 - INFO - Fetched from Google Drive (modified: 2026-01-06T01:37:35.284Z)
+2026-01-05 22:13:01,302 - INFO - Saved raw markdown: 2026-W02.md
+2026-01-05 22:13:01,302 - INFO - Parsing with Ollama (Mistral)
+2026-01-05 22:17:58,364 - INFO - Generating weekly summary...
+2026-01-05 22:18:17,073 - INFO - Generated summary with 10 topics
+2026-01-05 22:18:17,090 - INFO - Saved 6 entries, 1 weeks
+2026-01-05 22:18:17,090 - INFO - Committing changes...
+2026-01-05 22:18:22,313 - INFO - Git: Committed: Update journal data for 2026-W02
+Pushed to main
+2026-01-05 22:18:22,313 - INFO - Sync complete!
+2026-01-05 22:24:53,322 - INFO - ==================================================
+2026-01-05 22:24:53,322 - INFO - Journal Sync Pipeline
+2026-01-05 22:24:53,322 - INFO - ==================================================
+2026-01-05 22:24:53,322 - INFO - Loaded 0 existing entries
+2026-01-05 22:24:53,322 - INFO - Weeks to sync: ['2026-W02']
+2026-01-05 22:24:53,322 - INFO - Syncing week: 2026-W02
+2026-01-05 22:24:53,322 - INFO - Loaded from local file: C:\Users\radha\radprk.github.io\journal\weeks\2026-W02.md
+2026-01-05 22:24:53,322 - INFO - Parsing with Ollama (Mistral)
+2026-01-05 22:29:59,198 - INFO - Generating weekly summary...
+2026-01-05 22:30:19,778 - INFO - Generated summary with 10 topics
+2026-01-05 22:30:19,793 - INFO - Saved 6 entries, 1 weeks
+2026-01-05 22:30:19,794 - INFO - Committing changes...
+2026-01-05 22:30:26,550 - INFO - Git: Committed: Update journal data for 2026-W02
+Pushed to main
+2026-01-05 22:30:26,550 - INFO - Sync complete!
+2026-01-06 09:00:07,919 - INFO - ==================================================
+2026-01-06 09:00:07,919 - INFO - Journal Sync Pipeline
+2026-01-06 09:00:07,919 - INFO - ==================================================
+2026-01-06 09:00:07,925 - INFO - Loaded 0 existing entries
+2026-01-06 09:00:07,925 - INFO - Weeks to sync: ['2026-W02']
+2026-01-06 09:00:07,925 - INFO - Syncing week: 2026-W02
+2026-01-06 09:00:09,415 - INFO - Fetched from Google Drive (modified: 2026-01-06T01:37:35.284Z)
+2026-01-06 09:00:09,415 - INFO - Saved raw markdown: 2026-W02.md
+2026-01-06 09:00:09,415 - INFO - Parsing with Ollama (Mistral)
+2026-01-06 09:06:09,199 - INFO - Generating weekly summary...
+2026-01-06 09:06:35,644 - INFO - Generated summary with 12 topics
+2026-01-06 09:06:35,704 - INFO - Saved 6 entries, 1 weeks
+2026-01-06 09:06:35,704 - INFO - Committing changes...
+2026-01-06 09:06:40,101 - INFO - Git: Committed: Update journal data for 2026-W02
+Pushed to main
+2026-01-06 09:06:40,101 - INFO - Sync complete!
+2026-01-06 21:48:07,201 - INFO - ==================================================
+2026-01-06 21:48:07,201 - INFO - Journal Sync Pipeline
+2026-01-06 21:48:07,201 - INFO - ==================================================
+2026-01-06 21:48:07,201 - INFO - Loaded 6 existing entries
+2026-01-06 21:48:07,201 - INFO - Weeks to sync: ['2026-W02']
+2026-01-06 21:48:07,201 - INFO - Syncing week: 2026-W02
+2026-01-06 21:48:08,470 - INFO - Fetched from Google Drive (modified: 2026-01-07T00:12:39.763Z)
+2026-01-06 21:48:08,470 - INFO - Saved raw markdown: 2026-W02.md
+2026-01-06 21:48:08,470 - INFO - Parsing with Ollama (Mistral)
+2026-01-06 22:00:54,036 - INFO - Generating weekly summary...
+2026-01-06 22:01:11,697 - INFO - Generated summary with 12 topics
+2026-01-06 22:01:11,785 - INFO - Saved 6 entries, 1 weeks
+2026-01-06 22:01:11,785 - INFO - Committing changes...
+2026-01-06 22:01:15,071 - INFO - Git: Committed: Update journal data for 2026-W02
+Pushed to main
+2026-01-06 22:01:15,071 - INFO - Sync complete!
+2026-01-06 22:05:26,377 - INFO - ==================================================
+2026-01-06 22:05:26,377 - INFO - Journal Sync Pipeline
+2026-01-06 22:05:26,377 - INFO - ==================================================
+2026-01-06 22:05:26,377 - INFO - Loaded 6 existing entries
+2026-01-06 22:05:26,377 - INFO - Weeks to sync: ['2026-W02']
+2026-01-06 22:05:26,377 - INFO - Syncing week: 2026-W02
+2026-01-06 22:05:26,408 - INFO - Loaded from local file: C:\Users\radha\radprk.github.io\journal\weeks\2026-W02.md
+2026-01-06 22:05:26,408 - INFO - Parsing with Ollama (Mistral)
+2026-01-06 22:14:08,878 - INFO - Generating weekly summary...
+2026-01-06 22:14:35,604 - INFO - Generated summary with 12 topics
+2026-01-06 22:14:35,645 - INFO - Saved 6 entries, 1 weeks
+2026-01-06 22:14:35,647 - INFO - Committing changes...
+2026-01-06 22:14:41,451 - INFO - Git: Committed: Update journal data for 2026-W02
+Pushed to main
+2026-01-06 22:14:41,451 - INFO - Sync complete!
+2026-01-07 09:00:07,346 - INFO - ==================================================
+2026-01-07 09:00:07,346 - INFO - Journal Sync Pipeline
+2026-01-07 09:00:07,348 - INFO - ==================================================
+2026-01-07 09:00:07,372 - INFO - Loaded 0 existing entries
+2026-01-07 09:00:07,374 - INFO - Weeks to sync: ['2026-W02']
+2026-01-07 09:00:07,375 - INFO - Syncing week: 2026-W02
+2026-01-07 09:00:09,070 - INFO - Fetched from Google Drive (modified: 2026-01-07T13:44:40.344Z)
+2026-01-07 09:00:09,070 - INFO - Saved raw markdown: 2026-W02.md
+2026-01-07 09:00:09,072 - INFO - Parsing with Ollama (Mistral)
+2026-01-07 09:05:29,104 - INFO - Generating weekly summary...
+2026-01-07 09:06:10,461 - INFO - Generated summary with 10 topics
+2026-01-07 09:06:10,805 - INFO - Saved 6 entries, 1 weeks
+2026-01-07 09:06:10,808 - INFO - Committing changes...
+2026-01-07 09:06:19,365 - INFO - Git: Committed: Update journal data for 2026-W02
+Pushed to main
+2026-01-07 09:06:19,365 - INFO - Sync complete!
