@@ -1,6 +1,7 @@
 """
 Journal Parser using local Ollama (Mistral) for flexible extraction.
 Processes day-by-day for faster parsing.
+Now supports URL-based extraction for LeetCode problems.
 """
 
 import json
@@ -11,6 +12,8 @@ import urllib.error
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Optional
+
+from leetcode import parse_leetcode_from_text, extract_leetcode_urls
 
 
 def get_day_prompt(day_text: str, date_str: str, day_name: str) -> str:
@@ -161,6 +164,87 @@ def get_date_for_day(day_name: str, year: int, week: int) -> str:
     return target_day.strftime("%Y-%m-%d")
 
 
+def extract_urls_from_section(day_text: str) -> dict:
+    """
+    Extract structured data from URLs in the text.
+    This provides instant, accurate metadata without LLM parsing.
+    """
+    result = {
+        "leetcode": [],
+        "sql": [],
+        "system_design": [],
+        "ml": []
+    }
+
+    # Extract LeetCode problems from URLs
+    leetcode_problems = parse_leetcode_from_text(day_text)
+    for problem in leetcode_problems:
+        result["leetcode"].append({
+            "name": problem.get("name"),
+            "difficulty": problem.get("difficulty", "unknown"),
+            "tags": problem.get("tags", []),
+            "url": problem.get("url"),
+            "insight": None  # User can add manually
+        })
+
+    return result
+
+
+def extract_reading_from_text(text: str) -> list:
+    """Extract reading entries from simple text format like 'DDIA 4, pages 111-130'."""
+    reading = []
+
+    # Pattern: DDIA X, pages Y-Z or DDIA chapter X pages Y-Z
+    ddia_pattern = r'DDIA\s*(?:chapter\s*)?(\d+)(?:,?\s*pages?\s*(\d+)[-–](\d+))?'
+    for match in re.finditer(ddia_pattern, text, re.IGNORECASE):
+        entry = {
+            "book": "DDIA",
+            "chapter": int(match.group(1)),
+            "pages": None,
+            "insight": None
+        }
+        if match.group(2) and match.group(3):
+            entry["pages"] = [int(match.group(2)), int(match.group(3))]
+        reading.append(entry)
+
+    # AI Engineering pattern
+    ai_pattern = r'AI\s*Engineering\s*(?:chapter\s*)?(\d+)(?:,?\s*pages?\s*(\d+)[-–](\d+))?'
+    for match in re.finditer(ai_pattern, text, re.IGNORECASE):
+        entry = {
+            "book": "AI_Engineering",
+            "chapter": int(match.group(1)),
+            "pages": None,
+            "insight": None
+        }
+        if match.group(2) and match.group(3):
+            entry["pages"] = [int(match.group(2)), int(match.group(3))]
+        reading.append(entry)
+
+    return reading
+
+
+def extract_building_from_text(text: str) -> list:
+    """Extract building/project entries from simple text format."""
+    building = []
+
+    # Find the Building section
+    building_match = re.search(r'##\s*Building\s*\n(.*?)(?=\n##|\Z)', text, re.DOTALL | re.IGNORECASE)
+    if building_match:
+        section = building_match.group(1).strip()
+        # Extract bullet points
+        for line in section.split('\n'):
+            line = line.strip()
+            if line.startswith('-'):
+                project = line[1:].strip()
+                if project:
+                    building.append({
+                        "project": project,
+                        "work": None
+                    })
+
+    return building
+
+
 def normalize_day_data(data: dict) -> dict:
     """Normalize a single day's data structure."""
     if not isinstance(data, dict):
@@ -263,21 +347,46 @@ def parse_journal_daily(
 
         print(f"Parsing {day_name} ({date_str})...", end=" ", flush=True)
 
-        response, elapsed = call_ollama(get_day_prompt(day_text, date_str, day_name), model, timeout=90)
-        total_time += elapsed
+        # Try URL-based extraction first (faster, more accurate)
+        has_leetcode_urls = bool(extract_leetcode_urls(day_text))
 
-        if response:
-            day_data = extract_json(response)
-            if day_data:
-                result["days"][date_str] = {
-                    "day": day_name.capitalize(),
-                    **normalize_day_data(day_data)
-                }
-                print(f"OK ({elapsed:.1f}s)")
-            else:
-                print(f"OK ({elapsed:.1f}s) - couldn't parse JSON")
+        if has_leetcode_urls:
+            # Use URL extraction for practice section
+            print("(URL mode)...", end=" ", flush=True)
+            practice_data = extract_urls_from_section(day_text)
+            reading_data = extract_reading_from_text(day_text)
+            building_data = extract_building_from_text(day_text)
+
+            # Extract notes section
+            notes_match = re.search(r'##\s*Notes\s*\n(.*?)(?=\n##|\n---|\Z)', day_text, re.DOTALL | re.IGNORECASE)
+            notes = notes_match.group(1).strip() if notes_match else None
+
+            result["days"][date_str] = {
+                "day": day_name.capitalize(),
+                "practice": practice_data,
+                "building": building_data,
+                "reading": reading_data,
+                "exploring": [],
+                "notes": notes if notes else None
+            }
+            print(f"OK ({len(practice_data['leetcode'])} LC problems)")
         else:
-            print("TIMEOUT")
+            # Fall back to Ollama for complex text
+            response, elapsed = call_ollama(get_day_prompt(day_text, date_str, day_name), model, timeout=90)
+            total_time += elapsed
+
+            if response:
+                day_data = extract_json(response)
+                if day_data:
+                    result["days"][date_str] = {
+                        "day": day_name.capitalize(),
+                        **normalize_day_data(day_data)
+                    }
+                    print(f"OK ({elapsed:.1f}s)")
+                else:
+                    print(f"OK ({elapsed:.1f}s) - couldn't parse JSON")
+            else:
+                print("TIMEOUT")
 
     # Parse week review (always, might change)
     if sections["review"]:

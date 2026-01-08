@@ -44,10 +44,28 @@ function DayCard({ date, entry }) {
                 {allPractice.map((item, i) => (
                   <li key={i} className={`practice-item ${item.type}`}>
                     <span className="practice-type">{item.type.replace('_', ' ')}</span>
-                    <span className="practice-name">{item.name}</span>
+                    {item.url ? (
+                      <a
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="practice-name practice-link"
+                      >
+                        {item.name}
+                      </a>
+                    ) : (
+                      <span className="practice-name">{item.name}</span>
+                    )}
                     {item.difficulty && (
                       <span className={`difficulty ${item.difficulty}`}>
                         {item.difficulty}
+                      </span>
+                    )}
+                    {item.tags?.length > 0 && (
+                      <span className="practice-tags">
+                        {item.tags.slice(0, 3).map((tag, ti) => (
+                          <span key={ti} className="practice-tag">{tag}</span>
+                        ))}
                       </span>
                     )}
                     {item.insight && (

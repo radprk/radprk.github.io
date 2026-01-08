@@ -4,44 +4,36 @@
 - 5 leetcode problems
 - Finish DDIA chapter 4
 - Read 50 pages
-- Work on journal pipeline
-- 2 system design problems
 
 ---
 
 # Monday, January 6
 
 ## Practice
-- Leetcode: Problem Name (easy/medium/hard) - insight or key learning
-- SQL: Topic or problem - insight
-- System Design: Topic (HLD/LLD) - insight
-- ML: Topic - insight
+https://leetcode.com/problems/two-sum/
+https://leetcode.com/problems/valid-parentheses/
 
 ## Building
-- Project Name - what you worked on
+- journal pipeline
 
 ## Reading
-- DDIA chapter X, pages Y-Z - key insight
-- AI Engineering chapter X, pages Y-Z - key insight
-
-## Exploring
-Anything interesting you learned outside tech (astronomy, philosophy, history, etc.)
+DDIA 4, pages 111-130
 
 ## Notes
-How the day went, reflections, energy level
+Quick notes about the day
 
 ---
 
 # Tuesday, January 7
 
 ## Practice
--
+
 
 ## Building
--
+
 
 ## Reading
--
+
 
 ## Notes
 
@@ -51,13 +43,13 @@ How the day went, reflections, energy level
 # Wednesday, January 8
 
 ## Practice
--
+
 
 ## Building
--
+
 
 ## Reading
--
+
 
 ## Notes
 
@@ -67,13 +59,13 @@ How the day went, reflections, energy level
 # Thursday, January 9
 
 ## Practice
--
+
 
 ## Building
--
+
 
 ## Reading
--
+
 
 ## Notes
 
@@ -83,13 +75,13 @@ How the day went, reflections, energy level
 # Friday, January 10
 
 ## Practice
--
+
 
 ## Building
--
+
 
 ## Reading
--
+
 
 ## Notes
 
@@ -99,10 +91,10 @@ How the day went, reflections, energy level
 # Saturday, January 11
 
 ## Practice
--
+
 
 ## Reading
--
+
 
 ## Notes
 
@@ -112,10 +104,10 @@ How the day went, reflections, energy level
 # Sunday, January 12
 
 ## Practice
--
+
 
 ## Reading
--
+
 
 ## Notes
 
@@ -124,6 +116,6 @@ How the day went, reflections, energy level
 
 # Week-Review
 
-Goals hit: X/Y - brief summary
-Highlight: Best moment of the week
-Next week: Focus areas for next week
+Goals hit: X/Y
+Highlight: Best moment
+Next week: Focus areas
