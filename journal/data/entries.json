@@ -1,1 +1,233 @@
-{}
+{
+  "2026-01-05": {
+    "day": "Monday",
+    "practice": {
+      "leetcode": [
+        {
+          "name": "Leetcode: container with most water (medium)",
+          "difficulty": "medium",
+          "insight": "- two pointers, min height, max area"
+        },
+        {
+          "name": "Leetcode: two sum (easy)",
+          "difficulty": "easy",
+          "insight": ""
+        },
+        {
+          "name": "Leetcode: valid anagram (easy)",
+          "difficulty": "easy",
+          "insight": ""
+        }
+      ],
+      "sql": [],
+      "system_design": [],
+      "ml": []
+    },
+    "building": [
+      {
+        "project": "journal frontend to portfolio",
+        "work": "added"
+      },
+      {
+        "project": "refresh",
+        "work": "scheduled"
+      },
+      {
+        "project": "parsing errors",
+        "work": "debugged"
+      }
+    ],
+    "reading": [
+      {
+        "book": "DDIA or AI_Engineering",
+        "chapter": 1,
+        "pages": [
+          1,
+          20
+        ],
+        "insight": ""
+      }
+    ],
+    "exploring": [],
+    "notes": null
+  },
+  "2026-01-06": {
+    "day": "Tuesday",
+    "practice": {
+      "leetcode": [
+        {
+          "name": "valid anagram (revise)",
+          "difficulty": "",
+          "insight": ""
+        },
+        {
+          "name": "group anagrams",
+          "difficulty": "",
+          "insight": ""
+        },
+        {
+          "name": "product of array except self (revisit)",
+          "difficulty": "",
+          "insight": ""
+        },
+        {
+          "name": "Best time to buy or sell a stock",
+          "difficulty": "",
+          "insight": ""
+        },
+        {
+          "name": "Find Duplicates",
+          "difficulty": "",
+          "insight": ""
+        },
+        {
+          "name": "Two Sum (revise)",
+          "difficulty": "",
+          "insight": ""
+        }
+      ],
+      "sql": [],
+      "system_design": [],
+      "ml": []
+    },
+    "building": [
+      {
+        "project": "",
+        "work": ""
+      }
+    ],
+    "reading": [
+      {
+        "book": "DDIA or AI_Engineering",
+        "chapter": 2,
+        "pages": [
+          1,
+          50
+        ],
+        "insight": ""
+      }
+    ],
+    "exploring": [],
+    "notes": "Applied to 3 jobs\nReached out to a 4-5 people on linkedin"
+  },
+  "2026-01-07": {
+    "day": "Wednesday",
+    "practice": {
+      "leetcode": [],
+      "sql": [],
+      "system_design": [],
+      "ml": []
+    },
+    "building": [
+      {
+        "project": "",
+        "work": ""
+      }
+    ],
+    "reading": [
+      {
+        "book": "DDIA or AI_Engineering",
+        "chapter": 1,
+        "pages": [
+          1,
+          20
+        ],
+        "insight": ""
+      }
+    ],
+    "exploring": [
+      {
+        "topic": "",
+        "content": ""
+      }
+    ],
+    "notes": null
+  },
+  "2026-01-08": {
+    "day": "Thursday",
+    "practice": {
+      "leetcode": [],
+      "sql": [],
+      "system_design": [],
+      "ml": []
+    },
+    "building": [
+      {
+        "project": "",
+        "work": ""
+      }
+    ],
+    "reading": [
+      {
+        "book": "DDIA or AI_Engineering",
+        "chapter": 1,
+        "pages": [
+          1,
+          20
+        ],
+        "insight": ""
+      }
+    ],
+    "exploring": [
+      {
+        "topic": "",
+        "content": ""
+      }
+    ],
+    "notes": null
+  },
+  "2026-01-09": {
+    "day": "Friday",
+    "practice": {
+      "leetcode": [],
+      "sql": [],
+      "system_design": [],
+      "ml": []
+    },
+    "building": [
+      {
+        "project": "",
+        "work": ""
+      }
+    ],
+    "reading": [
+      {
+        "book": "DDIA or AI_Engineering",
+        "chapter": 1,
+        "pages": [],
+        "insight": ""
+      }
+    ],
+    "exploring": [
+      {
+        "topic": "",
+        "content": ""
+      }
+    ],
+    "notes": null
+  },
+  "2026-01-10": {
+    "day": "Saturday",
+    "practice": {
+      "leetcode": [],
+      "sql": [],
+      "system_design": [],
+      "ml": []
+    },
+    "building": [
+      {}
+    ],
+    "reading": [
+      {
+        "book": "DDIA or AI_Engineering",
+        "chapter": 1,
+        "pages": [],
+        "insight": ""
+      }
+    ],
+    "exploring": [
+      {}
+    ],
+    "notes": null
+  }
+}
