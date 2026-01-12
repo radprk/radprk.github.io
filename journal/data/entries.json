@@ -4,17 +4,17 @@
     "practice": {
       "leetcode": [
         {
-          "name": "Leetcode: container with most water (medium)",
+          "name": "container with most water (medium)",
           "difficulty": "medium",
           "insight": "- two pointers, min height, max area"
         },
         {
-          "name": "Leetcode: two sum (easy)",
+          "name": "two sum (easy)",
           "difficulty": "easy",
           "insight": ""
         },
         {
-          "name": "Leetcode: valid anagram (easy)",
+          "name": "valid anagram (easy)",
           "difficulty": "easy",
           "insight": ""
         }
@@ -25,16 +25,8 @@
     },
     "building": [
       {
-        "project": "journal frontend to portfolio",
-        "work": "added"
-      },
-      {
-        "project": "refresh",
-        "work": "scheduled"
-      },
-      {
-        "project": "parsing errors",
-        "work": "debugged"
+        "project": "",
+        "work": "added journal frontend to portfolio, scheduled refresh, debugged parsing errors"
       }
     ],
     "reading": [

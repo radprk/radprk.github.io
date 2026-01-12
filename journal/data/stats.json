@@ -37,20 +37,8 @@
   },
   "building": {
     "projects": {
-      "journal frontend to portfolio": {
-        "days_worked": 1,
-        "last_active": "2026-01-05"
-      },
-      "refresh": {
-        "days_worked": 1,
-        "last_active": "2026-01-05"
-      },
-      "parsing errors": {
-        "days_worked": 1,
-        "last_active": "2026-01-05"
-      },
       "": {
-        "days_worked": 4,
+        "days_worked": 5,
         "last_active": "2026-01-09"
       },
       "Unknown": {
@@ -67,14 +55,14 @@
   },
   "goals": {
     "current_week": {
-      "total": 0,
+      "total": 8,
       "completed": 0,
-      "percentage": 0
+      "percentage": 0.0
     },
     "all_time": {
-      "total": 0,
+      "total": 8,
       "completed": 0,
-      "percentage": 0
+      "percentage": 0.0
     },
     "streak": 0
   }
